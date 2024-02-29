@@ -1,12 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Microsoft.EntityFrameworkCore;
+using ConstructionSiteReportingSystem.Infrastructure.Data.Utilities;
 
 namespace ConstructionSiteReportingSystem.Infrastructure.Data.Models
 {
-    public class Project
+    [Comment("Investment project")]
+    public class Project : SoftDelete
     {
     }
 }
