@@ -16,7 +16,7 @@
         public DateTimeOffset? DeletedAt { get; }
 
         /// <summary>
-        /// Reverts the soft delete. Should be implemented by switching the IsDeleted state to false and setting the DeletedAt point in time to null. 
+        /// Reverts the soft delete.
         /// </summary>
         void UndoDelete();
     }
