@@ -1,4 +1,5 @@
-﻿using ConstructionSiteReportingSystem.Infrastructure.Enums;
+﻿using ConstructionSiteReportingSystem.Infrastructure.Data.Models.Contracts;
+using ConstructionSiteReportingSystem.Infrastructure.Enums;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using System.ComponentModel.DataAnnotations;
@@ -8,7 +9,7 @@ using static ConstructionSiteReportingSystem.Infrastructure.Constants.DataConsta
 namespace ConstructionSiteReportingSystem.Infrastructure.Data.Models
 {
     [Comment("User tasks")]
-    public class Task
+    public class Task : ISoftDelete
     {
         [Key]
         [Comment("Task identifier")]
@@ -38,5 +39,18 @@ namespace ConstructionSiteReportingSystem.Infrastructure.Data.Models
         [Required]
         [Comment("Task's current status")]
         public Status Status {  get; set; }
+
+        [Required]
+        [Comment("Task deleted state")]
+        public bool IsDeleted { get; private set; } = false;
+
+        [Comment("Task deletion point in time")]
+        public DateTimeOffset? DeletedAt { get; private set; } = null;
+
+        public void UndoDelete()
+        {
+            IsDeleted = false;
+            DeletedAt = null;
+        }
     }
 }

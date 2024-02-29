@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace ConstructionSiteReportingSystem.Infrastructure.Constants
+﻿namespace ConstructionSiteReportingSystem.Infrastructure.Constants
 {
     public static class DataConstants
     {
@@ -15,6 +9,23 @@ namespace ConstructionSiteReportingSystem.Infrastructure.Constants
 
             public const int DescriptionMinLength = 10;
             public const int DescriptionMaxLength = 1000;
+        }
+
+        public static class ProjectSiteInfo
+        {
+            public const int NameMinLength = 3;
+            public const int NameMaxLength = 50;
+        }
+
+        public static class Stage
+        {
+            public const int NameMinValue = 3;
+            public const int NameMaxValue = 50;
+        }
+
+        public static class Work
+        {
+            
         }
     }
 }

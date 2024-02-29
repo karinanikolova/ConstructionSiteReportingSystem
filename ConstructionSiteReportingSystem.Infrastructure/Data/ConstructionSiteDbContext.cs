@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+﻿using ConstructionSiteReportingSystem.Infrastructure.Data.Models;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
 namespace ConstructionSiteReportingSystem.Infrastructure.Data
@@ -8,6 +9,15 @@ namespace ConstructionSiteReportingSystem.Infrastructure.Data
         public ConstructionSiteDbContext(DbContextOptions<ConstructionSiteDbContext> options)
             : base(options)
         {
+
+        }
+
+        protected override void OnModelCreating(ModelBuilder builder)
+        {
+            builder.Entity<SiteStage>()
+                .HasKey(ss => new { ss.SiteId, ss.StageId});
+
+            base.OnModelCreating(builder);
         }
     }
 }
