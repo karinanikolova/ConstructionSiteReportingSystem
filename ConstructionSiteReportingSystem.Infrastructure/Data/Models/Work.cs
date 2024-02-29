@@ -2,12 +2,12 @@
 using Microsoft.EntityFrameworkCore;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using ConstructionSiteReportingSystem.Infrastructure.Data.Models.Contracts;
+using ConstructionSiteReportingSystem.Infrastructure.Data.Utilities;
 
 namespace ConstructionSiteReportingSystem.Infrastructure.Data.Models
 {
     [Comment("Construction and assembly work")]
-    public class Work : ISoftDelete
+    public class Work : SoftDelete
     {
         [Key]
         [Comment("Construction and assembly work identifier")]
@@ -43,14 +43,14 @@ namespace ConstructionSiteReportingSystem.Infrastructure.Data.Models
         public double Quantity { get; set; }
 
         [Required]
-        [Comment("Construction and assembly work unit identifier")]
+        [Comment("Construction and assembly work measurement unit identifier")]
         public int UnitId { get; set; }
 
         [ForeignKey(nameof(UnitId))]
         public Unit Unit { get; set; } = null!;
 
         [Required]
-        [Comment("Construction and assembly work cost per unit")]
+        [Comment("Construction and assembly work cost per measurement unit")]
         public decimal CostPerUnit { get; set; }
 
         [Required]
@@ -63,18 +63,5 @@ namespace ConstructionSiteReportingSystem.Infrastructure.Data.Models
 
         [ForeignKey(nameof(CreatorId))]
         public IdentityUser Creator { get; set; } = null!;
-
-        [Required]
-        [Comment("Construction and assembly work deleted state")]
-        public bool IsDeleted { get; private set; } = false;
-
-        [Comment("Construction and assembly work deletion point in time")]
-        public DateTimeOffset? DeletedAt { get; private set; } = null;
-        
-        public void UndoDelete()
-        {
-            IsDeleted = false;
-            DeletedAt = null;
-        }
     }
 }

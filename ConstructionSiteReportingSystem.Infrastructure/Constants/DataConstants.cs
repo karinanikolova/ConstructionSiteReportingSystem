@@ -19,13 +19,20 @@
 
         public static class Stage
         {
-            public const int NameMinValue = 3;
-            public const int NameMaxValue = 50;
+            public const int NameMinLength = 3;
+            public const int NameMaxLength = 50;
         }
 
-        public static class Work
+        public static class Unit
         {
-            
+            public const int TypeMinLength = 1;
+            public const int TypeMaxLength = 30;
+        }
+
+        public static class WorkInfo
+        {
+            public const int NameMinLength = 3;
+            public const int NameMaxLength = 150;
         }
     }
 }

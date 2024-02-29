@@ -1,4 +1,4 @@
-﻿namespace ConstructionSiteReportingSystem.Infrastructure.Data.Models.Contracts
+﻿namespace ConstructionSiteReportingSystem.Infrastructure.Data.Utilities.Contracts
 {
     /// <summary>
     /// Interface which can be implemented by Entity classes in order to be marked as soft-deleted.
