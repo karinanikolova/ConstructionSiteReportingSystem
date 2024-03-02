@@ -34,5 +34,11 @@
             public const int NameMinLength = 3;
             public const int NameMaxLength = 150;
         }
+
+        public static class Contractor
+        {
+            public const int NameMinLength = 3;
+            public const int NameMaxLength = 50;
+        }
     }
 }
