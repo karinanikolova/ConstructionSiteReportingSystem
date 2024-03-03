@@ -23,7 +23,7 @@ namespace ConstructionSiteReportingSystem.Infrastructure.Data.Models
         public double Quantity { get; set; }
 
         [Required]
-        [Comment("Construction and assembly work according to investment project unit identifier")]
+        [Comment("Construction and assembly work according to investment project measurement unit identifier")]
         public int UnitId { get; set; }
 
         [ForeignKey(nameof(UnitId))]
