@@ -1,7 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using ConstructionSiteReportingSystem.Infrastructure.Data.Utilities;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using ConstructionSiteReportingSystem.Infrastructure.Data.Utilities;
 
 namespace ConstructionSiteReportingSystem.Infrastructure.Data.Models
 {
@@ -20,6 +20,5 @@ namespace ConstructionSiteReportingSystem.Infrastructure.Data.Models
         public ProjectSiteInfo ProjectSiteInfo { get; set; } = null!;
 
         public ICollection<WorkByProject> WorksByProjects { get; set; } = new List<WorkByProject>();
-
     }
 }
