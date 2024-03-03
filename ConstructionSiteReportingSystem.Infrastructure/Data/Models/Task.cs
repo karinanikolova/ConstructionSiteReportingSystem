@@ -30,7 +30,7 @@ namespace ConstructionSiteReportingSystem.Infrastructure.Data.Models
         public DateTime CreatedOn { get; set; }
 
         [Required]
-        [Comment("Task creator")]
+        [Comment("Task creator identifier")]
         public int CreatorId { get; set; }
 
         [ForeignKey(nameof(CreatorId))]
