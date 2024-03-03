@@ -18,5 +18,7 @@ namespace ConstructionSiteReportingSystem.Infrastructure.Data.Models
         public string Type { get; set; } = string.Empty;
 
         public ICollection<Work> Works { get; set; } = new List<Work>();
+
+        public ICollection<WorkByProject> WorksByProjects { get; set; } = new List<WorkByProject>();
     }
 }
