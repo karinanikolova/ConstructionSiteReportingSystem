@@ -55,7 +55,7 @@ namespace ConstructionSiteReportingSystem.Infrastructure.Data.Models
         public decimal CostPerUnit { get; set; }
 
         [Required]
-        [Column(TypeName = "decimal(18,2)")]
+        [Column(TypeName = "decimal(36,2)")]
         [Comment("Construction and assembly work total cost")]
         public decimal TotalCost => Convert.ToDecimal(Quantity) * CostPerUnit;
 
