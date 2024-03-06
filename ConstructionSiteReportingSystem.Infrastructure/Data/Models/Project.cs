@@ -13,11 +13,11 @@ namespace ConstructionSiteReportingSystem.Infrastructure.Data.Models
         public int Id { get; set; }
 
         [Required]
-        [Comment("Investment project/Construction site information identifier")]
-        public int ProjectSiteInfoId { get; set; }
+        [Comment("Investment project/Construction site name identifier")]
+        public int ProjectSiteNameId { get; set; }
 
-        [ForeignKey(nameof(ProjectSiteInfoId))]
-        public ProjectSiteInfo ProjectSiteInfo { get; set; } = null!;
+        [ForeignKey(nameof(ProjectSiteNameId))]
+        public ProjectSiteName ProjectSiteName { get; set; } = null!;
 
         public ICollection<WorkByProject> WorksByProjects { get; set; } = new List<WorkByProject>();
     }
