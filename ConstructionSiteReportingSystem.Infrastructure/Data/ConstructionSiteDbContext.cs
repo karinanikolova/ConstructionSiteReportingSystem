@@ -16,7 +16,7 @@ namespace ConstructionSiteReportingSystem.Infrastructure.Data
 
         public DbSet<Contractor> Contractors { get; set; }
         public DbSet<Project> Projects { get; set; }
-        public DbSet<ProjectSiteInfo> ProjectsSitesInfo { get; set; }
+        public DbSet<ProjectSiteName> ProjectsSitesNames { get; set; }
         public DbSet<Site> Sites { get; set; }
         public DbSet<SiteStage> SitesStages { get; set; }
         public DbSet<Stage> Stages { get; set; }
@@ -52,7 +52,7 @@ namespace ConstructionSiteReportingSystem.Infrastructure.Data
             builder.Entity<Project>()
                 .HasQueryFilter(c => c.IsDeleted == false);
 
-            builder.Entity<ProjectSiteInfo>()
+            builder.Entity<ProjectSiteName>()
                 .HasQueryFilter(c => c.IsDeleted == false);
 
             builder.Entity<Site>()
