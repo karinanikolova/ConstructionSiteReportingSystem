@@ -11,7 +11,7 @@
             public const int DescriptionMaxLength = 1000;
         }
 
-        public static class ProjectSiteInfo
+        public static class ProjectSiteName
         {
             public const int NameMinLength = 3;
             public const int NameMaxLength = 50;
@@ -29,7 +29,12 @@
             public const int TypeMaxLength = 30;
         }
 
-        public static class WorkInfo
+        public static class Work
+        {
+            public const int DescriptionMaxLength = 500;
+        }
+
+        public static class WorkType
         {
             public const int NameMinLength = 3;
             public const int NameMaxLength = 150;
