@@ -24,7 +24,7 @@ namespace ConstructionSiteReportingSystem.Infrastructure.Data
         public DbSet<Unit> Units { get; set; }
         public DbSet<Work> Works { get; set; }
         public DbSet<WorkByProject> WorksByProjects { get; set; }
-        public DbSet<WorkInfo> WorksInfo { get; set; }
+        public DbSet<WorkType> WorksTypes { get; set; }
 
         // Overriding the SaveChanges method in order to achieve soft delete
         public override int SaveChanges(bool acceptAllChangesOnSuccess)
@@ -76,7 +76,7 @@ namespace ConstructionSiteReportingSystem.Infrastructure.Data
             builder.Entity<WorkByProject>()
                 .HasQueryFilter(c => c.IsDeleted == false);
 
-            builder.Entity<WorkInfo>()
+            builder.Entity<WorkType>()
                 .HasQueryFilter(c => c.IsDeleted == false);
 
             // Defining table keys, relations and Deletebehaviors
@@ -109,15 +109,15 @@ namespace ConstructionSiteReportingSystem.Infrastructure.Data
                 .OnDelete(DeleteBehavior.Restrict);
 
             builder.Entity<WorkByProject>()
-                .HasOne(wbp => wbp.WorkInfo)
+                .HasOne(wbp => wbp.WorkType)
                 .WithMany(wbp => wbp.WorksByProjects)
-                .HasForeignKey(wbp => wbp.WorkInfoId)
+                .HasForeignKey(wbp => wbp.WorkTypeId)
                 .OnDelete(DeleteBehavior.Restrict);
 
             builder.Entity<Work>()
-                .HasOne(w => w.WorkInfo)
+                .HasOne(w => w.WorkType)
                 .WithMany(w => w.Works)
-                .HasForeignKey(w => w.WorkInfoId)
+                .HasForeignKey(w => w.WorkTypeId)
                 .OnDelete(DeleteBehavior.Restrict);
 
             builder.Entity<Work>()
