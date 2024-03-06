@@ -19,9 +19,6 @@ namespace ConstructionSiteReportingSystem.Infrastructure.Data.Models
         [ForeignKey(nameof(WorkTypeId))]
         public WorkType WorkType{ get; set; } = null!;
 
-        [Comment("Construction and assembly work according to investment project quantity")]
-        public double Quantity { get; set; }
-
         [Required]
         [Comment("Construction and assembly work according to investment project measurement unit identifier")]
         public int UnitId { get; set; }
