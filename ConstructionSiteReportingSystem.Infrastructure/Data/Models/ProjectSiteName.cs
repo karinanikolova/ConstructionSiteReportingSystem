@@ -1,7 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using System.ComponentModel.DataAnnotations;
 using ConstructionSiteReportingSystem.Infrastructure.Data.Utilities;
-using static ConstructionSiteReportingSystem.Infrastructure.Constants.DataConstants.ProjectSiteInfo;
+using static ConstructionSiteReportingSystem.Infrastructure.Constants.DataConstants.ProjectSiteName;
 
 namespace ConstructionSiteReportingSystem.Infrastructure.Data.Models
 {
