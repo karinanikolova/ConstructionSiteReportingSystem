@@ -3,6 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using ConstructionSiteReportingSystem.Infrastructure.Data.Utilities;
+using static ConstructionSiteReportingSystem.Infrastructure.Constants.DataConstants.Work;
 
 namespace ConstructionSiteReportingSystem.Infrastructure.Data.Models
 {
@@ -14,11 +15,15 @@ namespace ConstructionSiteReportingSystem.Infrastructure.Data.Models
         public int Id { get; set; }
 
         [Required]
-        [Comment("Construction and assembly work additional information identifier")]
-        public int WorkInfoId { get; set; }
+        [Comment("Construction and assembly work type identifier")]
+        public int WorkTypeId { get; set; }
 
-        [ForeignKey(nameof(WorkInfoId))]
-        public WorkInfo WorkInfo { get; set; } = null!;
+        [ForeignKey(nameof(WorkTypeId))]
+        public WorkType WorkType { get; set; } = null!;
+
+        [MaxLength(DescriptionMaxLength)]
+        [Comment("Construction and assembly work description")]
+        public string? Description { get; set; }
 
         [Required]
         [Comment("Construction and assembly work carry out date and time")]

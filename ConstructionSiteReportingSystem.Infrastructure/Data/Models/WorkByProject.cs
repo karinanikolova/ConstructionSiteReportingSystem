@@ -13,11 +13,11 @@ namespace ConstructionSiteReportingSystem.Infrastructure.Data.Models
         public int Id { get; set; }
 
         [Required]
-        [Comment("Construction and assembly work according to investment project additional information identifier")]
-        public int WorkInfoId { get; set; }
+        [Comment("Construction and assembly work type identifier according to investment project")]
+        public int WorkTypeId { get; set; }
 
-        [ForeignKey(nameof(WorkInfoId))]
-        public WorkInfo WorkInfo { get; set; } = null!;
+        [ForeignKey(nameof(WorkTypeId))]
+        public WorkType WorkType{ get; set; } = null!;
 
         [Comment("Construction and assembly work according to investment project quantity")]
         public double Quantity { get; set; }
