@@ -31,7 +31,7 @@ namespace ConstructionSiteReportingSystem.Infrastructure.Data.Models
 
         [Required]
         [Comment("Task creator identifier")]
-        public int CreatorId { get; set; }
+        public string CreatorId { get; set; } = null!;
 
         [ForeignKey(nameof(CreatorId))]
         public IdentityUser Creator { get; set; } = null!;
