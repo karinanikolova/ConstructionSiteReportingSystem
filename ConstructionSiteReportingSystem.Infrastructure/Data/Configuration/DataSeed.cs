@@ -25,7 +25,7 @@ namespace ConstructionSiteReportingSystem.Infrastructure.Data.Configuration
 
         public IEnumerable<Work> Works { get; set; }
 
-        public IEnumerable<WorkByProject> WorkByProjects { get; set; }
+        public IEnumerable<WorkByProject> WorksByProjects { get; set; }
 
         public DataSeed()
         {
@@ -547,7 +547,7 @@ namespace ConstructionSiteReportingSystem.Infrastructure.Data.Configuration
 
         public void SeedWorksByProjects()
         {
-            WorkByProjects = new List<WorkByProject>()
+            WorksByProjects = new List<WorkByProject>()
             {
                 new WorkByProject()
                 {
