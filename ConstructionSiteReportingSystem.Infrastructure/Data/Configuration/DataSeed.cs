@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using ConstructionSiteReportingSystem.Infrastructure.Data.Models;
+using Task = ConstructionSiteReportingSystem.Infrastructure.Data.Models.Task;
 
 namespace ConstructionSiteReportingSystem.Infrastructure.Data.Configuration
 {
@@ -27,6 +28,8 @@ namespace ConstructionSiteReportingSystem.Infrastructure.Data.Configuration
 
         public IEnumerable<WorkByProject> WorksByProjects { get; set; }
 
+        public IEnumerable<Task> Tasks { get; set; }
+
         public DataSeed()
         {
             SeedUsers();
@@ -40,6 +43,7 @@ namespace ConstructionSiteReportingSystem.Infrastructure.Data.Configuration
             SeedWorkTypes();
             SeedWorks();
             SeedWorksByProjects();
+            SeedTasks();
         }
 
         private void SeedUsers()
@@ -104,7 +108,7 @@ namespace ConstructionSiteReportingSystem.Infrastructure.Data.Configuration
             };
         }
 
-        public void SeedProjectSiteNames()
+        private void SeedProjectSiteNames()
         {
             ProjectSiteNames = new List<ProjectSiteName>()
             {
@@ -121,7 +125,7 @@ namespace ConstructionSiteReportingSystem.Infrastructure.Data.Configuration
             };
         }
 
-        public void SeedProject()
+        private void SeedProject()
         {
             Projects = new List<Project>()
             {
@@ -138,7 +142,7 @@ namespace ConstructionSiteReportingSystem.Infrastructure.Data.Configuration
             };
         }
 
-        public void SeedSite()
+        private void SeedSite()
         {
             Sites = new List<Site>()
             {
@@ -157,7 +161,7 @@ namespace ConstructionSiteReportingSystem.Infrastructure.Data.Configuration
             };
         }
 
-        public void SeedStages()
+        private void SeedStages()
         {
             Stages = new List<Stage>()
             {
@@ -189,7 +193,7 @@ namespace ConstructionSiteReportingSystem.Infrastructure.Data.Configuration
             };
         }
 
-        public void SeedSiteStages()
+        private void SeedSiteStages()
         {
             SitesStages = new List<SiteStage>()
             {
@@ -246,7 +250,7 @@ namespace ConstructionSiteReportingSystem.Infrastructure.Data.Configuration
             };
         }
 
-        public void SeedUnits()
+        private void SeedUnits()
         {
             Units = new List<Unit>()
             {
@@ -303,7 +307,7 @@ namespace ConstructionSiteReportingSystem.Infrastructure.Data.Configuration
             };
         }
 
-        public void SeedWorkTypes()
+        private void SeedWorkTypes()
         {
             WorkTypes = new List<WorkType>()
             {
@@ -350,7 +354,7 @@ namespace ConstructionSiteReportingSystem.Infrastructure.Data.Configuration
             };
         }
 
-        public void SeedWorks()
+        private void SeedWorks()
         {
             Works = new List<Work>()
             {
@@ -545,7 +549,7 @@ namespace ConstructionSiteReportingSystem.Infrastructure.Data.Configuration
             };
         }
 
-        public void SeedWorksByProjects()
+        private void SeedWorksByProjects()
         {
             WorksByProjects = new List<WorkByProject>()
             {
@@ -613,6 +617,67 @@ namespace ConstructionSiteReportingSystem.Infrastructure.Data.Configuration
                     ToTalQuantity = 3600,
                     ProjectId = 1
                 }
+            };
+        }
+
+        private void SeedTasks()
+        {
+            Tasks = new List<Task>()
+            {
+                new Task() 
+                { 
+                    Id = 1,
+                    Title = "Order concrete",
+                    Description = "Must order 5m3 concrete class C20/25 with delivery date next Monday",
+                    CreatedOn = DateTime.Now,
+                    CreatorId = "32f9a0f0-4d62-4573-96e3-fbb7ad7f321f",
+                    Status = Enums.Status.NotStarted
+                },
+                new Task()
+                {
+                    Id = 2,
+                    Title = "New project documentation",
+                    Description = "Should start looking through documentation and drawings of upcoming project",
+                    CreatedOn = DateTime.Now.AddDays(30),
+                    CreatorId = "32f9a0f0-4d62-4573-96e3-fbb7ad7f321f",
+                    Status = Enums.Status.NotStarted
+                },
+                new Task()
+                {
+                    Id = 3,
+                    Title = "Weekly meeting",
+                    Description = "Go to weekly site Monday meeting",
+                    CreatedOn = DateTime.Now.AddDays(-5),
+                    CreatorId = "32f9a0f0-4d62-4573-96e3-fbb7ad7f321f",
+                    Status = Enums.Status.Finished
+                },
+                new Task()
+                {
+                    Id = 4,
+                    Title = "Monthly workers attendance forms",
+                    Description = "Fill in monthly workers attendance forms and send them to accounting by the end of month",
+                    CreatedOn = DateTime.Now,
+                    CreatorId = "32f9a0f0-4d62-4573-96e3-fbb7ad7f321f",
+                    Status = Enums.Status.InProgress
+                },
+                new Task()
+                {
+                    Id = 5,
+                    Title = "Schedule meeting",
+                    Description = "Call engineer supervisor and schedule meeting to discuss construction work progress and difficulties",
+                    CreatedOn = DateTime.Now,
+                    CreatorId = "a615552b-5981-4730-be32-12c087492aef",
+                    Status = Enums.Status.NotStarted
+                },
+                new Task()
+                {
+                    Id = 6,
+                    Title = "Formwork",
+                    Description = "Call Doka representative and order more formwork for site",
+                    CreatedOn = DateTime.Now.AddDays(5),
+                    CreatorId = "a615552b-5981-4730-be32-12c087492aef",
+                    Status = Enums.Status.NotStarted
+                },
             };
         }
     }
