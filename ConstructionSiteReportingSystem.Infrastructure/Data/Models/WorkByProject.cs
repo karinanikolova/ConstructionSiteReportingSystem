@@ -28,7 +28,7 @@ namespace ConstructionSiteReportingSystem.Infrastructure.Data.Models
 
         [Required]
         [Comment("Construction and assembly work according to investment project total quantity")]
-        public double ToTalQuantity { get; set; }
+        public double TotalQuantity { get; set; }
 
         [Required]
         [Comment("Construction and assembly work investment project identifier")]
