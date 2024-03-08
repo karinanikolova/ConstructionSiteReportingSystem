@@ -62,7 +62,7 @@ namespace ConstructionSiteReportingSystem.Infrastructure.Data.Models
         [Required]
         [Column(TypeName = "decimal(36,2)")]
         [Comment("Construction and assembly work total cost")]
-        public decimal TotalCost => Convert.ToDecimal(Quantity) * CostPerUnit;
+        public decimal TotalCost { get; set; }
 
         [Required]
         [Comment("Construction and assembly work creator identifier")]
