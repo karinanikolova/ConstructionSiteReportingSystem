@@ -1,4 +1,5 @@
-﻿using ConstructionSiteReportingSystem.Infrastructure.Data.Models;
+﻿using ConstructionSiteReportingSystem.Infrastructure.Data.Configuration;
+using ConstructionSiteReportingSystem.Infrastructure.Data.Models;
 using ConstructionSiteReportingSystem.Infrastructure.Data.Utilities.Contracts;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
@@ -44,99 +45,19 @@ namespace ConstructionSiteReportingSystem.Infrastructure.Data
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
-            // Applying query filers to each entity in order for Entity Framework Core to ignore soft-deleted records when executing queries. The query filer will only show entities with the IsDeleted property set to 'false'.
-
-            builder.Entity<Contractor>()
-                .HasQueryFilter(c => c.IsDeleted == false);
-
-            builder.Entity<Project>()
-                .HasQueryFilter(c => c.IsDeleted == false);
-
-            builder.Entity<ProjectSiteName>()
-                .HasQueryFilter(c => c.IsDeleted == false);
-
-            builder.Entity<Site>()
-                .HasQueryFilter(c => c.IsDeleted == false);
-
-            builder.Entity<SiteStage>()
-                .HasQueryFilter(c => c.IsDeleted == false);
-
-            builder.Entity<Stage>()
-                .HasQueryFilter(c => c.IsDeleted == false);
-
-            builder.Entity<Task>()
-                .HasQueryFilter(c => c.IsDeleted == false);
-
-            builder.Entity<Unit>()
-                .HasQueryFilter(c => c.IsDeleted == false);
-
-            builder.Entity<Work>()
-                .HasQueryFilter(c => c.IsDeleted == false);
-
-            builder.Entity<WorkByProject>()
-                .HasQueryFilter(c => c.IsDeleted == false);
-
-            builder.Entity<WorkType>()
-                .HasQueryFilter(c => c.IsDeleted == false);
-
-            // Defining table keys, relations and Deletebehaviors
-
-            builder.Entity<SiteStage>()
-                .HasKey(ss => new { ss.SiteId, ss.StageId });
-
-            builder.Entity<SiteStage>()
-                .HasOne(ss => ss.Site)
-                .WithMany(ss => ss.SitesStages)
-                .HasForeignKey(ss => ss.SiteId)
-                .OnDelete(DeleteBehavior.Restrict);
-
-            builder.Entity<SiteStage>()
-                .HasOne(ss => ss.Stage)
-                .WithMany(ss => ss.SitesStages)
-                .HasForeignKey(ss => ss.StageId)
-                .OnDelete(DeleteBehavior.Restrict);
-
-            builder.Entity<WorkByProject>()
-                .HasOne(wbp => wbp.Project)
-                .WithMany(wbp => wbp.WorksByProjects)
-                .HasForeignKey(wbp => wbp.ProjectId)
-                .OnDelete(DeleteBehavior.Restrict);
-
-            builder.Entity<WorkByProject>()
-                .HasOne(wbp => wbp.Unit)
-                .WithMany(wbp => wbp.WorksByProjects)
-                .HasForeignKey(wbp => wbp.UnitId)
-                .OnDelete(DeleteBehavior.Restrict);
-
-            builder.Entity<WorkByProject>()
-                .HasOne(wbp => wbp.WorkType)
-                .WithMany(wbp => wbp.WorksByProjects)
-                .HasForeignKey(wbp => wbp.WorkTypeId)
-                .OnDelete(DeleteBehavior.Restrict);
-
-            builder.Entity<Work>()
-                .HasOne(w => w.WorkType)
-                .WithMany(w => w.Works)
-                .HasForeignKey(w => w.WorkTypeId)
-                .OnDelete(DeleteBehavior.Restrict);
-
-            builder.Entity<Work>()
-                .HasOne(w => w.Stage)
-                .WithMany(w => w.Works)
-                .HasForeignKey(w => w.StageId)
-                .OnDelete(DeleteBehavior.Restrict);
-
-            builder.Entity<Work>()
-                .HasOne(w => w.Contractor)
-                .WithMany(w => w.Works)
-                .HasForeignKey(w => w.ContractorId)
-                .OnDelete(DeleteBehavior.Restrict);
-
-            builder.Entity<Work>()
-                .HasOne(w => w.Unit)
-                .WithMany(w => w.Works)
-                .HasForeignKey(w => w.UnitId)
-                .OnDelete(DeleteBehavior.Restrict);
+            // Applying configurations for each entity, including query filters, defining table keys, relations and DeleteBehaviors
+            builder.ApplyConfiguration(new UserConfiguration());
+            builder.ApplyConfiguration(new ContractorConfiguration());
+            builder.ApplyConfiguration(new ProjectSiteNameConfiguration());
+            builder.ApplyConfiguration(new ProjectConfiguration());
+            builder.ApplyConfiguration(new SiteConfiguration());
+            builder.ApplyConfiguration(new StageConfiguration());
+            builder.ApplyConfiguration(new SiteStageConfiguration());
+            builder.ApplyConfiguration(new UnitConfiguration());
+            builder.ApplyConfiguration(new WorkTypeConfiguration());
+            builder.ApplyConfiguration(new WorkConfiguration());
+            builder.ApplyConfiguration(new WorkByProjectConfiguration());
+            builder.ApplyConfiguration(new TaskConfiguration());
 
             base.OnModelCreating(builder);
         }
