@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using ConstructionSiteReportingSystem.Infrastructure.Data.Models;
 using Task = ConstructionSiteReportingSystem.Infrastructure.Data.Models.Task;
+using ConstructionSiteReportingSystem.Infrastructure.Enums;
 
 namespace ConstructionSiteReportingSystem.Infrastructure.Data.Configuration
 {
@@ -267,22 +268,17 @@ namespace ConstructionSiteReportingSystem.Infrastructure.Data.Configuration
                 new Unit()
                 {
                     Id = 3,
-                    Type = "m^3"
+                    Type = "cu.m"
                 },
                 new Unit()
                 {
                     Id = 4,
-                    Type = "m^2"
+                    Type = "sq.m"
                 },
                 new Unit()
                 {
                     Id = 5,
                     Type = "Meter"
-                },
-                new Unit()
-                {
-                    Id = 6,
-                    Type = "Piece"
                 },
                 new Unit()
                 {
@@ -388,7 +384,7 @@ namespace ConstructionSiteReportingSystem.Infrastructure.Data.Configuration
                 {
                     Id = 3,
                     WorkTypeId = 2,
-                    Description = "Imput cost for crushed aggredate material and delivery",
+                    Description = "Entered cost for crushed aggredate material and delivery",
                     CarryOutDate = DateTime.Now.AddDays(1),
                     StageId = 1,
                     ContractorId = 4,
@@ -402,7 +398,7 @@ namespace ConstructionSiteReportingSystem.Infrastructure.Data.Configuration
                 {
                     Id = 4,
                     WorkTypeId = 2,
-                    Description = "Input cost for crushed aggredate compaction using 11 ton roller",
+                    Description = "Entered cost for crushed aggredate compaction using 11 ton roller",
                     CarryOutDate = DateTime.Now.AddDays(1),
                     StageId = 1,
                     ContractorId = 2,
@@ -508,7 +504,7 @@ namespace ConstructionSiteReportingSystem.Infrastructure.Data.Configuration
                 {
                     Id = 12,
                     WorkTypeId = 7,
-                    Description = "Input cost for reinforcement steel and delivery",
+                    Description = "Entered cost for reinforcement steel and delivery",
                     CarryOutDate = DateTime.Now.AddDays(4),
                     StageId = 1,
                     ContractorId = 5,
@@ -522,7 +518,7 @@ namespace ConstructionSiteReportingSystem.Infrastructure.Data.Configuration
                 {
                     Id = 13,
                     WorkTypeId = 7,
-                    Description = "Input cost for reinforcement steel laying",
+                    Description = "Entered cost for reinforcement steel laying",
                     CarryOutDate = DateTime.Now.AddDays(4),
                     StageId = 1,
                     ContractorId = 1,
@@ -536,7 +532,7 @@ namespace ConstructionSiteReportingSystem.Infrastructure.Data.Configuration
                 {
                     Id = 14,
                     WorkTypeId = 8,
-                    Description = "Input cost for formwork assembly",
+                    Description = "Entered cost for formwork assembly",
                     CarryOutDate = DateTime.Now.AddDays(17),
                     StageId = 2,
                     ContractorId = 1,
@@ -558,7 +554,7 @@ namespace ConstructionSiteReportingSystem.Infrastructure.Data.Configuration
                     Id = 1,
                     WorkTypeId = 1,
                     UnitId = 5,
-                    ToTalQuantity = 3543,
+                    TotalQuantity = 3543,
                     ProjectId = 1
                 },
                 new WorkByProject()
@@ -566,7 +562,7 @@ namespace ConstructionSiteReportingSystem.Infrastructure.Data.Configuration
                     Id = 2,
                     WorkTypeId = 2,
                     UnitId = 3,
-                    ToTalQuantity = 12056,
+                    TotalQuantity = 12056,
                     ProjectId = 1
                 },
                 new WorkByProject()
@@ -574,7 +570,7 @@ namespace ConstructionSiteReportingSystem.Infrastructure.Data.Configuration
                     Id = 3,
                     WorkTypeId = 3,
                     UnitId = 3,
-                    ToTalQuantity = 15327,
+                    TotalQuantity = 15327,
                     ProjectId = 1
                 },
                 new WorkByProject()
@@ -582,7 +578,7 @@ namespace ConstructionSiteReportingSystem.Infrastructure.Data.Configuration
                     Id = 4,
                     WorkTypeId = 4,
                     UnitId = 1,
-                    ToTalQuantity = 3024,
+                    TotalQuantity = 3024,
                     ProjectId = 1
                 },
                 new WorkByProject()
@@ -590,7 +586,7 @@ namespace ConstructionSiteReportingSystem.Infrastructure.Data.Configuration
                     Id = 5,
                     WorkTypeId = 5,
                     UnitId = 1,
-                    ToTalQuantity = 3024,
+                    TotalQuantity = 3024,
                     ProjectId = 1
                 },
                 new WorkByProject()
@@ -598,7 +594,7 @@ namespace ConstructionSiteReportingSystem.Infrastructure.Data.Configuration
                     Id = 6,
                     WorkTypeId = 6,
                     UnitId = 1,
-                    ToTalQuantity = 3000,
+                    TotalQuantity = 3000,
                     ProjectId = 1
                 },
                 new WorkByProject()
@@ -606,7 +602,7 @@ namespace ConstructionSiteReportingSystem.Infrastructure.Data.Configuration
                     Id = 7,
                     WorkTypeId = 7,
                     UnitId = 2,
-                    ToTalQuantity = 72000,
+                    TotalQuantity = 72000,
                     ProjectId = 1
                 },
                 new WorkByProject()
@@ -614,7 +610,7 @@ namespace ConstructionSiteReportingSystem.Infrastructure.Data.Configuration
                     Id = 8,
                     WorkTypeId = 8,
                     UnitId = 4,
-                    ToTalQuantity = 3600,
+                    TotalQuantity = 3600,
                     ProjectId = 1
                 }
             };
@@ -624,14 +620,14 @@ namespace ConstructionSiteReportingSystem.Infrastructure.Data.Configuration
         {
             Tasks = new List<Task>()
             {
-                new Task() 
-                { 
+                new Task()
+                {
                     Id = 1,
                     Title = "Order concrete",
                     Description = "Must order 5m3 concrete class C20/25 with delivery date next Monday",
                     CreatedOn = DateTime.Now,
                     CreatorId = "32f9a0f0-4d62-4573-96e3-fbb7ad7f321f",
-                    Status = Enums.Status.NotStarted
+                    Status = (Status)0
                 },
                 new Task()
                 {
@@ -640,7 +636,7 @@ namespace ConstructionSiteReportingSystem.Infrastructure.Data.Configuration
                     Description = "Should start looking through documentation and drawings of upcoming project",
                     CreatedOn = DateTime.Now.AddDays(30),
                     CreatorId = "32f9a0f0-4d62-4573-96e3-fbb7ad7f321f",
-                    Status = Enums.Status.NotStarted
+                    Status = (Status)0
                 },
                 new Task()
                 {
@@ -649,7 +645,7 @@ namespace ConstructionSiteReportingSystem.Infrastructure.Data.Configuration
                     Description = "Go to weekly site Monday meeting",
                     CreatedOn = DateTime.Now.AddDays(-5),
                     CreatorId = "32f9a0f0-4d62-4573-96e3-fbb7ad7f321f",
-                    Status = Enums.Status.Finished
+                    Status = (Status)2
                 },
                 new Task()
                 {
@@ -658,7 +654,7 @@ namespace ConstructionSiteReportingSystem.Infrastructure.Data.Configuration
                     Description = "Fill in monthly workers attendance forms and send them to accounting by the end of month",
                     CreatedOn = DateTime.Now,
                     CreatorId = "32f9a0f0-4d62-4573-96e3-fbb7ad7f321f",
-                    Status = Enums.Status.InProgress
+                    Status = (Status)1
                 },
                 new Task()
                 {
@@ -667,7 +663,7 @@ namespace ConstructionSiteReportingSystem.Infrastructure.Data.Configuration
                     Description = "Call engineer supervisor and schedule meeting to discuss construction work progress and difficulties",
                     CreatedOn = DateTime.Now,
                     CreatorId = "a615552b-5981-4730-be32-12c087492aef",
-                    Status = Enums.Status.NotStarted
+                    Status = (Status)0
                 },
                 new Task()
                 {
@@ -676,7 +672,7 @@ namespace ConstructionSiteReportingSystem.Infrastructure.Data.Configuration
                     Description = "Call Doka representative and order more formwork for site",
                     CreatedOn = DateTime.Now.AddDays(5),
                     CreatorId = "a615552b-5981-4730-be32-12c087492aef",
-                    Status = Enums.Status.NotStarted
+                    Status = (Status)0
                 },
             };
         }
