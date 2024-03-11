@@ -2,10 +2,11 @@
 using Microsoft.AspNetCore.Mvc;
 using ConstructionSiteReportingSystem.Models;
 using ConstructionSiteReportingSystem.Core.Models.Home;
+using Microsoft.AspNetCore.Authorization;
 
 namespace ConstructionSiteReportingSystem.Controllers
 {
-    public class HomeController : Controller
+    public class HomeController : BaseController
     {
         private readonly ILogger<HomeController> _logger;
 
@@ -14,13 +15,15 @@ namespace ConstructionSiteReportingSystem.Controllers
             _logger = logger;
         }
 
-        public IActionResult Index()
+        [AllowAnonymous]
+        public async Task<IActionResult> Index()
         {
             var model = new IndexViewModel();
 
             return View(model);
         }
 
+        [AllowAnonymous]
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
         {
