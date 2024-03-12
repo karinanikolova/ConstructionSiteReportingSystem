@@ -1,14 +1,14 @@
 ﻿<ul class="navbar-nav flex-grow-1">
-    <li class="nav-item">
-        <a class="nav-link text-dark" asp-area="" asp-controller="Project" asp-action="All">Projects</a>
-    </li>
-    @if (this.User?.Identity?.IsAuthenticated ?? false)
-    {
-        <li class="nav-item">
-            <a class="nav-link text-dark" asp-area="" asp-controller="Report" asp-action="All">Reports</a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link text-dark" asp-area="" asp-controller="Task" asp-action="All">Tasks</a>
-        </li>
-    }
+	@if (this.User?.Identity?.IsAuthenticated ?? false)
+	{
+		<li class="nav-item">
+			<a class="nav-link text-dark" asp-area="" asp-controller="Project" asp-action="All">Projects</a>
+		</li>
+		<li class="nav-item">
+			<a class="nav-link text-dark" asp-area="" asp-controller="Report" asp-action="All">Reports</a>
+		</li>
+		<li class="nav-item">
+			<a class="nav-link text-dark" asp-area="" asp-controller="Task" asp-action="All">Tasks</a>
+		</li>
+	}
 </ul>
