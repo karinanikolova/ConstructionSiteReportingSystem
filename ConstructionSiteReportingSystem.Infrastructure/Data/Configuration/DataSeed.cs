@@ -116,14 +116,22 @@ namespace ConstructionSiteReportingSystem.Infrastructure.Data.Configuration
                 new ProjectSiteName()
                 {
                     Id = 1,
-                    Name = "Plant construction for production of electric bicycles MaxCompany"
-                },
+                    Name = "Plant construction for production of electric bicycles MaxCompany",
+                    ImageUrl = "https://images.pexels.com/photos/220885/pexels-photo-220885.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
+				},
                 new ProjectSiteName()
                 {
                     Id = 2,
-                    Name = "Construction of streets in Plovdiv Municipality"
-                }
-            };
+                    Name = "Construction of streets in Plovdiv Municipality",
+                    ImageUrl = "https://images.pexels.com/photos/2833686/pexels-photo-2833686.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
+				},
+				new ProjectSiteName()
+				{
+					Id = 3,
+					Name = "Plant construction for cardboard packaging GreenPac",
+					ImageUrl = "https://images.pexels.com/photos/236698/pexels-photo-236698.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
+				}
+			};
         }
 
         private void SeedProject()
