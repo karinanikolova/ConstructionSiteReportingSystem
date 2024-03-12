@@ -1,26 +1,28 @@
-﻿using System.Diagnostics;
-using Microsoft.AspNetCore.Mvc;
+﻿using ConstructionSiteReportingSystem.Core.Contracts;
 using ConstructionSiteReportingSystem.Models;
-using ConstructionSiteReportingSystem.Core.Models.Home;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
+using System.Diagnostics;
 
 namespace ConstructionSiteReportingSystem.Controllers
 {
-    public class HomeController : BaseController
+	public class HomeController : BaseController
     {
         private readonly ILogger<HomeController> _logger;
+        private readonly IHomeService _homeService;
 
-        public HomeController(ILogger<HomeController> logger)
+        public HomeController(ILogger<HomeController> logger, IHomeService homeService)
         {
             _logger = logger;
+            _homeService = homeService;
         }
 
         [AllowAnonymous]
         public async Task<IActionResult> Index()
         {
-            var model = new IndexViewModel();
+            var models = await _homeService.ProjectsForPreviewAsync();
 
-            return View(model);
+            return View(models);
         }
 
         [AllowAnonymous]
