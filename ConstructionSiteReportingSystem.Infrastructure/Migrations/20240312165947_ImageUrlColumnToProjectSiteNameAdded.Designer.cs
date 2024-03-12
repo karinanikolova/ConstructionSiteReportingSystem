@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace ConstructionSiteReportingSystem.Infrastructure.Migrations
 {
     [DbContext(typeof(ConstructionSiteDbContext))]
-    [Migration("20240308110712_DatabaseSeed")]
-    partial class DatabaseSeed
+    [Migration("20240312165947_ImageUrlColumnToProjectSiteNameAdded")]
+    partial class ImageUrlColumnToProjectSiteNameAdded
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -50,38 +50,6 @@ namespace ConstructionSiteReportingSystem.Infrastructure.Migrations
                     b.ToTable("Contractors");
 
                     b.HasComment("Construction contractor");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            IsDeleted = false,
-                            Name = "GBS Build"
-                        },
-                        new
-                        {
-                            Id = 2,
-                            IsDeleted = false,
-                            Name = "M Constructions"
-                        },
-                        new
-                        {
-                            Id = 3,
-                            IsDeleted = false,
-                            Name = "Quality Plumbing"
-                        },
-                        new
-                        {
-                            Id = 4,
-                            IsDeleted = false,
-                            Name = "Pavement Systems"
-                        },
-                        new
-                        {
-                            Id = 5,
-                            IsDeleted = false,
-                            Name = "NewSteel LTD"
-                        });
                 });
 
             modelBuilder.Entity("ConstructionSiteReportingSystem.Infrastructure.Data.Models.Project", b =>
@@ -111,20 +79,6 @@ namespace ConstructionSiteReportingSystem.Infrastructure.Migrations
                     b.ToTable("Projects");
 
                     b.HasComment("Investment project");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            IsDeleted = false,
-                            ProjectSiteNameId = 1
-                        },
-                        new
-                        {
-                            Id = 2,
-                            IsDeleted = false,
-                            ProjectSiteNameId = 2
-                        });
                 });
 
             modelBuilder.Entity("ConstructionSiteReportingSystem.Infrastructure.Data.Models.ProjectSiteName", b =>
@@ -138,6 +92,11 @@ namespace ConstructionSiteReportingSystem.Infrastructure.Migrations
 
                     b.Property<DateTimeOffset?>("DeletedAt")
                         .HasColumnType("datetimeoffset");
+
+                    b.Property<string>("ImageUrl")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)")
+                        .HasComment("Investment project/Construction site image URL");
 
                     b.Property<bool>("IsDeleted")
                         .HasColumnType("bit");
@@ -153,20 +112,6 @@ namespace ConstructionSiteReportingSystem.Infrastructure.Migrations
                     b.ToTable("ProjectsSitesNames");
 
                     b.HasComment("Investment project/Construction site name");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            IsDeleted = false,
-                            Name = "Plant construction for production of electric bicycles MaxCompany"
-                        },
-                        new
-                        {
-                            Id = 2,
-                            IsDeleted = false,
-                            Name = "Construction of streets in Plovdiv Municipality"
-                        });
                 });
 
             modelBuilder.Entity("ConstructionSiteReportingSystem.Infrastructure.Data.Models.Site", b =>
@@ -200,22 +145,6 @@ namespace ConstructionSiteReportingSystem.Infrastructure.Migrations
                     b.ToTable("Sites");
 
                     b.HasComment("Construction site");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            FinishDate = new DateTime(2027, 3, 8, 13, 7, 12, 270, DateTimeKind.Local).AddTicks(1283),
-                            IsDeleted = false,
-                            ProjectSiteNameId = 1
-                        },
-                        new
-                        {
-                            Id = 2,
-                            FinishDate = new DateTime(2029, 3, 8, 13, 7, 12, 270, DateTimeKind.Local).AddTicks(1310),
-                            IsDeleted = false,
-                            ProjectSiteNameId = 2
-                        });
                 });
 
             modelBuilder.Entity("ConstructionSiteReportingSystem.Infrastructure.Data.Models.SiteStage", b =>
@@ -241,68 +170,6 @@ namespace ConstructionSiteReportingSystem.Infrastructure.Migrations
                     b.ToTable("SitesStages");
 
                     b.HasComment("Construction site and construction stage mapping table");
-
-                    b.HasData(
-                        new
-                        {
-                            SiteId = 1,
-                            StageId = 1,
-                            IsDeleted = false
-                        },
-                        new
-                        {
-                            SiteId = 1,
-                            StageId = 2,
-                            IsDeleted = false
-                        },
-                        new
-                        {
-                            SiteId = 1,
-                            StageId = 3,
-                            IsDeleted = false
-                        },
-                        new
-                        {
-                            SiteId = 1,
-                            StageId = 4,
-                            IsDeleted = false
-                        },
-                        new
-                        {
-                            SiteId = 1,
-                            StageId = 5,
-                            IsDeleted = false
-                        },
-                        new
-                        {
-                            SiteId = 2,
-                            StageId = 1,
-                            IsDeleted = false
-                        },
-                        new
-                        {
-                            SiteId = 2,
-                            StageId = 2,
-                            IsDeleted = false
-                        },
-                        new
-                        {
-                            SiteId = 2,
-                            StageId = 3,
-                            IsDeleted = false
-                        },
-                        new
-                        {
-                            SiteId = 2,
-                            StageId = 4,
-                            IsDeleted = false
-                        },
-                        new
-                        {
-                            SiteId = 2,
-                            StageId = 5,
-                            IsDeleted = false
-                        });
                 });
 
             modelBuilder.Entity("ConstructionSiteReportingSystem.Infrastructure.Data.Models.Stage", b =>
@@ -331,38 +198,6 @@ namespace ConstructionSiteReportingSystem.Infrastructure.Migrations
                     b.ToTable("Stages");
 
                     b.HasComment("Construction stage");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            IsDeleted = false,
-                            Name = "Sitework and foundation"
-                        },
-                        new
-                        {
-                            Id = 2,
-                            IsDeleted = false,
-                            Name = "Rough framing"
-                        },
-                        new
-                        {
-                            Id = 3,
-                            IsDeleted = false,
-                            Name = "Exterior construction"
-                        },
-                        new
-                        {
-                            Id = 4,
-                            IsDeleted = false,
-                            Name = "Mechanical, electrical and plumbing"
-                        },
-                        new
-                        {
-                            Id = 5,
-                            IsDeleted = false,
-                            Name = "Finishes and fixtures"
-                        });
                 });
 
             modelBuilder.Entity("ConstructionSiteReportingSystem.Infrastructure.Data.Models.Task", b =>
@@ -412,68 +247,6 @@ namespace ConstructionSiteReportingSystem.Infrastructure.Migrations
                     b.ToTable("Tasks");
 
                     b.HasComment("User tasks");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            CreatedOn = new DateTime(2024, 3, 8, 13, 7, 12, 361, DateTimeKind.Local).AddTicks(4508),
-                            CreatorId = "32f9a0f0-4d62-4573-96e3-fbb7ad7f321f",
-                            Description = "Must order 5m3 concrete class C20/25 with delivery date next Monday",
-                            IsDeleted = false,
-                            Status = 0,
-                            Title = "Order concrete"
-                        },
-                        new
-                        {
-                            Id = 2,
-                            CreatedOn = new DateTime(2024, 4, 7, 13, 7, 12, 361, DateTimeKind.Local).AddTicks(4511),
-                            CreatorId = "32f9a0f0-4d62-4573-96e3-fbb7ad7f321f",
-                            Description = "Should start looking through documentation and drawings of upcoming project",
-                            IsDeleted = false,
-                            Status = 0,
-                            Title = "New project documentation"
-                        },
-                        new
-                        {
-                            Id = 3,
-                            CreatedOn = new DateTime(2024, 3, 3, 13, 7, 12, 361, DateTimeKind.Local).AddTicks(4514),
-                            CreatorId = "32f9a0f0-4d62-4573-96e3-fbb7ad7f321f",
-                            Description = "Go to weekly site Monday meeting",
-                            IsDeleted = false,
-                            Status = 2,
-                            Title = "Weekly meeting"
-                        },
-                        new
-                        {
-                            Id = 4,
-                            CreatedOn = new DateTime(2024, 3, 8, 13, 7, 12, 361, DateTimeKind.Local).AddTicks(4516),
-                            CreatorId = "32f9a0f0-4d62-4573-96e3-fbb7ad7f321f",
-                            Description = "Fill in monthly workers attendance forms and send them to accounting by the end of month",
-                            IsDeleted = false,
-                            Status = 1,
-                            Title = "Monthly workers attendance forms"
-                        },
-                        new
-                        {
-                            Id = 5,
-                            CreatedOn = new DateTime(2024, 3, 8, 13, 7, 12, 361, DateTimeKind.Local).AddTicks(4518),
-                            CreatorId = "a615552b-5981-4730-be32-12c087492aef",
-                            Description = "Call engineer supervisor and schedule meeting to discuss construction work progress and difficulties",
-                            IsDeleted = false,
-                            Status = 0,
-                            Title = "Schedule meeting"
-                        },
-                        new
-                        {
-                            Id = 6,
-                            CreatedOn = new DateTime(2024, 3, 13, 13, 7, 12, 361, DateTimeKind.Local).AddTicks(4521),
-                            CreatorId = "a615552b-5981-4730-be32-12c087492aef",
-                            Description = "Call Doka representative and order more formwork for site",
-                            IsDeleted = false,
-                            Status = 0,
-                            Title = "Formwork"
-                        });
                 });
 
             modelBuilder.Entity("ConstructionSiteReportingSystem.Infrastructure.Data.Models.Unit", b =>
@@ -502,62 +275,6 @@ namespace ConstructionSiteReportingSystem.Infrastructure.Migrations
                     b.ToTable("Units");
 
                     b.HasComment("Measurement unit");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            IsDeleted = false,
-                            Type = "Ton"
-                        },
-                        new
-                        {
-                            Id = 2,
-                            IsDeleted = false,
-                            Type = "Kilogram"
-                        },
-                        new
-                        {
-                            Id = 3,
-                            IsDeleted = false,
-                            Type = "cu.m"
-                        },
-                        new
-                        {
-                            Id = 4,
-                            IsDeleted = false,
-                            Type = "sq.m"
-                        },
-                        new
-                        {
-                            Id = 5,
-                            IsDeleted = false,
-                            Type = "Meter"
-                        },
-                        new
-                        {
-                            Id = 6,
-                            IsDeleted = false,
-                            Type = "Piece"
-                        },
-                        new
-                        {
-                            Id = 7,
-                            IsDeleted = false,
-                            Type = "Piece/m"
-                        },
-                        new
-                        {
-                            Id = 8,
-                            IsDeleted = false,
-                            Type = "Machine hours"
-                        },
-                        new
-                        {
-                            Id = 9,
-                            IsDeleted = false,
-                            Type = "Man hours"
-                        });
                 });
 
             modelBuilder.Entity("ConstructionSiteReportingSystem.Infrastructure.Data.Models.Work", b =>
@@ -636,224 +353,6 @@ namespace ConstructionSiteReportingSystem.Infrastructure.Migrations
                     b.ToTable("Works");
 
                     b.HasComment("Construction and assembly work");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            CarryOutDate = new DateTime(2024, 3, 8, 13, 7, 12, 334, DateTimeKind.Local).AddTicks(1168),
-                            ContractorId = 3,
-                            CostPerUnit = 23m,
-                            CreatorId = "32f9a0f0-4d62-4573-96e3-fbb7ad7f321f",
-                            IsDeleted = false,
-                            IsIncluded = true,
-                            Quantity = 897.0,
-                            StageId = 4,
-                            TotalCost = 0m,
-                            UnitId = 5,
-                            WorkTypeId = 1
-                        },
-                        new
-                        {
-                            Id = 2,
-                            CarryOutDate = new DateTime(2024, 3, 8, 13, 7, 12, 334, DateTimeKind.Local).AddTicks(1172),
-                            ContractorId = 4,
-                            CostPerUnit = 42.5m,
-                            CreatorId = "32f9a0f0-4d62-4573-96e3-fbb7ad7f321f",
-                            IsDeleted = false,
-                            IsIncluded = true,
-                            Quantity = 120.0,
-                            StageId = 1,
-                            TotalCost = 0m,
-                            UnitId = 3,
-                            WorkTypeId = 2
-                        },
-                        new
-                        {
-                            Id = 3,
-                            CarryOutDate = new DateTime(2024, 3, 9, 13, 7, 12, 334, DateTimeKind.Local).AddTicks(1174),
-                            ContractorId = 4,
-                            CostPerUnit = 35.5m,
-                            CreatorId = "32f9a0f0-4d62-4573-96e3-fbb7ad7f321f",
-                            Description = "Entered cost for crushed aggredate material and delivery",
-                            IsDeleted = false,
-                            IsIncluded = true,
-                            Quantity = 150.0,
-                            StageId = 1,
-                            TotalCost = 0m,
-                            UnitId = 3,
-                            WorkTypeId = 2
-                        },
-                        new
-                        {
-                            Id = 4,
-                            CarryOutDate = new DateTime(2024, 3, 9, 13, 7, 12, 334, DateTimeKind.Local).AddTicks(1177),
-                            ContractorId = 2,
-                            CostPerUnit = 600m,
-                            CreatorId = "32f9a0f0-4d62-4573-96e3-fbb7ad7f321f",
-                            Description = "Entered cost for crushed aggredate compaction using 11 ton roller",
-                            IsDeleted = false,
-                            IsIncluded = false,
-                            Quantity = 1.0,
-                            StageId = 1,
-                            TotalCost = 0m,
-                            UnitId = 8,
-                            WorkTypeId = 2
-                        },
-                        new
-                        {
-                            Id = 5,
-                            CarryOutDate = new DateTime(2024, 3, 10, 13, 7, 12, 334, DateTimeKind.Local).AddTicks(1179),
-                            ContractorId = 4,
-                            CostPerUnit = 42.5m,
-                            CreatorId = "32f9a0f0-4d62-4573-96e3-fbb7ad7f321f",
-                            IsDeleted = false,
-                            IsIncluded = true,
-                            Quantity = 250.0,
-                            StageId = 1,
-                            TotalCost = 0m,
-                            UnitId = 3,
-                            WorkTypeId = 2
-                        },
-                        new
-                        {
-                            Id = 6,
-                            CarryOutDate = new DateTime(2024, 3, 18, 13, 7, 12, 334, DateTimeKind.Local).AddTicks(1182),
-                            ContractorId = 4,
-                            CostPerUnit = 8m,
-                            CreatorId = "32f9a0f0-4d62-4573-96e3-fbb7ad7f321f",
-                            Description = "Used combined excavators",
-                            IsDeleted = false,
-                            IsIncluded = true,
-                            Quantity = 150.0,
-                            StageId = 1,
-                            TotalCost = 0m,
-                            UnitId = 3,
-                            WorkTypeId = 3
-                        },
-                        new
-                        {
-                            Id = 7,
-                            CarryOutDate = new DateTime(2024, 3, 20, 13, 7, 12, 334, DateTimeKind.Local).AddTicks(1184),
-                            ContractorId = 4,
-                            CostPerUnit = 164m,
-                            CreatorId = "32f9a0f0-4d62-4573-96e3-fbb7ad7f321f",
-                            IsDeleted = false,
-                            IsIncluded = true,
-                            Quantity = 163.0,
-                            StageId = 1,
-                            TotalCost = 0m,
-                            UnitId = 1,
-                            WorkTypeId = 4
-                        },
-                        new
-                        {
-                            Id = 8,
-                            CarryOutDate = new DateTime(2024, 3, 21, 13, 7, 12, 334, DateTimeKind.Local).AddTicks(1186),
-                            ContractorId = 4,
-                            CostPerUnit = 164m,
-                            CreatorId = "32f9a0f0-4d62-4573-96e3-fbb7ad7f321f",
-                            IsDeleted = false,
-                            IsIncluded = true,
-                            Quantity = 158.0,
-                            StageId = 1,
-                            TotalCost = 0m,
-                            UnitId = 1,
-                            WorkTypeId = 4
-                        },
-                        new
-                        {
-                            Id = 9,
-                            CarryOutDate = new DateTime(2024, 3, 22, 13, 7, 12, 334, DateTimeKind.Local).AddTicks(1188),
-                            ContractorId = 4,
-                            CostPerUnit = 164m,
-                            CreatorId = "32f9a0f0-4d62-4573-96e3-fbb7ad7f321f",
-                            IsDeleted = false,
-                            IsIncluded = true,
-                            Quantity = 75.0,
-                            StageId = 1,
-                            TotalCost = 0m,
-                            UnitId = 1,
-                            WorkTypeId = 4
-                        },
-                        new
-                        {
-                            Id = 10,
-                            CarryOutDate = new DateTime(2024, 3, 23, 13, 7, 12, 334, DateTimeKind.Local).AddTicks(1192),
-                            ContractorId = 4,
-                            CostPerUnit = 152m,
-                            CreatorId = "32f9a0f0-4d62-4573-96e3-fbb7ad7f321f",
-                            IsDeleted = false,
-                            IsIncluded = true,
-                            Quantity = 210.0,
-                            StageId = 1,
-                            TotalCost = 0m,
-                            UnitId = 1,
-                            WorkTypeId = 5
-                        },
-                        new
-                        {
-                            Id = 11,
-                            CarryOutDate = new DateTime(2024, 3, 13, 13, 7, 12, 334, DateTimeKind.Local).AddTicks(1194),
-                            ContractorId = 2,
-                            CostPerUnit = 135m,
-                            CreatorId = "a615552b-5981-4730-be32-12c087492aef",
-                            IsDeleted = false,
-                            IsIncluded = true,
-                            Quantity = 20.0,
-                            StageId = 1,
-                            TotalCost = 0m,
-                            UnitId = 3,
-                            WorkTypeId = 6
-                        },
-                        new
-                        {
-                            Id = 12,
-                            CarryOutDate = new DateTime(2024, 3, 12, 13, 7, 12, 334, DateTimeKind.Local).AddTicks(1199),
-                            ContractorId = 5,
-                            CostPerUnit = 2.2m,
-                            CreatorId = "a615552b-5981-4730-be32-12c087492aef",
-                            Description = "Entered cost for reinforcement steel and delivery",
-                            IsDeleted = false,
-                            IsIncluded = true,
-                            Quantity = 57.0,
-                            StageId = 1,
-                            TotalCost = 0m,
-                            UnitId = 2,
-                            WorkTypeId = 7
-                        },
-                        new
-                        {
-                            Id = 13,
-                            CarryOutDate = new DateTime(2024, 3, 12, 13, 7, 12, 334, DateTimeKind.Local).AddTicks(1202),
-                            ContractorId = 1,
-                            CostPerUnit = 0.3m,
-                            CreatorId = "a615552b-5981-4730-be32-12c087492aef",
-                            Description = "Entered cost for reinforcement steel laying",
-                            IsDeleted = false,
-                            IsIncluded = false,
-                            Quantity = 57.0,
-                            StageId = 1,
-                            TotalCost = 0m,
-                            UnitId = 2,
-                            WorkTypeId = 7
-                        },
-                        new
-                        {
-                            Id = 14,
-                            CarryOutDate = new DateTime(2024, 3, 25, 13, 7, 12, 334, DateTimeKind.Local).AddTicks(1204),
-                            ContractorId = 1,
-                            CostPerUnit = 8m,
-                            CreatorId = "32f9a0f0-4d62-4573-96e3-fbb7ad7f321f",
-                            Description = "Entered cost for formwork assembly",
-                            IsDeleted = false,
-                            IsIncluded = true,
-                            Quantity = 57.0,
-                            StageId = 2,
-                            TotalCost = 0m,
-                            UnitId = 4,
-                            WorkTypeId = 8
-                        });
                 });
 
             modelBuilder.Entity("ConstructionSiteReportingSystem.Infrastructure.Data.Models.WorkByProject", b =>
@@ -898,80 +397,6 @@ namespace ConstructionSiteReportingSystem.Infrastructure.Migrations
                     b.ToTable("WorksByProjects");
 
                     b.HasComment("Construction and assembly work according to investment project");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            IsDeleted = false,
-                            ProjectId = 1,
-                            TotalQuantity = 3543.0,
-                            UnitId = 5,
-                            WorkTypeId = 1
-                        },
-                        new
-                        {
-                            Id = 2,
-                            IsDeleted = false,
-                            ProjectId = 1,
-                            TotalQuantity = 12056.0,
-                            UnitId = 3,
-                            WorkTypeId = 2
-                        },
-                        new
-                        {
-                            Id = 3,
-                            IsDeleted = false,
-                            ProjectId = 1,
-                            TotalQuantity = 15327.0,
-                            UnitId = 3,
-                            WorkTypeId = 3
-                        },
-                        new
-                        {
-                            Id = 4,
-                            IsDeleted = false,
-                            ProjectId = 1,
-                            TotalQuantity = 3024.0,
-                            UnitId = 1,
-                            WorkTypeId = 4
-                        },
-                        new
-                        {
-                            Id = 5,
-                            IsDeleted = false,
-                            ProjectId = 1,
-                            TotalQuantity = 3024.0,
-                            UnitId = 1,
-                            WorkTypeId = 5
-                        },
-                        new
-                        {
-                            Id = 6,
-                            IsDeleted = false,
-                            ProjectId = 1,
-                            TotalQuantity = 3000.0,
-                            UnitId = 1,
-                            WorkTypeId = 6
-                        },
-                        new
-                        {
-                            Id = 7,
-                            IsDeleted = false,
-                            ProjectId = 1,
-                            TotalQuantity = 72000.0,
-                            UnitId = 2,
-                            WorkTypeId = 7
-                        },
-                        new
-                        {
-                            Id = 8,
-                            IsDeleted = false,
-                            ProjectId = 1,
-                            TotalQuantity = 3600.0,
-                            UnitId = 4,
-                            WorkTypeId = 8
-                        });
                 });
 
             modelBuilder.Entity("ConstructionSiteReportingSystem.Infrastructure.Data.Models.WorkType", b =>
@@ -1000,56 +425,6 @@ namespace ConstructionSiteReportingSystem.Infrastructure.Migrations
                     b.ToTable("WorksTypes");
 
                     b.HasComment("Construction and assembly work type");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            IsDeleted = false,
-                            Name = "PE400 SN8 pipe installation"
-                        },
-                        new
-                        {
-                            Id = 2,
-                            IsDeleted = false,
-                            Name = "Delivery,laying and compaction of crushed aggregate for road base"
-                        },
-                        new
-                        {
-                            Id = 3,
-                            IsDeleted = false,
-                            Name = "Earthwork excavation"
-                        },
-                        new
-                        {
-                            Id = 4,
-                            IsDeleted = false,
-                            Name = "Delivery, laying and compaction of asphalt concrete binder course"
-                        },
-                        new
-                        {
-                            Id = 5,
-                            IsDeleted = false,
-                            Name = "Delivery, laying and compaction of asphalt concrete surface course"
-                        },
-                        new
-                        {
-                            Id = 6,
-                            IsDeleted = false,
-                            Name = "Delivery and pouring concrete for foundation slab"
-                        },
-                        new
-                        {
-                            Id = 7,
-                            IsDeleted = false,
-                            Name = "Delivery and laying of reinforcement steel for foundation slab"
-                        },
-                        new
-                        {
-                            Id = 8,
-                            IsDeleted = false,
-                            Name = "Large-area formwork for concrete slab"
-                        });
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
@@ -1167,40 +542,6 @@ namespace ConstructionSiteReportingSystem.Infrastructure.Migrations
                         .HasFilter("[NormalizedUserName] IS NOT NULL");
 
                     b.ToTable("AspNetUsers", (string)null);
-
-                    b.HasData(
-                        new
-                        {
-                            Id = "32f9a0f0-4d62-4573-96e3-fbb7ad7f321f",
-                            AccessFailedCount = 0,
-                            ConcurrencyStamp = "38cc9533-0137-413c-96b8-d687d21fd223",
-                            Email = "test@mail.com",
-                            EmailConfirmed = false,
-                            LockoutEnabled = false,
-                            NormalizedEmail = "TEST@MAIL.COM",
-                            NormalizedUserName = "TEST@MAIL.COM",
-                            PasswordHash = "AQAAAAEAACcQAAAAEAwt5VAo6/x+HG9NY6jB4msq/jaGhjF/jAzD/nERASTOfuUlX5oVKZhbgjo5m6JFRA==",
-                            PhoneNumberConfirmed = false,
-                            SecurityStamp = "7d9eee49-29f1-4dca-957a-5a5da03e6e00",
-                            TwoFactorEnabled = false,
-                            UserName = "test@mail.com"
-                        },
-                        new
-                        {
-                            Id = "a615552b-5981-4730-be32-12c087492aef",
-                            AccessFailedCount = 0,
-                            ConcurrencyStamp = "84e2d68a-47d8-4224-a07a-6867f8fe70e8",
-                            Email = "guest@mail.com",
-                            EmailConfirmed = false,
-                            LockoutEnabled = false,
-                            NormalizedEmail = "GUEST@MAIL.COM",
-                            NormalizedUserName = "GUEST@MAIL.COM",
-                            PasswordHash = "AQAAAAEAACcQAAAAEKbZvZktaX5RimrUC1G7EQgSrmf3AsMFJKIf5frWyh0dgbngoOXNbwcMIkL0rPTKAw==",
-                            PhoneNumberConfirmed = false,
-                            SecurityStamp = "f71baa4a-9e4c-4420-badf-730d063d7c32",
-                            TwoFactorEnabled = false,
-                            UserName = "guest@mail.com"
-                        });
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<string>", b =>
