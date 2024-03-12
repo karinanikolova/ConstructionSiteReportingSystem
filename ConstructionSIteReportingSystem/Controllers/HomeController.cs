@@ -18,6 +18,7 @@ namespace ConstructionSiteReportingSystem.Controllers
         }
 
         [AllowAnonymous]
+        [HttpGet]
         public async Task<IActionResult> Index()
         {
             var models = await _homeService.ProjectsForPreviewAsync();
