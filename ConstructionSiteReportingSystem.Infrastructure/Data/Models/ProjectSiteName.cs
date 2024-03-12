@@ -17,6 +17,10 @@ namespace ConstructionSiteReportingSystem.Infrastructure.Data.Models
         [Comment("Investment project/Construction site name")]
         public string Name { get; set; } = string.Empty;
 
+        [Required]
+		[Comment("Investment project/Construction site image URL")]
+		public string ImageUrl { get; set; } = string.Empty;
+
         public Site Site { get; set; } = null!;
         public Project Project { get; set;} = null!;
     }
