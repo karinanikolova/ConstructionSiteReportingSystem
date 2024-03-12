@@ -1,10 +1,43 @@
-﻿@model IndexViewModel
+﻿@model IEnumerable<IndexViewModel>
 
 @{
-    ViewData["Title"] = "Home Page";
+	ViewData["Title"] = "Welcome to the Construction Site Reporting System";
+	var projects = Model.ToArray();
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+<div class="mb-5">
+	<h3 class="text-center">@ViewData["Title"]</h3>
+</div>
+
+@if (!projects.Any())
+{
+	<div class="mb-5">
+		<h4 class="text-center">There are no current projects</h4>
+	</div>
+}
+
+<div id="carouselExampleFade" class="carousel slide carousel-fade" data-bs-ride="carousel">
+	<div class="carousel-inner">
+		@for (int i = 0; i < projects.Length; i++)
+		{
+			<div class="carousel-item @(i == 0 ? "active" : string.Empty)">
+				<img class="d-block w-100" style="height:500px" src="@projects[i].ImageUrl" alt=" @projects[i].Name">
+				<div class="carousel-caption d-none d-md-block">
+					<h3>@projects[i].Name</h3>
+					@if (!User.Identity.IsAuthenticated)
+					{
+						<p>Please, login to view the full information</p>
+					}
+				</div>
+			</div>
+		}
+	</div>
+	<button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleFade" data-bs-slide="prev">
+		<span class="carousel-control-prev-icon" aria-hidden="true"></span>
+		<span class="visually-hidden">Previous</span>
+	</button>
+	<button class="carousel-control-next" type="button" data-bs-target="#carouselExampleFade" data-bs-slide="next">
+		<span class="carousel-control-next-icon" aria-hidden="true"></span>
+		<span class="visually-hidden">Next</span>
+	</button>
 </div>
