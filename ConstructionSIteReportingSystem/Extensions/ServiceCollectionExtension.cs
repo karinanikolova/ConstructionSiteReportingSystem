@@ -20,8 +20,9 @@ namespace Microsoft.Extensions.DependencyInjection
         /// <returns></returns>
         public static IServiceCollection AddApplicationServices(this IServiceCollection services)
         {
-            // Adding ProjectService to the Inversion of Control container.
+            // Adding custom services to the Inversion of Control container.
             services.AddScoped<IProjectService, ProjectService>();
+            services.AddScoped<IHomeService, HomeService>();
 
             return services;
         }
