@@ -1,9 +1,9 @@
-﻿using ConstructionSiteReportingSystem.Core.Models.Home;
+﻿using ConstructionSiteReportingSystem.Core.Models.Project;
 
 namespace ConstructionSiteReportingSystem.Core.Contracts
 {
     public interface IProjectService
     {
-        Task<IEnumerable<ProjectIndexViewModel>> ProjectsForPreviewAsync();
+        Task<IEnumerable<ProjectInfoViewModel>> AllProjectsAsync();
     }
 }
