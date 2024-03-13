@@ -1,13 +1,31 @@
 ﻿using ConstructionSiteReportingSystem.Core.Contracts;
-using ConstructionSiteReportingSystem.Core.Models.Home;
+using ConstructionSiteReportingSystem.Core.Models.Project;
+using ConstructionSiteReportingSystem.Infrastructure.Data.Models;
+using ConstructionSiteReportingSystem.Infrastructure.Data.Utilities.Contracts;
+using Microsoft.EntityFrameworkCore;
 
 namespace ConstructionSiteReportingSystem.Core.Services
 {
     public class ProjectService : IProjectService
     {
-        public Task<IEnumerable<ProjectIndexViewModel>> ProjectsForPreviewAsync()
+        private readonly IRepository _repository;
+
+        public ProjectService(IRepository repository)
         {
-            throw new NotImplementedException();
+            _repository = repository;
+        }
+
+        public async Task<IEnumerable<ProjectInfoViewModel>> AllProjectsAsync()
+        {
+            return await _repository
+                .AllReadOnly<ProjectSiteName>()
+                .Select(psn => new ProjectInfoViewModel()
+                {
+                    Id = psn.Id,
+                    Name = psn.Name
+                })
+                .OrderByDescending(psn => psn.Id)
+                .ToListAsync();
         }
     }
 }
