@@ -408,6 +408,7 @@ namespace ConstructionSiteReportingSystem.Infrastructure.Data.Configuration
                     Quantity = 897,
                     UnitId = 5,
                     CostPerUnit = 23M,
+                    TotalCost = 20631M,
                     CreatorId = "32f9a0f0-4d62-4573-96e3-fbb7ad7f321f",
                     IsIncluded = true
                 },
@@ -421,6 +422,7 @@ namespace ConstructionSiteReportingSystem.Infrastructure.Data.Configuration
                     Quantity = 120,
                     UnitId = 3,
                     CostPerUnit = 42.5M,
+                    TotalCost = 5100M,
                     CreatorId = "32f9a0f0-4d62-4573-96e3-fbb7ad7f321f",
                     IsIncluded = true
                 },
@@ -435,6 +437,7 @@ namespace ConstructionSiteReportingSystem.Infrastructure.Data.Configuration
                     Quantity = 150,
                     UnitId = 3,
                     CostPerUnit = 35.5M,
+                    TotalCost = 5325M,
                     CreatorId = "32f9a0f0-4d62-4573-96e3-fbb7ad7f321f",
                     IsIncluded = true
                 },
@@ -449,6 +452,7 @@ namespace ConstructionSiteReportingSystem.Infrastructure.Data.Configuration
                     Quantity = 1,
                     UnitId = 8,
                     CostPerUnit = 600M,
+                    TotalCost = 600M,
                     CreatorId = "32f9a0f0-4d62-4573-96e3-fbb7ad7f321f",
                     IsIncluded = false
                 },
@@ -462,6 +466,7 @@ namespace ConstructionSiteReportingSystem.Infrastructure.Data.Configuration
                     Quantity = 250,
                     UnitId = 3,
                     CostPerUnit = 42.5M,
+                    TotalCost = 10625M,
                     CreatorId = "32f9a0f0-4d62-4573-96e3-fbb7ad7f321f",
                     IsIncluded = true
                 },
@@ -476,6 +481,7 @@ namespace ConstructionSiteReportingSystem.Infrastructure.Data.Configuration
                     Quantity = 150,
                     UnitId = 3,
                     CostPerUnit = 8M,
+                    TotalCost = 1200M,
                     CreatorId = "32f9a0f0-4d62-4573-96e3-fbb7ad7f321f",
                     IsIncluded = true
                 },
@@ -489,6 +495,7 @@ namespace ConstructionSiteReportingSystem.Infrastructure.Data.Configuration
                     Quantity = 163,
                     UnitId = 1,
                     CostPerUnit = 164M,
+                    TotalCost = 26732M,
                     CreatorId = "32f9a0f0-4d62-4573-96e3-fbb7ad7f321f",
                     IsIncluded = true
                 },
@@ -502,6 +509,7 @@ namespace ConstructionSiteReportingSystem.Infrastructure.Data.Configuration
                     Quantity = 158,
                     UnitId = 1,
                     CostPerUnit = 164M,
+                    TotalCost = 25912M,
                     CreatorId = "32f9a0f0-4d62-4573-96e3-fbb7ad7f321f",
                     IsIncluded = true
                 },
@@ -515,6 +523,7 @@ namespace ConstructionSiteReportingSystem.Infrastructure.Data.Configuration
                     Quantity = 75,
                     UnitId = 1,
                     CostPerUnit = 164M,
+                    TotalCost = 12300M,
                     CreatorId = "32f9a0f0-4d62-4573-96e3-fbb7ad7f321f",
                     IsIncluded = true
                 },
@@ -528,6 +537,7 @@ namespace ConstructionSiteReportingSystem.Infrastructure.Data.Configuration
                     Quantity = 210,
                     UnitId = 1,
                     CostPerUnit = 152M,
+                    TotalCost = 31920M,
                     CreatorId = "32f9a0f0-4d62-4573-96e3-fbb7ad7f321f",
                     IsIncluded = true
                 },
@@ -541,6 +551,7 @@ namespace ConstructionSiteReportingSystem.Infrastructure.Data.Configuration
                     Quantity = 20,
                     UnitId = 3,
                     CostPerUnit = 135M,
+                    TotalCost = 2700M,
                     CreatorId = "a615552b-5981-4730-be32-12c087492aef",
                     IsIncluded = true
                 },
@@ -555,6 +566,7 @@ namespace ConstructionSiteReportingSystem.Infrastructure.Data.Configuration
                     Quantity = 57,
                     UnitId = 2,
                     CostPerUnit = 2.2M,
+                    TotalCost = 125.4M,
                     CreatorId = "a615552b-5981-4730-be32-12c087492aef",
                     IsIncluded = true
                 },
@@ -569,6 +581,7 @@ namespace ConstructionSiteReportingSystem.Infrastructure.Data.Configuration
                     Quantity = 57,
                     UnitId = 2,
                     CostPerUnit = 0.3M,
+                    TotalCost = 17.1M,
                     CreatorId = "a615552b-5981-4730-be32-12c087492aef",
                     IsIncluded = false
                 },
@@ -583,6 +596,7 @@ namespace ConstructionSiteReportingSystem.Infrastructure.Data.Configuration
                     Quantity = 57,
                     UnitId = 4,
                     CostPerUnit = 8M,
+                    TotalCost = 456M,
                     CreatorId = "32f9a0f0-4d62-4573-96e3-fbb7ad7f321f",
                     IsIncluded = true
                 }
