@@ -147,8 +147,13 @@ namespace ConstructionSiteReportingSystem.Infrastructure.Data.Configuration
                 {
                     Id = 2,
                     ProjectSiteNameId = 2
-                }
-            };
+                },
+				new Project()
+				{
+					Id = 3,
+					ProjectSiteNameId = 3
+				}
+			};
         }
 
         private void SeedSite()
@@ -166,8 +171,14 @@ namespace ConstructionSiteReportingSystem.Infrastructure.Data.Configuration
                     Id = 2,
                     ProjectSiteNameId = 2,
                     FinishDate = DateTime.Now.AddYears(5)
-                }
-            };
+                },
+				new Site()
+				{
+					Id = 3,
+					ProjectSiteNameId = 3,
+					FinishDate = DateTime.Now.AddYears(2)
+				}
+			};
         }
 
         private void SeedStages()
@@ -255,8 +266,33 @@ namespace ConstructionSiteReportingSystem.Infrastructure.Data.Configuration
                 {
                     SiteId = 2,
                     StageId = 5
-                }
-            };
+                },
+				new SiteStage()
+				{
+					SiteId = 3,
+					StageId = 1
+				},
+				new SiteStage()
+				{
+					SiteId = 3,
+					StageId = 2
+				},
+				new SiteStage()
+				{
+					SiteId = 3,
+					StageId = 3
+				},
+				new SiteStage()
+				{
+					SiteId = 3,
+					StageId = 4
+				},
+				new SiteStage()
+				{
+					SiteId = 3,
+					StageId = 5
+				}
+			};
         }
 
         private void SeedUnits()
