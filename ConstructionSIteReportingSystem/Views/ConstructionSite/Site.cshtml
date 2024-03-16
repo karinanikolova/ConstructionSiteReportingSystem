@@ -71,7 +71,7 @@
 			{
 				<tr>
 					<th scope="row">@(i++)</th>
-					<td>@work.CarryOutDate</td>
+					<td>@work.CarryOutDate.ToString(DateTimeFormat, CultureInfo.InvariantCulture)</td>
 					<td>@work.WorkName</td>
 					<td>@work.Description</td>
 					<td>@work.Contractor</td>
