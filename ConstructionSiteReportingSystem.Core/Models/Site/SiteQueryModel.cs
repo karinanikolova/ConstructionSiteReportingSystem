@@ -23,6 +23,8 @@ namespace ConstructionSiteReportingSystem.Core.Models.Site
 
         public DateTime ConstructionFinishDate { get; set; }
 
+        public IEnumerable<string> Stages { get; set; } = new List<string>();
+
         public IEnumerable<StageViewModel> StagesWithWorks { get; set; } = new List<StageViewModel>();
     }
 }
