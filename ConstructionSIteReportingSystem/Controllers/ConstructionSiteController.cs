@@ -35,6 +35,7 @@ namespace ConstructionSiteReportingSystem.Controllers
 			model.TotalWorksCount = site.TotalWorksCount;
 			model.SiteName = site.SiteName;
 			model.ConstructionFinishDate = site.ConstructionFinishDate;
+			model.Stages = await _constructionSiteService.GetAllStagesNamesAsync();
 
 			return View(model);
 		}
