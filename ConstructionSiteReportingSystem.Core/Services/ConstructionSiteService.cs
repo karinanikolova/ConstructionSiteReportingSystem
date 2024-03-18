@@ -36,7 +36,7 @@ namespace ConstructionSiteReportingSystem.Core.Services
 				.Where(ss => ss.Site.ProjectSiteNameId == projectSiteNameId);
 
 				var allStages = await GetAllStagesNamesAsync();
-				
+
 
 				if (!string.IsNullOrWhiteSpace(stage) && allStages.Any(s => s == stage))
 				{
@@ -72,6 +72,15 @@ namespace ConstructionSiteReportingSystem.Core.Services
 								.ToList()
 							})
 							.First();
+
+					site.TotalWorksCount = stageModel.Works.Count();
+
+					var worksToTake = stageModel.Works
+						.Skip((currentPage - 1) * worksPerPage)
+						.Take(worksPerPage)
+						.ToList();
+
+					stageModel.Works = worksToTake;
 
 					site.StagesWithWorks.Add(stageModel);
 				}
@@ -119,14 +128,9 @@ namespace ConstructionSiteReportingSystem.Core.Services
 							_ => works.OrderBy(w => w.CarryOutDate).ToList()
 						};
 
-						var allWorksModel = new List<StageViewModel>();
-
-						allWorksModel.Add(new StageViewModel()
-						{
-							Works = works
-						});
-
-						site.StagesWithWorks = allWorksModel;
+						site.AllWorksWithoutStages = works
+							.Skip((currentPage - 1) * worksPerPage)
+							.Take(worksPerPage);
 					}
 					else
 					{
@@ -145,13 +149,17 @@ namespace ConstructionSiteReportingSystem.Core.Services
 							_ => works.OrderBy(w => w.CarryOutDate).ToList()
 						};
 
-						stageModels.First().Works = works;
+
+						stageModels.First().Works = works
+							.Skip((currentPage - 1) * worksPerPage)
+							.Take(worksPerPage)
+							.ToList();
 
 						site.StagesWithWorks = stageModels;
 					}
-				}
 
-				site.TotalWorksCount = site.StagesWithWorks.Select(sw => sw.Works.Count).Sum();
+					site.TotalWorksCount = works.Count();
+				}
 			}
 
 			return site;
