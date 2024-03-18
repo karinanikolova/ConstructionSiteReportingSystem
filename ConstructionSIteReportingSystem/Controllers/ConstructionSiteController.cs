@@ -32,6 +32,7 @@ namespace ConstructionSiteReportingSystem.Controllers
 			}
 
 			model.StagesWithWorks = site.StagesWithWorks;
+			model.AllWorksWithoutStages = site.AllWorksWithoutStages;
 			model.TotalWorksCount = site.TotalWorksCount;
 			model.SiteName = site.SiteName;
 			model.ConstructionFinishDate = site.ConstructionFinishDate;
