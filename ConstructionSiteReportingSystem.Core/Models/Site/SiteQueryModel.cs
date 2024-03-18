@@ -1,10 +1,9 @@
-﻿using ConstructionSiteReportingSystem.Core.Constants;
-using ConstructionSiteReportingSystem.Infrastructure.Enums;
+﻿using ConstructionSiteReportingSystem.Infrastructure.Enums;
 using System.ComponentModel.DataAnnotations;
 
 namespace ConstructionSiteReportingSystem.Core.Models.Site
 {
-    public class SiteQueryModel
+	public class SiteQueryModel
     {
         public const int WorksPerPage = 5;
 
@@ -26,5 +25,7 @@ namespace ConstructionSiteReportingSystem.Core.Models.Site
         public IEnumerable<string> Stages { get; set; } = new List<string>();
 
         public IEnumerable<StageViewModel> StagesWithWorks { get; set; } = new List<StageViewModel>();
+
+        public IEnumerable<WorkViewModel> AllWorksWithoutStages { get; set; } = new List<WorkViewModel>();
     }
 }
