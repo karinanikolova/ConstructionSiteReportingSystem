@@ -15,16 +15,15 @@ namespace ConstructionSiteReportingSystem.Core.Services
 			_repository = repository;
         }
 
-        public async Task<IEnumerable<IndexViewModel>> ProjectsForPreviewAsync()
+        public async Task<IEnumerable<IndexViewModel>> SitesForPreviewAsync()
 		{
-			return await _repository.AllReadOnly<ProjectSiteName>()
-				.OrderByDescending(psn => psn.Id)
+			return await _repository.AllReadOnly<Site>()
 				.Take(3)
-				.Select(psn => new IndexViewModel()
+				.Select(s => new IndexViewModel()
 				{
-					Id = psn.Id,
-					Name = psn.Name,
-					ImageUrl = psn.ImageUrl
+					Id = s.Id,
+					Name = s.Name,
+					ImageUrl = s.ImageUrl
 				})
 				.ToListAsync();
 		}
