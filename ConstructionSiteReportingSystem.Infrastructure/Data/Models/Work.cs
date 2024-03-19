@@ -70,9 +70,5 @@ namespace ConstructionSiteReportingSystem.Infrastructure.Data.Models
 
         [ForeignKey(nameof(CreatorId))]
         public IdentityUser Creator { get; set; } = null!;
-
-        [Required]
-        [Comment("Boolean value that determines if the current construction and assembly work is included in the total quantity report")]
-        public bool IsIncluded { get; set; }
     }
 }
