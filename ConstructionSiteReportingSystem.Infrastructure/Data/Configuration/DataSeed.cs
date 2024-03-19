@@ -11,10 +11,6 @@ namespace ConstructionSiteReportingSystem.Infrastructure.Data.Configuration
 
         public IEnumerable<Contractor> Contractors { get; set; }
 
-        public IEnumerable<ProjectSiteName> ProjectSiteNames { get; set; }
-
-        public IEnumerable<Project> Projects { get; set; }
-
         public IEnumerable<Site> Sites { get; set; }
 
         public IEnumerable<Stage> Stages { get; set; }
@@ -27,23 +23,18 @@ namespace ConstructionSiteReportingSystem.Infrastructure.Data.Configuration
 
         public IEnumerable<Work> Works { get; set; }
 
-        public IEnumerable<WorkByProject> WorksByProjects { get; set; }
-
         public IEnumerable<Task> Tasks { get; set; }
 
         public DataSeed()
         {
             SeedUsers();
             SeedContractors();
-            SeedProjectSiteNames();
-            SeedProject();
             SeedSite();
             SeedStages();
             SeedSiteStages();
             SeedUnits();
             SeedWorkTypes();
             SeedWorks();
-            SeedWorksByProjects();
             SeedTasks();
         }
 
@@ -109,53 +100,6 @@ namespace ConstructionSiteReportingSystem.Infrastructure.Data.Configuration
             };
         }
 
-        private void SeedProjectSiteNames()
-        {
-            ProjectSiteNames = new List<ProjectSiteName>()
-            {
-                new ProjectSiteName()
-                {
-                    Id = 1,
-                    Name = "Plant construction for production of electric bicycles MaxCompany",
-                    ImageUrl = "https://images.pexels.com/photos/220885/pexels-photo-220885.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
-				},
-                new ProjectSiteName()
-                {
-                    Id = 2,
-                    Name = "Construction of streets in Plovdiv Municipality",
-                    ImageUrl = "https://images.pexels.com/photos/2833686/pexels-photo-2833686.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
-				},
-				new ProjectSiteName()
-				{
-					Id = 3,
-					Name = "Plant construction for cardboard packaging GreenPac",
-					ImageUrl = "https://images.pexels.com/photos/236698/pexels-photo-236698.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
-				}
-			};
-        }
-
-        private void SeedProject()
-        {
-            Projects = new List<Project>()
-            {
-                new Project()
-                {
-                    Id = 1,
-                    ProjectSiteNameId = 1
-                },
-                new Project()
-                {
-                    Id = 2,
-                    ProjectSiteNameId = 2
-                },
-				new Project()
-				{
-					Id = 3,
-					ProjectSiteNameId = 3
-				}
-			};
-        }
-
         private void SeedSite()
         {
             Sites = new List<Site>()
@@ -163,19 +107,22 @@ namespace ConstructionSiteReportingSystem.Infrastructure.Data.Configuration
                 new Site()
                 {
                     Id = 1,
-                    ProjectSiteNameId = 1,
+                    Name = "Plant construction for production of electric bicycles MaxCompany",
+                    ImageUrl = "https://images.pexels.com/photos/220885/pexels-photo-220885.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
                     FinishDate = DateTime.Now.AddYears(3)
                 },
                 new Site()
                 {
                     Id = 2,
-                    ProjectSiteNameId = 2,
+					Name = "Construction of streets in Plovdiv Municipality",
+                    ImageUrl = "https://images.pexels.com/photos/2833686/pexels-photo-2833686.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
                     FinishDate = DateTime.Now.AddYears(5)
                 },
 				new Site()
 				{
 					Id = 3,
-					ProjectSiteNameId = 3,
+					Name = "Plant construction for cardboard packaging GreenPac",
+					ImageUrl = "https://images.pexels.com/photos/236698/pexels-photo-236698.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
 					FinishDate = DateTime.Now.AddYears(2)
 				}
 			};
@@ -302,12 +249,12 @@ namespace ConstructionSiteReportingSystem.Infrastructure.Data.Configuration
                 new Unit()
                 {
                     Id = 1,
-                    Type = "Ton"
+                    Type = "ton"
                 },
                 new Unit()
                 {
                     Id = 2,
-                    Type = "Kilogram"
+                    Type = "kg"
                 },
                 new Unit()
                 {
@@ -322,27 +269,27 @@ namespace ConstructionSiteReportingSystem.Infrastructure.Data.Configuration
                 new Unit()
                 {
                     Id = 5,
-                    Type = "Meter"
+                    Type = "m"
                 },
                 new Unit()
                 {
                     Id = 6,
-                    Type = "Piece"
+                    Type = "piece"
                 },
                 new Unit()
                 {
                     Id = 7,
-                    Type = "Piece/m"
+                    Type = "piece/m"
                 },
                 new Unit()
                 {
                     Id = 8,
-                    Type = "Machine hours"
+                    Type = "machine hours"
                 },
                 new Unit()
                 {
                     Id = 9,
-                    Type = "Man hours"
+                    Type = "man hours"
                 }
             };
         }
@@ -409,8 +356,7 @@ namespace ConstructionSiteReportingSystem.Infrastructure.Data.Configuration
                     UnitId = 5,
                     CostPerUnit = 23M,
                     TotalCost = 20631M,
-                    CreatorId = "32f9a0f0-4d62-4573-96e3-fbb7ad7f321f",
-                    IsIncluded = true
+                    CreatorId = "32f9a0f0-4d62-4573-96e3-fbb7ad7f321f"
                 },
                 new Work()
                 {
@@ -423,8 +369,7 @@ namespace ConstructionSiteReportingSystem.Infrastructure.Data.Configuration
                     UnitId = 3,
                     CostPerUnit = 42.5M,
                     TotalCost = 5100M,
-                    CreatorId = "32f9a0f0-4d62-4573-96e3-fbb7ad7f321f",
-                    IsIncluded = true
+                    CreatorId = "32f9a0f0-4d62-4573-96e3-fbb7ad7f321f"
                 },
                 new Work()
                 {
@@ -438,8 +383,7 @@ namespace ConstructionSiteReportingSystem.Infrastructure.Data.Configuration
                     UnitId = 3,
                     CostPerUnit = 35.5M,
                     TotalCost = 5325M,
-                    CreatorId = "32f9a0f0-4d62-4573-96e3-fbb7ad7f321f",
-                    IsIncluded = true
+                    CreatorId = "32f9a0f0-4d62-4573-96e3-fbb7ad7f321f"
                 },
                 new Work()
                 {
@@ -453,8 +397,7 @@ namespace ConstructionSiteReportingSystem.Infrastructure.Data.Configuration
                     UnitId = 8,
                     CostPerUnit = 600M,
                     TotalCost = 600M,
-                    CreatorId = "32f9a0f0-4d62-4573-96e3-fbb7ad7f321f",
-                    IsIncluded = false
+                    CreatorId = "32f9a0f0-4d62-4573-96e3-fbb7ad7f321f"
                 },
                 new Work()
                 {
@@ -467,8 +410,7 @@ namespace ConstructionSiteReportingSystem.Infrastructure.Data.Configuration
                     UnitId = 3,
                     CostPerUnit = 42.5M,
                     TotalCost = 10625M,
-                    CreatorId = "32f9a0f0-4d62-4573-96e3-fbb7ad7f321f",
-                    IsIncluded = true
+                    CreatorId = "32f9a0f0-4d62-4573-96e3-fbb7ad7f321f"
                 },
                 new Work()
                 {
@@ -482,8 +424,7 @@ namespace ConstructionSiteReportingSystem.Infrastructure.Data.Configuration
                     UnitId = 3,
                     CostPerUnit = 8M,
                     TotalCost = 1200M,
-                    CreatorId = "32f9a0f0-4d62-4573-96e3-fbb7ad7f321f",
-                    IsIncluded = true
+                    CreatorId = "32f9a0f0-4d62-4573-96e3-fbb7ad7f321f"
                 },
                 new Work()
                 {
@@ -496,8 +437,7 @@ namespace ConstructionSiteReportingSystem.Infrastructure.Data.Configuration
                     UnitId = 1,
                     CostPerUnit = 164M,
                     TotalCost = 26732M,
-                    CreatorId = "32f9a0f0-4d62-4573-96e3-fbb7ad7f321f",
-                    IsIncluded = true
+                    CreatorId = "32f9a0f0-4d62-4573-96e3-fbb7ad7f321f"
                 },
                 new Work()
                 {
@@ -510,8 +450,7 @@ namespace ConstructionSiteReportingSystem.Infrastructure.Data.Configuration
                     UnitId = 1,
                     CostPerUnit = 164M,
                     TotalCost = 25912M,
-                    CreatorId = "32f9a0f0-4d62-4573-96e3-fbb7ad7f321f",
-                    IsIncluded = true
+                    CreatorId = "32f9a0f0-4d62-4573-96e3-fbb7ad7f321f"
                 },
                 new Work()
                 {
@@ -524,8 +463,7 @@ namespace ConstructionSiteReportingSystem.Infrastructure.Data.Configuration
                     UnitId = 1,
                     CostPerUnit = 164M,
                     TotalCost = 12300M,
-                    CreatorId = "32f9a0f0-4d62-4573-96e3-fbb7ad7f321f",
-                    IsIncluded = true
+                    CreatorId = "32f9a0f0-4d62-4573-96e3-fbb7ad7f321f"
                 },
                 new Work()
                 {
@@ -538,8 +476,7 @@ namespace ConstructionSiteReportingSystem.Infrastructure.Data.Configuration
                     UnitId = 1,
                     CostPerUnit = 152M,
                     TotalCost = 31920M,
-                    CreatorId = "32f9a0f0-4d62-4573-96e3-fbb7ad7f321f",
-                    IsIncluded = true
+                    CreatorId = "32f9a0f0-4d62-4573-96e3-fbb7ad7f321f"
                 },
                 new Work()
                 {
@@ -552,8 +489,7 @@ namespace ConstructionSiteReportingSystem.Infrastructure.Data.Configuration
                     UnitId = 3,
                     CostPerUnit = 135M,
                     TotalCost = 2700M,
-                    CreatorId = "a615552b-5981-4730-be32-12c087492aef",
-                    IsIncluded = true
+                    CreatorId = "a615552b-5981-4730-be32-12c087492aef"
                 },
                 new Work()
                 {
@@ -567,8 +503,7 @@ namespace ConstructionSiteReportingSystem.Infrastructure.Data.Configuration
                     UnitId = 2,
                     CostPerUnit = 2.2M,
                     TotalCost = 125.4M,
-                    CreatorId = "a615552b-5981-4730-be32-12c087492aef",
-                    IsIncluded = true
+                    CreatorId = "a615552b-5981-4730-be32-12c087492aef"
                 },
                 new Work()
                 {
@@ -582,8 +517,7 @@ namespace ConstructionSiteReportingSystem.Infrastructure.Data.Configuration
                     UnitId = 2,
                     CostPerUnit = 0.3M,
                     TotalCost = 17.1M,
-                    CreatorId = "a615552b-5981-4730-be32-12c087492aef",
-                    IsIncluded = false
+                    CreatorId = "a615552b-5981-4730-be32-12c087492aef"
                 },
                 new Work()
                 {
@@ -597,79 +531,7 @@ namespace ConstructionSiteReportingSystem.Infrastructure.Data.Configuration
                     UnitId = 4,
                     CostPerUnit = 8M,
                     TotalCost = 456M,
-                    CreatorId = "32f9a0f0-4d62-4573-96e3-fbb7ad7f321f",
-                    IsIncluded = true
-                }
-            };
-        }
-
-        private void SeedWorksByProjects()
-        {
-            WorksByProjects = new List<WorkByProject>()
-            {
-                new WorkByProject()
-                {
-                    Id = 1,
-                    WorkTypeId = 1,
-                    UnitId = 5,
-                    TotalQuantity = 3543,
-                    ProjectId = 1
-                },
-                new WorkByProject()
-                {
-                    Id = 2,
-                    WorkTypeId = 2,
-                    UnitId = 3,
-                    TotalQuantity = 12056,
-                    ProjectId = 1
-                },
-                new WorkByProject()
-                {
-                    Id = 3,
-                    WorkTypeId = 3,
-                    UnitId = 3,
-                    TotalQuantity = 15327,
-                    ProjectId = 1
-                },
-                new WorkByProject()
-                {
-                    Id = 4,
-                    WorkTypeId = 4,
-                    UnitId = 1,
-                    TotalQuantity = 3024,
-                    ProjectId = 1
-                },
-                new WorkByProject()
-                {
-                    Id = 5,
-                    WorkTypeId = 5,
-                    UnitId = 1,
-                    TotalQuantity = 3024,
-                    ProjectId = 1
-                },
-                new WorkByProject()
-                {
-                    Id = 6,
-                    WorkTypeId = 6,
-                    UnitId = 1,
-                    TotalQuantity = 3000,
-                    ProjectId = 1
-                },
-                new WorkByProject()
-                {
-                    Id = 7,
-                    WorkTypeId = 7,
-                    UnitId = 2,
-                    TotalQuantity = 72000,
-                    ProjectId = 1
-                },
-                new WorkByProject()
-                {
-                    Id = 8,
-                    WorkTypeId = 8,
-                    UnitId = 4,
-                    TotalQuantity = 3600,
-                    ProjectId = 1
+                    CreatorId = "32f9a0f0-4d62-4573-96e3-fbb7ad7f321f"
                 }
             };
         }
