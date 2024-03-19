@@ -4,6 +4,6 @@ namespace ConstructionSiteReportingSystem.Core.Contracts
 {
 	public interface IHomeService
 	{
-		Task<IEnumerable<IndexViewModel>> ProjectsForPreviewAsync();
+		Task<IEnumerable<IndexViewModel>> SitesForPreviewAsync();
 	}
 }
