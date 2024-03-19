@@ -1,0 +1,12 @@
+﻿@model WorkViewModel
+
+<tr>
+	<th scope="row">@Model.CarryOutDate.ToString(DateTimeFormat, CultureInfo.InvariantCulture)</th>
+	<td>@Model.WorkName</td>
+	<td>@Model.Description</td>
+	<td>@Model.Contractor</td>
+	<td>@Model.Quantity</td>
+	<td>@Model.Unit</td>
+	<td>@Model.CostPerUnit</td>
+	<td>@Model.TotalCost</td>
+</tr>
