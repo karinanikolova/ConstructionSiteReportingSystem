@@ -21,7 +21,7 @@ namespace ConstructionSiteReportingSystem.Controllers
         [HttpGet]
         public async Task<IActionResult> Index()
         {
-            var models = await _homeService.ProjectsForPreviewAsync();
+            var models = await _homeService.SitesForPreviewAsync();
 
             return View(models);
         }
