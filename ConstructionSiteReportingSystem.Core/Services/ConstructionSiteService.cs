@@ -19,13 +19,26 @@ namespace ConstructionSiteReportingSystem.Core.Services
 			_repository = repository;
 		}
 
-		public async Task<SiteQueryServiceModel> GetSiteAsync(int projectSiteNameId, string? stage = null, string? searchDate = null, DateSorting dateSorting = DateSorting.Newest, int currentPage = 1, int worksPerPage = 1)
+		public async Task<IEnumerable<SiteInfoViewModel>> AllSitesAsync()
+		{
+			return await _repository
+				.AllReadOnly<Site>()
+				.Select(s => new SiteInfoViewModel()
+				{
+					Id = s.Id,
+					Name = s.Name,
+					FinishDate = ConvertDateToString(s.FinishDate)
+				})
+				.ToListAsync();
+		}
+
+		public async Task<SiteQueryServiceModel> GetSiteAsync(int siteId, string? stage = null, string? searchDate = null, DateSorting dateSorting = DateSorting.Newest, int currentPage = 1, int worksPerPage = 1)
 		{
 			var site = await _repository.AllReadOnly<Site>()
-				.Where(s => s.ProjectSiteNameId == projectSiteNameId)
+				.Where(s => s.Id == siteId)
 				.Select(s => new SiteQueryServiceModel()
 				{
-					SiteName = s.ProjectSiteName.Name,
+					SiteName = s.Name,
 					ConstructionFinishDate = s.FinishDate
 				})
 				.FirstOrDefaultAsync();
@@ -33,7 +46,7 @@ namespace ConstructionSiteReportingSystem.Core.Services
 			if (site != null)
 			{
 				var siteStagesWithWorks = _repository.AllReadOnly<SiteStage>()
-				.Where(ss => ss.Site.ProjectSiteNameId == projectSiteNameId);
+				.Where(ss => ss.SiteId == siteId);
 
 				var allStages = await GetAllStagesNamesAsync();
 
@@ -41,7 +54,7 @@ namespace ConstructionSiteReportingSystem.Core.Services
 				if (!string.IsNullOrWhiteSpace(stage) && allStages.Any(s => s == stage))
 				{
 					siteStagesWithWorks = _repository.AllReadOnly<SiteStage>()
-				.Where(ss => ss.Site.ProjectSiteNameId == projectSiteNameId && ss.Stage.Name == stage);
+				.Where(ss => ss.SiteId == siteId && ss.Stage.Name == stage);
 				}
 
 				DateTime date;
@@ -171,6 +184,11 @@ namespace ConstructionSiteReportingSystem.Core.Services
 				.Select(s => s.Name)
 				.Distinct()
 				.ToListAsync();
+		}
+
+		private static string ConvertDateToString(DateTime date)
+		{
+			return date.ToString(DateTimeFormat, CultureInfo.InvariantCulture);
 		}
 	}
 }
