@@ -16,15 +16,12 @@ namespace ConstructionSiteReportingSystem.Infrastructure.Data
         }
 
         public DbSet<Contractor> Contractors { get; set; }
-        public DbSet<Project> Projects { get; set; }
-        public DbSet<ProjectSiteName> ProjectsSitesNames { get; set; }
         public DbSet<Site> Sites { get; set; }
         public DbSet<SiteStage> SitesStages { get; set; }
         public DbSet<Stage> Stages { get; set; }
         public DbSet<Task> Tasks { get; set; }
         public DbSet<Unit> Units { get; set; }
         public DbSet<Work> Works { get; set; }
-        public DbSet<WorkByProject> WorksByProjects { get; set; }
         public DbSet<WorkType> WorksTypes { get; set; }
 
         // Overriding the SaveChanges method in order to achieve soft delete
@@ -48,15 +45,12 @@ namespace ConstructionSiteReportingSystem.Infrastructure.Data
             // Applying configurations for each entity, including query filters, defining table keys, relations and DeleteBehaviors
             builder.ApplyConfiguration(new UserConfiguration());
             builder.ApplyConfiguration(new ContractorConfiguration());
-            builder.ApplyConfiguration(new ProjectSiteNameConfiguration());
-            builder.ApplyConfiguration(new ProjectConfiguration());
             builder.ApplyConfiguration(new SiteConfiguration());
             builder.ApplyConfiguration(new StageConfiguration());
             builder.ApplyConfiguration(new SiteStageConfiguration());
             builder.ApplyConfiguration(new UnitConfiguration());
             builder.ApplyConfiguration(new WorkTypeConfiguration());
             builder.ApplyConfiguration(new WorkConfiguration());
-            builder.ApplyConfiguration(new WorkByProjectConfiguration());
             builder.ApplyConfiguration(new TaskConfiguration());
 
             base.OnModelCreating(builder);
