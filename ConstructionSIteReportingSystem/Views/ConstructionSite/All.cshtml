@@ -1,0 +1,35 @@
+﻿@model IEnumerable<SiteInfoViewModel>
+
+@{
+	ViewData["Title"] = "Construction sites";
+	var sites = Model.ToArray();
+}
+
+<div class="mb-5">
+	<h3 class="text-center">@ViewData["Title"]</h3>
+</div>
+
+<div class="accordion" id="accordionExample">
+	@for (int i = 0; i < sites.Length; i++)
+	{
+		<div class="accordion-item">
+			@{
+				string collapseString = string.Concat("collapse", i.ToString());
+			}
+
+			<h2 class="accordion-header">
+				<button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#@collapseString" aria-expanded="true" aria-controls="@collapseString">
+					@sites[i].Name
+				</button>
+			</h2>
+			<div id=@collapseString class="accordion-collapse collapse" data-bs-parent="#accordionExample">
+				<div class="accordion-body">
+					<div class="mb-3">
+						Finish date: @sites[i].FinishDate
+					</div>
+					<a asp-controller="ConstructionSite" asp-action="Site" asp-route-id="@sites[i].Id" class="btn btn-outline-primary" type="button">View Report</a>
+				</div>
+			</div>
+		</div>
+	}
+</div>
