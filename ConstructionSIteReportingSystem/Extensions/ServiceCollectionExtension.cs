@@ -21,7 +21,6 @@ namespace Microsoft.Extensions.DependencyInjection
         public static IServiceCollection AddApplicationServices(this IServiceCollection services)
         {
             // Adding custom services to the Inversion of Control container.
-            services.AddScoped<IProjectService, ProjectService>();
             services.AddScoped<IHomeService, HomeService>();
             services.AddScoped<IConstructionSiteService, ConstructionSiteService>();
 
