@@ -2,13 +2,16 @@
 	@if (this.User?.Identity?.IsAuthenticated ?? false)
 	{
 		<li class="nav-item">
-			<a class="nav-link text-dark" asp-area="" asp-controller="Project" asp-action="All">Projects</a>
+			<a class="nav-link text-dark" asp-area="" asp-controller="ConstructionSite" asp-action="All">Construction Sites</a>
 		</li>
 		<li class="nav-item">
-			<a class="nav-link text-dark" asp-area="" asp-controller="Report" asp-action="All">Reports</a>
+			<a class="nav-link text-dark" asp-area="" asp-controller="ConstructionSite" asp-action="AddWork">Add Work</a>
 		</li>
 		<li class="nav-item">
 			<a class="nav-link text-dark" asp-area="" asp-controller="Task" asp-action="All">Tasks</a>
+		</li>
+		<li class="nav-item">
+			<a class="nav-link text-dark" asp-area="" asp-controller="Task" asp-action="AddTask">Add Task</a>
 		</li>
 	}
 </ul>
