@@ -11,7 +11,7 @@
             public const int DescriptionMaxLength = 1000;
         }
 
-        public static class ProjectSiteName
+        public static class Site
         {
             public const int NameMinLength = 3;
             public const int NameMaxLength = 100;
