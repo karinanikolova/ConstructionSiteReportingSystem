@@ -16,6 +16,14 @@ namespace ConstructionSiteReportingSystem.Controllers
 		}
 
 		[HttpGet]
+		public async Task<IActionResult> All()
+		{
+			var models = await _constructionSiteService.AllSitesAsync();
+
+			return View(models);
+		}
+
+		[HttpGet]
 		public async Task<IActionResult> Site(int id, [FromQuery]SiteQueryModel model)
 		{
 			var site = await _constructionSiteService.GetSiteAsync(
