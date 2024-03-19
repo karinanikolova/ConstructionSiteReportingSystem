@@ -125,16 +125,7 @@
 		{
 			foreach (var work in Model.AllWorksWithoutStages)
 			{
-				<tr>
-					<th scope="row">@work.CarryOutDate.ToString(DateTimeFormat, CultureInfo.InvariantCulture)</th>
-					<td>@work.WorkName</td>
-					<td>@work.Description</td>
-					<td>@work.Contractor</td>
-					<td>@work.Quantity</td>
-					<td>@work.Unit</td>
-					<td>@work.CostPerUnit</td>
-					<td>@work.TotalCost</td>
-				</tr>
+				<partial name="_SitePartial" model="@work" />
 			}
 		}
 		else
@@ -143,16 +134,7 @@
 			{
 				foreach (var work in stage.Works)
 				{
-					<tr>
-						<th scope="row">@work.CarryOutDate.ToString(DateTimeFormat, CultureInfo.InvariantCulture)</th>
-						<td>@work.WorkName</td>
-						<td>@work.Description</td>
-						<td>@work.Contractor</td>
-						<td>@work.Quantity</td>
-						<td>@work.Unit</td>
-						<td>@work.CostPerUnit</td>
-						<td>@work.TotalCost</td>
-					</tr>
+					<partial name="_SitePartial" model="@work" />
 				}
 			}
 		}
