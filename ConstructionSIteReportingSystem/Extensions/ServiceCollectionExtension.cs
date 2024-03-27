@@ -23,6 +23,7 @@ namespace Microsoft.Extensions.DependencyInjection
             // Adding custom services to the Inversion of Control container.
             services.AddScoped<IHomeService, HomeService>();
             services.AddScoped<IConstructionSiteService, ConstructionSiteService>();
+            services.AddScoped<IWorkService, WorkService>();
 
 			return services;
         }
