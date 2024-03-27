@@ -1,6 +1,12 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using ConstructionSiteReportingSystem.Infrastructure.Data.Models;
 using Task = ConstructionSiteReportingSystem.Infrastructure.Data.Models.Task;
+using Contractor = ConstructionSiteReportingSystem.Infrastructure.Data.Models.Contractor;
+using Site = ConstructionSiteReportingSystem.Infrastructure.Data.Models.Site;
+using Stage = ConstructionSiteReportingSystem.Infrastructure.Data.Models.Stage;
+using Unit = ConstructionSiteReportingSystem.Infrastructure.Data.Models.Unit;
+using WorkType = ConstructionSiteReportingSystem.Infrastructure.Data.Models.WorkType;
+using Work = ConstructionSiteReportingSystem.Infrastructure.Data.Models.Work;
 using ConstructionSiteReportingSystem.Infrastructure.Enums;
 
 namespace ConstructionSiteReportingSystem.Infrastructure.Data.Configuration
@@ -15,7 +21,7 @@ namespace ConstructionSiteReportingSystem.Infrastructure.Data.Configuration
 
         public IEnumerable<Stage> Stages { get; set; }
 
-        public IEnumerable<SiteStage> SitesStages { get; set; }
+        public IEnumerable<SiteWork> SitesWorks { get; set; }
 
         public IEnumerable<Unit> Units { get; set; }
 
@@ -29,9 +35,9 @@ namespace ConstructionSiteReportingSystem.Infrastructure.Data.Configuration
         {
             SeedUsers();
             SeedContractors();
-            SeedSite();
+            SeedSites();
             SeedStages();
-            SeedSiteStages();
+            SeedSitesWorks();
             SeedUnits();
             SeedWorkTypes();
             SeedWorks();
@@ -100,7 +106,7 @@ namespace ConstructionSiteReportingSystem.Infrastructure.Data.Configuration
             };
         }
 
-        private void SeedSite()
+        private void SeedSites()
         {
             Sites = new List<Site>()
             {
@@ -160,84 +166,109 @@ namespace ConstructionSiteReportingSystem.Infrastructure.Data.Configuration
             };
         }
 
-        private void SeedSiteStages()
-        {
-            SitesStages = new List<SiteStage>()
+        private void SeedSitesWorks()
+        { 
+            SitesWorks = new List<SiteWork>()
             {
-                new SiteStage()
+                new SiteWork()
                 {
                     SiteId = 1,
-                    StageId = 1
+                    WorkId = 1
                 },
-                new SiteStage()
+                new SiteWork()
                 {
                     SiteId = 1,
-                    StageId = 2
+                    WorkId = 2
                 },
-                new SiteStage()
+                new SiteWork()
                 {
                     SiteId = 1,
-                    StageId = 3
+                    WorkId = 3
                 },
-                new SiteStage()
+                new SiteWork()
                 {
                     SiteId = 1,
-                    StageId = 4
+                    WorkId = 4
                 },
-                new SiteStage()
+                new SiteWork()
                 {
                     SiteId = 1,
-                    StageId = 5
+                    WorkId = 5
                 },
-                new SiteStage()
+                new SiteWork()
                 {
-                    SiteId = 2,
-                    StageId = 1
+                    SiteId = 1,
+                    WorkId = 6
                 },
-                new SiteStage()
+                new SiteWork()
                 {
-                    SiteId = 2,
-                    StageId = 2
+                    SiteId = 1,
+                    WorkId = 7
                 },
-                new SiteStage()
+                new SiteWork()
                 {
-                    SiteId = 2,
-                    StageId = 3
+                    SiteId = 1,
+                    WorkId = 8
                 },
-                new SiteStage()
+                new SiteWork()
                 {
-                    SiteId = 2,
-                    StageId = 4
+                    SiteId = 1,
+                    WorkId = 9
                 },
-                new SiteStage()
+                new SiteWork()
                 {
-                    SiteId = 2,
-                    StageId = 5
+                    SiteId = 1,
+                    WorkId = 10
                 },
-				new SiteStage()
+				new SiteWork()
 				{
-					SiteId = 3,
-					StageId = 1
+					SiteId = 1,
+					WorkId = 11
 				},
-				new SiteStage()
+				new SiteWork()
 				{
-					SiteId = 3,
-					StageId = 2
+					SiteId = 1,
+					WorkId = 12
 				},
-				new SiteStage()
+				new SiteWork()
 				{
-					SiteId = 3,
-					StageId = 3
+					SiteId = 1,
+					WorkId = 13
 				},
-				new SiteStage()
+				new SiteWork()
 				{
-					SiteId = 3,
-					StageId = 4
+					SiteId = 1,
+					WorkId = 14
 				},
-				new SiteStage()
+				new SiteWork()
+				{
+					SiteId = 2,
+					WorkId = 1
+				},
+				new SiteWork()
+				{
+					SiteId = 2,
+					WorkId = 2
+				},
+				new SiteWork()
+				{
+					SiteId = 2,
+					WorkId = 3
+				},
+				new SiteWork()
 				{
 					SiteId = 3,
-					StageId = 5
+					WorkId = 12
+				},
+				new SiteWork()
+				{
+					SiteId = 3,
+					WorkId = 13
+				},
+				new SiteWork()
+				{
+					SiteId = 3,
+					WorkId = 14
 				}
 			};
         }
