@@ -10,6 +10,8 @@
 
         public DateTime CarryOutDate { get; set; }
 
+        public string Stage { get; set; } = string.Empty;
+
         public string Contractor { get; set; } = string.Empty;
 
         public double Quantity { get; set; }
