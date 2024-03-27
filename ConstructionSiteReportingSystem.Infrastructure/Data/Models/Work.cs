@@ -70,5 +70,7 @@ namespace ConstructionSiteReportingSystem.Infrastructure.Data.Models
 
         [ForeignKey(nameof(CreatorId))]
         public IdentityUser Creator { get; set; } = null!;
-    }
+
+		public ICollection<SiteWork> SitesWorks { get; set; } = new List<SiteWork>();
+	}
 }
