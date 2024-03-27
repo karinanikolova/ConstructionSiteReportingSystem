@@ -122,7 +122,7 @@ namespace ConstructionSiteReportingSystem.Infrastructure.Migrations
                         new
                         {
                             Id = 1,
-                            FinishDate = new DateTime(2027, 3, 19, 15, 7, 50, 83, DateTimeKind.Local).AddTicks(1370),
+                            FinishDate = new DateTime(2027, 3, 27, 12, 23, 5, 661, DateTimeKind.Local).AddTicks(6418),
                             ImageUrl = "https://images.pexels.com/photos/220885/pexels-photo-220885.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
                             IsDeleted = false,
                             Name = "Plant construction for production of electric bicycles MaxCompany"
@@ -130,7 +130,7 @@ namespace ConstructionSiteReportingSystem.Infrastructure.Migrations
                         new
                         {
                             Id = 2,
-                            FinishDate = new DateTime(2029, 3, 19, 15, 7, 50, 83, DateTimeKind.Local).AddTicks(1393),
+                            FinishDate = new DateTime(2029, 3, 27, 12, 23, 5, 661, DateTimeKind.Local).AddTicks(6435),
                             ImageUrl = "https://images.pexels.com/photos/2833686/pexels-photo-2833686.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
                             IsDeleted = false,
                             Name = "Construction of streets in Plovdiv Municipality"
@@ -138,22 +138,22 @@ namespace ConstructionSiteReportingSystem.Infrastructure.Migrations
                         new
                         {
                             Id = 3,
-                            FinishDate = new DateTime(2026, 3, 19, 15, 7, 50, 83, DateTimeKind.Local).AddTicks(1396),
+                            FinishDate = new DateTime(2026, 3, 27, 12, 23, 5, 661, DateTimeKind.Local).AddTicks(6545),
                             ImageUrl = "https://images.pexels.com/photos/236698/pexels-photo-236698.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
                             IsDeleted = false,
                             Name = "Plant construction for cardboard packaging GreenPac"
                         });
                 });
 
-            modelBuilder.Entity("ConstructionSiteReportingSystem.Infrastructure.Data.Models.SiteStage", b =>
+            modelBuilder.Entity("ConstructionSiteReportingSystem.Infrastructure.Data.Models.SiteWork", b =>
                 {
                     b.Property<int>("SiteId")
                         .HasColumnType("int")
                         .HasComment("Construction site identifier");
 
-                    b.Property<int>("StageId")
+                    b.Property<int>("WorkId")
                         .HasColumnType("int")
-                        .HasComment("Construction stage identifier");
+                        .HasComment("Construction and assembly work identifier");
 
                     b.Property<DateTimeOffset?>("DeletedAt")
                         .HasColumnType("datetimeoffset");
@@ -161,103 +161,133 @@ namespace ConstructionSiteReportingSystem.Infrastructure.Migrations
                     b.Property<bool>("IsDeleted")
                         .HasColumnType("bit");
 
-                    b.HasKey("SiteId", "StageId");
+                    b.HasKey("SiteId", "WorkId");
 
-                    b.HasIndex("StageId");
+                    b.HasIndex("WorkId");
 
-                    b.ToTable("SitesStages");
+                    b.ToTable("SitesWorks");
 
-                    b.HasComment("Construction site and construction stage mapping table");
+                    b.HasComment("Construction site and construction/assembly work mapping table");
 
                     b.HasData(
                         new
                         {
                             SiteId = 1,
-                            StageId = 1,
+                            WorkId = 1,
                             IsDeleted = false
                         },
                         new
                         {
                             SiteId = 1,
-                            StageId = 2,
+                            WorkId = 2,
                             IsDeleted = false
                         },
                         new
                         {
                             SiteId = 1,
-                            StageId = 3,
+                            WorkId = 3,
                             IsDeleted = false
                         },
                         new
                         {
                             SiteId = 1,
-                            StageId = 4,
+                            WorkId = 4,
                             IsDeleted = false
                         },
                         new
                         {
                             SiteId = 1,
-                            StageId = 5,
+                            WorkId = 5,
+                            IsDeleted = false
+                        },
+                        new
+                        {
+                            SiteId = 1,
+                            WorkId = 6,
+                            IsDeleted = false
+                        },
+                        new
+                        {
+                            SiteId = 1,
+                            WorkId = 7,
+                            IsDeleted = false
+                        },
+                        new
+                        {
+                            SiteId = 1,
+                            WorkId = 8,
+                            IsDeleted = false
+                        },
+                        new
+                        {
+                            SiteId = 1,
+                            WorkId = 9,
+                            IsDeleted = false
+                        },
+                        new
+                        {
+                            SiteId = 1,
+                            WorkId = 10,
+                            IsDeleted = false
+                        },
+                        new
+                        {
+                            SiteId = 1,
+                            WorkId = 11,
+                            IsDeleted = false
+                        },
+                        new
+                        {
+                            SiteId = 1,
+                            WorkId = 12,
+                            IsDeleted = false
+                        },
+                        new
+                        {
+                            SiteId = 1,
+                            WorkId = 13,
+                            IsDeleted = false
+                        },
+                        new
+                        {
+                            SiteId = 1,
+                            WorkId = 14,
                             IsDeleted = false
                         },
                         new
                         {
                             SiteId = 2,
-                            StageId = 1,
+                            WorkId = 1,
                             IsDeleted = false
                         },
                         new
                         {
                             SiteId = 2,
-                            StageId = 2,
+                            WorkId = 2,
                             IsDeleted = false
                         },
                         new
                         {
                             SiteId = 2,
-                            StageId = 3,
-                            IsDeleted = false
-                        },
-                        new
-                        {
-                            SiteId = 2,
-                            StageId = 4,
-                            IsDeleted = false
-                        },
-                        new
-                        {
-                            SiteId = 2,
-                            StageId = 5,
+                            WorkId = 3,
                             IsDeleted = false
                         },
                         new
                         {
                             SiteId = 3,
-                            StageId = 1,
+                            WorkId = 12,
                             IsDeleted = false
                         },
                         new
                         {
                             SiteId = 3,
-                            StageId = 2,
+                            WorkId = 13,
                             IsDeleted = false
                         },
                         new
                         {
                             SiteId = 3,
-                            StageId = 3,
-                            IsDeleted = false
-                        },
-                        new
-                        {
-                            SiteId = 3,
-                            StageId = 4,
-                            IsDeleted = false
-                        },
-                        new
-                        {
-                            SiteId = 3,
-                            StageId = 5,
+                            WorkId = 14,
                             IsDeleted = false
                         });
                 });
@@ -374,7 +404,7 @@ namespace ConstructionSiteReportingSystem.Infrastructure.Migrations
                         new
                         {
                             Id = 1,
-                            CreatedOn = new DateTime(2024, 3, 19, 15, 7, 50, 159, DateTimeKind.Local).AddTicks(6548),
+                            CreatedOn = new DateTime(2024, 3, 27, 12, 23, 5, 740, DateTimeKind.Local).AddTicks(585),
                             CreatorId = "32f9a0f0-4d62-4573-96e3-fbb7ad7f321f",
                             Description = "Must order 5m3 concrete class C20/25 with delivery date next Monday",
                             IsDeleted = false,
@@ -384,7 +414,7 @@ namespace ConstructionSiteReportingSystem.Infrastructure.Migrations
                         new
                         {
                             Id = 2,
-                            CreatedOn = new DateTime(2024, 4, 18, 15, 7, 50, 159, DateTimeKind.Local).AddTicks(6550),
+                            CreatedOn = new DateTime(2024, 4, 26, 12, 23, 5, 740, DateTimeKind.Local).AddTicks(668),
                             CreatorId = "32f9a0f0-4d62-4573-96e3-fbb7ad7f321f",
                             Description = "Should start looking through documentation and drawings of upcoming project",
                             IsDeleted = false,
@@ -394,7 +424,7 @@ namespace ConstructionSiteReportingSystem.Infrastructure.Migrations
                         new
                         {
                             Id = 3,
-                            CreatedOn = new DateTime(2024, 3, 14, 15, 7, 50, 159, DateTimeKind.Local).AddTicks(6553),
+                            CreatedOn = new DateTime(2024, 3, 22, 12, 23, 5, 740, DateTimeKind.Local).AddTicks(671),
                             CreatorId = "32f9a0f0-4d62-4573-96e3-fbb7ad7f321f",
                             Description = "Go to weekly site Monday meeting",
                             IsDeleted = false,
@@ -404,7 +434,7 @@ namespace ConstructionSiteReportingSystem.Infrastructure.Migrations
                         new
                         {
                             Id = 4,
-                            CreatedOn = new DateTime(2024, 3, 19, 15, 7, 50, 159, DateTimeKind.Local).AddTicks(6555),
+                            CreatedOn = new DateTime(2024, 3, 27, 12, 23, 5, 740, DateTimeKind.Local).AddTicks(673),
                             CreatorId = "32f9a0f0-4d62-4573-96e3-fbb7ad7f321f",
                             Description = "Fill in monthly workers attendance forms and send them to accounting by the end of month",
                             IsDeleted = false,
@@ -414,7 +444,7 @@ namespace ConstructionSiteReportingSystem.Infrastructure.Migrations
                         new
                         {
                             Id = 5,
-                            CreatedOn = new DateTime(2024, 3, 19, 15, 7, 50, 159, DateTimeKind.Local).AddTicks(6557),
+                            CreatedOn = new DateTime(2024, 3, 27, 12, 23, 5, 740, DateTimeKind.Local).AddTicks(675),
                             CreatorId = "a615552b-5981-4730-be32-12c087492aef",
                             Description = "Call engineer supervisor and schedule meeting to discuss construction work progress and difficulties",
                             IsDeleted = false,
@@ -424,7 +454,7 @@ namespace ConstructionSiteReportingSystem.Infrastructure.Migrations
                         new
                         {
                             Id = 6,
-                            CreatedOn = new DateTime(2024, 3, 24, 15, 7, 50, 159, DateTimeKind.Local).AddTicks(6559),
+                            CreatedOn = new DateTime(2024, 4, 1, 12, 23, 5, 740, DateTimeKind.Local).AddTicks(678),
                             CreatorId = "a615552b-5981-4730-be32-12c087492aef",
                             Description = "Call Doka representative and order more formwork for site",
                             IsDeleted = false,
@@ -594,7 +624,7 @@ namespace ConstructionSiteReportingSystem.Infrastructure.Migrations
                         new
                         {
                             Id = 1,
-                            CarryOutDate = new DateTime(2024, 3, 19, 15, 7, 50, 147, DateTimeKind.Local).AddTicks(550),
+                            CarryOutDate = new DateTime(2024, 3, 27, 12, 23, 5, 727, DateTimeKind.Local).AddTicks(6467),
                             ContractorId = 3,
                             CostPerUnit = 23m,
                             CreatorId = "32f9a0f0-4d62-4573-96e3-fbb7ad7f321f",
@@ -608,7 +638,7 @@ namespace ConstructionSiteReportingSystem.Infrastructure.Migrations
                         new
                         {
                             Id = 2,
-                            CarryOutDate = new DateTime(2024, 3, 19, 15, 7, 50, 147, DateTimeKind.Local).AddTicks(557),
+                            CarryOutDate = new DateTime(2024, 3, 27, 12, 23, 5, 727, DateTimeKind.Local).AddTicks(6487),
                             ContractorId = 4,
                             CostPerUnit = 42.5m,
                             CreatorId = "32f9a0f0-4d62-4573-96e3-fbb7ad7f321f",
@@ -622,7 +652,7 @@ namespace ConstructionSiteReportingSystem.Infrastructure.Migrations
                         new
                         {
                             Id = 3,
-                            CarryOutDate = new DateTime(2024, 3, 20, 15, 7, 50, 147, DateTimeKind.Local).AddTicks(560),
+                            CarryOutDate = new DateTime(2024, 3, 28, 12, 23, 5, 727, DateTimeKind.Local).AddTicks(6491),
                             ContractorId = 4,
                             CostPerUnit = 35.5m,
                             CreatorId = "32f9a0f0-4d62-4573-96e3-fbb7ad7f321f",
@@ -637,7 +667,7 @@ namespace ConstructionSiteReportingSystem.Infrastructure.Migrations
                         new
                         {
                             Id = 4,
-                            CarryOutDate = new DateTime(2024, 3, 20, 15, 7, 50, 147, DateTimeKind.Local).AddTicks(563),
+                            CarryOutDate = new DateTime(2024, 3, 28, 12, 23, 5, 727, DateTimeKind.Local).AddTicks(6551),
                             ContractorId = 2,
                             CostPerUnit = 600m,
                             CreatorId = "32f9a0f0-4d62-4573-96e3-fbb7ad7f321f",
@@ -652,7 +682,7 @@ namespace ConstructionSiteReportingSystem.Infrastructure.Migrations
                         new
                         {
                             Id = 5,
-                            CarryOutDate = new DateTime(2024, 3, 21, 15, 7, 50, 147, DateTimeKind.Local).AddTicks(565),
+                            CarryOutDate = new DateTime(2024, 3, 29, 12, 23, 5, 727, DateTimeKind.Local).AddTicks(6554),
                             ContractorId = 4,
                             CostPerUnit = 42.5m,
                             CreatorId = "32f9a0f0-4d62-4573-96e3-fbb7ad7f321f",
@@ -666,7 +696,7 @@ namespace ConstructionSiteReportingSystem.Infrastructure.Migrations
                         new
                         {
                             Id = 6,
-                            CarryOutDate = new DateTime(2024, 3, 29, 15, 7, 50, 147, DateTimeKind.Local).AddTicks(569),
+                            CarryOutDate = new DateTime(2024, 4, 6, 12, 23, 5, 727, DateTimeKind.Local).AddTicks(6559),
                             ContractorId = 4,
                             CostPerUnit = 8m,
                             CreatorId = "32f9a0f0-4d62-4573-96e3-fbb7ad7f321f",
@@ -681,7 +711,7 @@ namespace ConstructionSiteReportingSystem.Infrastructure.Migrations
                         new
                         {
                             Id = 7,
-                            CarryOutDate = new DateTime(2024, 3, 31, 15, 7, 50, 147, DateTimeKind.Local).AddTicks(571),
+                            CarryOutDate = new DateTime(2024, 4, 8, 12, 23, 5, 727, DateTimeKind.Local).AddTicks(6566),
                             ContractorId = 4,
                             CostPerUnit = 164m,
                             CreatorId = "32f9a0f0-4d62-4573-96e3-fbb7ad7f321f",
@@ -695,7 +725,7 @@ namespace ConstructionSiteReportingSystem.Infrastructure.Migrations
                         new
                         {
                             Id = 8,
-                            CarryOutDate = new DateTime(2024, 4, 1, 15, 7, 50, 147, DateTimeKind.Local).AddTicks(574),
+                            CarryOutDate = new DateTime(2024, 4, 9, 12, 23, 5, 727, DateTimeKind.Local).AddTicks(6569),
                             ContractorId = 4,
                             CostPerUnit = 164m,
                             CreatorId = "32f9a0f0-4d62-4573-96e3-fbb7ad7f321f",
@@ -709,7 +739,7 @@ namespace ConstructionSiteReportingSystem.Infrastructure.Migrations
                         new
                         {
                             Id = 9,
-                            CarryOutDate = new DateTime(2024, 4, 2, 15, 7, 50, 147, DateTimeKind.Local).AddTicks(576),
+                            CarryOutDate = new DateTime(2024, 4, 10, 12, 23, 5, 727, DateTimeKind.Local).AddTicks(6689),
                             ContractorId = 4,
                             CostPerUnit = 164m,
                             CreatorId = "32f9a0f0-4d62-4573-96e3-fbb7ad7f321f",
@@ -723,7 +753,7 @@ namespace ConstructionSiteReportingSystem.Infrastructure.Migrations
                         new
                         {
                             Id = 10,
-                            CarryOutDate = new DateTime(2024, 4, 3, 15, 7, 50, 147, DateTimeKind.Local).AddTicks(579),
+                            CarryOutDate = new DateTime(2024, 4, 11, 12, 23, 5, 727, DateTimeKind.Local).AddTicks(6694),
                             ContractorId = 4,
                             CostPerUnit = 152m,
                             CreatorId = "32f9a0f0-4d62-4573-96e3-fbb7ad7f321f",
@@ -737,7 +767,7 @@ namespace ConstructionSiteReportingSystem.Infrastructure.Migrations
                         new
                         {
                             Id = 11,
-                            CarryOutDate = new DateTime(2024, 3, 24, 15, 7, 50, 147, DateTimeKind.Local).AddTicks(581),
+                            CarryOutDate = new DateTime(2024, 4, 1, 12, 23, 5, 727, DateTimeKind.Local).AddTicks(6700),
                             ContractorId = 2,
                             CostPerUnit = 135m,
                             CreatorId = "a615552b-5981-4730-be32-12c087492aef",
@@ -751,7 +781,7 @@ namespace ConstructionSiteReportingSystem.Infrastructure.Migrations
                         new
                         {
                             Id = 12,
-                            CarryOutDate = new DateTime(2024, 3, 23, 15, 7, 50, 147, DateTimeKind.Local).AddTicks(584),
+                            CarryOutDate = new DateTime(2024, 3, 31, 12, 23, 5, 727, DateTimeKind.Local).AddTicks(6703),
                             ContractorId = 5,
                             CostPerUnit = 2.2m,
                             CreatorId = "a615552b-5981-4730-be32-12c087492aef",
@@ -766,7 +796,7 @@ namespace ConstructionSiteReportingSystem.Infrastructure.Migrations
                         new
                         {
                             Id = 13,
-                            CarryOutDate = new DateTime(2024, 3, 23, 15, 7, 50, 147, DateTimeKind.Local).AddTicks(587),
+                            CarryOutDate = new DateTime(2024, 3, 31, 12, 23, 5, 727, DateTimeKind.Local).AddTicks(6706),
                             ContractorId = 1,
                             CostPerUnit = 0.3m,
                             CreatorId = "a615552b-5981-4730-be32-12c087492aef",
@@ -781,7 +811,7 @@ namespace ConstructionSiteReportingSystem.Infrastructure.Migrations
                         new
                         {
                             Id = 14,
-                            CarryOutDate = new DateTime(2024, 4, 5, 15, 7, 50, 147, DateTimeKind.Local).AddTicks(590),
+                            CarryOutDate = new DateTime(2024, 4, 13, 12, 23, 5, 727, DateTimeKind.Local).AddTicks(6708),
                             ContractorId = 1,
                             CostPerUnit = 8m,
                             CreatorId = "32f9a0f0-4d62-4573-96e3-fbb7ad7f321f",
@@ -994,15 +1024,15 @@ namespace ConstructionSiteReportingSystem.Infrastructure.Migrations
                         {
                             Id = "32f9a0f0-4d62-4573-96e3-fbb7ad7f321f",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "8bf7f41d-db18-4cd9-ae4e-df30088265ae",
+                            ConcurrencyStamp = "05202de6-33f5-4f8f-b89e-c26318572c3d",
                             Email = "test@mail.com",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
                             NormalizedEmail = "TEST@MAIL.COM",
                             NormalizedUserName = "TEST@MAIL.COM",
-                            PasswordHash = "AQAAAAEAACcQAAAAEGaBJe7vVRbwioFY/aVj3kSOkHFdypTu6izfNq63al5AQXwrvkgZna9QdH/6UhK3Jg==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEN79zn9xMOCrS6kT3CwEupiRwM/Hgy3LZPQ0JoRkcaq+8tmawK3L//gsVLkB1mzcUw==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "408ca107-dbd0-4435-956e-4e97b2d1e76e",
+                            SecurityStamp = "cdbc8c96-7449-42c0-9cfb-188c98a4de32",
                             TwoFactorEnabled = false,
                             UserName = "test@mail.com"
                         },
@@ -1010,15 +1040,15 @@ namespace ConstructionSiteReportingSystem.Infrastructure.Migrations
                         {
                             Id = "a615552b-5981-4730-be32-12c087492aef",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "af7a0db4-efcb-463a-b993-7b29fe87cb5e",
+                            ConcurrencyStamp = "843e239e-8492-427a-97e7-d239950e5953",
                             Email = "guest@mail.com",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
                             NormalizedEmail = "GUEST@MAIL.COM",
                             NormalizedUserName = "GUEST@MAIL.COM",
-                            PasswordHash = "AQAAAAEAACcQAAAAEIGQK+mkxT7qWGrc4SWNoAfxHs2gummbaTsKUJqqwMkEhM3o1jY1f7HGSZbDbuO5rg==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEHXybsxtUXKCtrxA40nW+DcdSiktKJCIcNfcEY5Nl+CD8B3xfhQ7JY/EqbnuBUZimQ==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "660a4215-3e6d-4ecd-94ec-c82d7d44bf31",
+                            SecurityStamp = "5a2c28de-145a-4e2e-b134-c3d17bf0b5b8",
                             TwoFactorEnabled = false,
                             UserName = "guest@mail.com"
                         });
@@ -1109,23 +1139,23 @@ namespace ConstructionSiteReportingSystem.Infrastructure.Migrations
                     b.ToTable("AspNetUserTokens", (string)null);
                 });
 
-            modelBuilder.Entity("ConstructionSiteReportingSystem.Infrastructure.Data.Models.SiteStage", b =>
+            modelBuilder.Entity("ConstructionSiteReportingSystem.Infrastructure.Data.Models.SiteWork", b =>
                 {
                     b.HasOne("ConstructionSiteReportingSystem.Infrastructure.Data.Models.Site", "Site")
-                        .WithMany("SitesStages")
+                        .WithMany("SitesWorks")
                         .HasForeignKey("SiteId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
-                    b.HasOne("ConstructionSiteReportingSystem.Infrastructure.Data.Models.Stage", "Stage")
-                        .WithMany("SitesStages")
-                        .HasForeignKey("StageId")
+                    b.HasOne("ConstructionSiteReportingSystem.Infrastructure.Data.Models.Work", "Work")
+                        .WithMany("SitesWorks")
+                        .HasForeignKey("WorkId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
                     b.Navigation("Site");
 
-                    b.Navigation("Stage");
+                    b.Navigation("Work");
                 });
 
             modelBuilder.Entity("ConstructionSiteReportingSystem.Infrastructure.Data.Models.Task", b =>
@@ -1240,19 +1270,22 @@ namespace ConstructionSiteReportingSystem.Infrastructure.Migrations
 
             modelBuilder.Entity("ConstructionSiteReportingSystem.Infrastructure.Data.Models.Site", b =>
                 {
-                    b.Navigation("SitesStages");
+                    b.Navigation("SitesWorks");
                 });
 
             modelBuilder.Entity("ConstructionSiteReportingSystem.Infrastructure.Data.Models.Stage", b =>
                 {
-                    b.Navigation("SitesStages");
-
                     b.Navigation("Works");
                 });
 
             modelBuilder.Entity("ConstructionSiteReportingSystem.Infrastructure.Data.Models.Unit", b =>
                 {
                     b.Navigation("Works");
+                });
+
+            modelBuilder.Entity("ConstructionSiteReportingSystem.Infrastructure.Data.Models.Work", b =>
+                {
+                    b.Navigation("SitesWorks");
                 });
 
             modelBuilder.Entity("ConstructionSiteReportingSystem.Infrastructure.Data.Models.WorkType", b =>
