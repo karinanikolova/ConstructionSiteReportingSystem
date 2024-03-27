@@ -17,7 +17,7 @@ namespace ConstructionSiteReportingSystem.Infrastructure.Data
 
         public DbSet<Contractor> Contractors { get; set; }
         public DbSet<Site> Sites { get; set; }
-        public DbSet<SiteStage> SitesStages { get; set; }
+        public DbSet<SiteWork> SitesWorks { get; set; }
         public DbSet<Stage> Stages { get; set; }
         public DbSet<Task> Tasks { get; set; }
         public DbSet<Unit> Units { get; set; }
@@ -47,7 +47,7 @@ namespace ConstructionSiteReportingSystem.Infrastructure.Data
             builder.ApplyConfiguration(new ContractorConfiguration());
             builder.ApplyConfiguration(new SiteConfiguration());
             builder.ApplyConfiguration(new StageConfiguration());
-            builder.ApplyConfiguration(new SiteStageConfiguration());
+            builder.ApplyConfiguration(new SiteWorkConfiguration());
             builder.ApplyConfiguration(new UnitConfiguration());
             builder.ApplyConfiguration(new WorkTypeConfiguration());
             builder.ApplyConfiguration(new WorkConfiguration());
