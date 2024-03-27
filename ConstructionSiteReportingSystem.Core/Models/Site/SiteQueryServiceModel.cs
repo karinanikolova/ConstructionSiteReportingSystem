@@ -8,8 +8,6 @@
 
         public int TotalWorksCount { get; set; }
 
-        public ICollection<StageViewModel> StagesWithWorks { get; set; } = new List<StageViewModel>();
-
-		public IEnumerable<WorkViewModel> AllWorksWithoutStages { get; set; } = new List<WorkViewModel>();
+		public IEnumerable<WorkViewModel> Works { get; set; } = new List<WorkViewModel>();
 	}
 }
