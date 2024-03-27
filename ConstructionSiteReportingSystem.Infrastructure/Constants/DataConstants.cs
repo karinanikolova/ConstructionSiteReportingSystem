@@ -32,7 +32,13 @@
         public static class Work
         {
             public const int DescriptionMaxLength = 500;
-        }
+
+            public const double QuantityMinValue = 0.00;
+            public const double QuantityMaxValue = double.MaxValue;
+
+			public const decimal CostPerUnitMinValue = 0.00M;
+			public const decimal CostPerUnitMaxValue = decimal.MaxValue;
+		}
 
         public static class WorkType
         {
