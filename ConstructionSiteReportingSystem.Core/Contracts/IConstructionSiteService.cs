@@ -9,6 +9,6 @@ namespace ConstructionSiteReportingSystem.Core.Contracts
 
 		Task<IEnumerable<string>> GetAllStagesNamesAsync();
 
-		Task<IEnumerable<SiteInfoViewModel>> AllSitesAsync();
+		Task<IEnumerable<SiteInfoViewModel>> GetAllSitesAsync();
 	}
 }
