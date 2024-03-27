@@ -18,7 +18,7 @@ namespace ConstructionSiteReportingSystem.Controllers
 		[HttpGet]
 		public async Task<IActionResult> All()
 		{
-			var models = await _constructionSiteService.AllSitesAsync();
+			var models = await _constructionSiteService.GetAllSitesAsync();
 
 			return View(models);
 		}
@@ -39,9 +39,8 @@ namespace ConstructionSiteReportingSystem.Controllers
 				return BadRequest();
 			}
 
-			model.StagesWithWorks = site.StagesWithWorks;
-			model.AllWorksWithoutStages = site.AllWorksWithoutStages;
 			model.TotalWorksCount = site.TotalWorksCount;
+			model.Works = site.Works;
 			model.SiteName = site.SiteName;
 			model.ConstructionFinishDate = site.ConstructionFinishDate;
 			model.Stages = await _constructionSiteService.GetAllStagesNamesAsync();
