@@ -3,7 +3,7 @@
 @{
 	ViewData["Title"] = Model.SiteName;
 
-	var siteStages = Model.StagesWithWorks;
+	var siteWorks = Model.Works;
 }
 
 <div class="mb-5">
@@ -71,24 +71,11 @@
 	</div>
 
 	@{
-		bool areThereWorks;
+		bool areThereWorks = false;
 
-		if (Model.AllWorksWithoutStages.Any())
+		if (Model.Works.Any())
 		{
 			areThereWorks = true;
-		}
-		else
-		{
-			var currentStage = siteStages.FirstOrDefault();
-
-			if (currentStage == null)
-			{
-				areThereWorks = false;
-			}
-			else
-			{
-				areThereWorks = currentStage.Works.Any();
-			}
 		}
 
 		var shouldButtonBeDisabled = Model.CurrentPage == maxPage ||
@@ -121,22 +108,9 @@
 		</tr>
 	</thead>
 	<tbody>
-		@if (Model.AllWorksWithoutStages.Count() > 0)
+		@foreach (var work in siteWorks)
 		{
-			foreach (var work in Model.AllWorksWithoutStages)
-			{
-				<partial name="_SitePartial" model="@work" />
-			}
-		}
-		else
-		{
-			@foreach (var stage in siteStages)
-			{
-				foreach (var work in stage.Works)
-				{
-					<partial name="_SitePartial" model="@work" />
-				}
-			}
+			<partial name="_SitePartial" model="@work" /> 
 		}
 	</tbody>
 </table>
