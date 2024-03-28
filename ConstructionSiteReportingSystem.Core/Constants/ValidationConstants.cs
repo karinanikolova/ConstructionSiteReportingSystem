@@ -2,6 +2,6 @@
 {
     public static class ValidationConstants
     {
-        public const string DateTimeFormat = "dd/MM/yyyy";
+        public const string DateTimePreferredFormat = "dd/MM/yyyy";
     }
 }
