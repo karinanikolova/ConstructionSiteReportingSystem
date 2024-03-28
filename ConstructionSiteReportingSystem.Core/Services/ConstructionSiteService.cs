@@ -58,7 +58,7 @@ namespace ConstructionSiteReportingSystem.Core.Services
 				}
 
 				DateTime date;
-				bool isDateValid = DateTime.TryParseExact(searchDate, DateTimeFormat, CultureInfo.InvariantCulture, DateTimeStyles.None, out date);
+				bool isDateValid = DateTime.TryParseExact(searchDate, DateTimePreferredFormat, CultureInfo.InvariantCulture, DateTimeStyles.None, out date);
 
 				if (isDateValid)
 				{
@@ -112,7 +112,7 @@ namespace ConstructionSiteReportingSystem.Core.Services
 
 		private static string ConvertDateToString(DateTime date)
 		{
-			return date.ToString(DateTimeFormat, CultureInfo.InvariantCulture);
+			return date.ToString(DateTimePreferredFormat, CultureInfo.InvariantCulture);
 		}
 	}
 }
