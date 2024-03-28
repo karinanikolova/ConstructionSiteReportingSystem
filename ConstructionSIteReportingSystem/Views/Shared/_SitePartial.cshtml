@@ -1,7 +1,7 @@
 ﻿@model WorkViewModel
 
 <tr>
-	<th scope="row">@Model.CarryOutDate.ToString(DateTimeFormat, CultureInfo.InvariantCulture)</th>
+	<th scope="row">@Model.CarryOutDate.ToString(DateTimePreferredFormat, CultureInfo.InvariantCulture)</th>
 	<td>@Model.WorkName</td>
 	<td>@Model.Description</td>
 	<td>@Model.Contractor</td>
