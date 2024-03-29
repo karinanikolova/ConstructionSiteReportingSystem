@@ -12,7 +12,7 @@ namespace ConstructionSiteReportingSystem.Core.Models.Work
 		[Display(Name = "Type")]
 		public int WorkTypeId { get; set; }
 
-		[StringLength(DescriptionMaxLength, ErrorMessage = NotRequiredFieldMessage)]
+		[StringLength(DescriptionMaxLength, MinimumLength = DescriptionMinLength, ErrorMessage = DescriptionNotRequiredMessage)]
 		public string? Description { get; set; }
 
 		[Required(ErrorMessage = DateMessage)]
