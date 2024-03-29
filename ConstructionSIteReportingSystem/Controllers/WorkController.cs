@@ -71,47 +71,18 @@ namespace ConstructionSiteReportingSystem.Controllers
 			DateTime date;
 			bool isDateValid = DateTime.TryParseExact(workModel.CarryOutDate, DateTimePreferredFormat, CultureInfo.InvariantCulture, DateTimeStyles.None, out date);
 
-			if (!isDateValid)
+			if (!isDateValid || date.Year < DateTime.UtcNow.Year)
 			{
 				ModelState.AddModelError(nameof(workModel.CarryOutDate), "The specified date is not valid");
 			}
 
 			if (!ModelState.IsValid)
 			{
-				//if (ModelState["SiteId"].Errors.Count > 0)
-				//{
-
-				//}
-
-				if (ModelState.GetValidationState("SiteId") == Microsoft.AspNetCore.Mvc.ModelBinding.ModelValidationState.Valid)
-				{
-					workModel.Sites = await _workService.GetAllSitesAsync();
-				}
-
-				if (ModelState.GetValidationState("WorkTypeId") == Microsoft.AspNetCore.Mvc.ModelBinding.ModelValidationState.Valid)
-				{
-					workModel.WorkTypes = await _workService.GetAllWorkTypesAsync();
-				}
-
-				if (ModelState.GetValidationState("StageId") == Microsoft.AspNetCore.Mvc.ModelBinding.ModelValidationState.Valid)
-				{
-					workModel.Stages = await _workService.GetAllStagesAsync();
-				}
-
-				if (ModelState.GetValidationState("ContractorId") == Microsoft.AspNetCore.Mvc.ModelBinding.ModelValidationState.Valid)
-				{
-					workModel.Contractors = await _workService.GetAllContractorsAsync();
-				}
-
-				if (ModelState.GetValidationState("UnitId") == Microsoft.AspNetCore.Mvc.ModelBinding.ModelValidationState.Valid)
-				{
-					workModel.Units = await _workService.GetAllUnitsAsync();
-				}
-
-				if (ModelState.GetValidationState("CarryOutDate") == Microsoft.AspNetCore.Mvc.ModelBinding.ModelValidationState.Valid)
-				{
-					workModel.CarryOutDate = ConvertDateToString(DateTime.UtcNow);
-				}
+				workModel.Sites = await _workService.GetAllSitesAsync();
+				workModel.WorkTypes = await _workService.GetAllWorkTypesAsync();
+				workModel.Stages = await _workService.GetAllStagesAsync();
+				workModel.Contractors = await _workService.GetAllContractorsAsync();
+				workModel.Units = await _workService.GetAllUnitsAsync();
 
 				return View(workModel);
 			}
@@ -120,7 +91,6 @@ namespace ConstructionSiteReportingSystem.Controllers
 
 			var siteId = await _workService.CreateWorkAsync(workModel, date, userId);
 
-			//To be continued -> SiteQueryModel
 			return RedirectToAction("Site", "ConstructionSite", new {id = siteId, model = new SiteQueryModel()});
 		}
 
