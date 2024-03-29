@@ -27,7 +27,10 @@
 
 		<div class="form-group col-md-3">
 			<label asp-for="SearchDate"></label>
-			<input asp-for="SearchDate" class="form-control" placeholder="Enter date in format: @DateTime.UtcNow.ToString(DateTimePreferredFormat, CultureInfo.InvariantCulture)">
+			<input asp-for="SearchDate" class="form-control" placeholder="Enter search date here...">
+			<div id="SearchDate" class="form-text">
+				Enter date in format: @DateTime.UtcNow.ToString(DateTimePreferredFormat, CultureInfo.InvariantCulture)
+			</div>
 		</div>
 
 		<div class="form-group col-md-3">
