@@ -46,7 +46,7 @@ namespace ConstructionSiteReportingSystem.Core.Services
 
 			if (site != null)
 			{
-				var siteWorks = _repository.AllReadOnly<SiteWork>()
+				var works = _repository.AllReadOnly<Work>()
 				.Where(ss => ss.SiteId == siteId);
 
 				var allStages = await GetAllStagesNamesAsync();
@@ -54,8 +54,8 @@ namespace ConstructionSiteReportingSystem.Core.Services
 
 				if (!string.IsNullOrWhiteSpace(stage) && allStages.Any(s => s == stage))
 				{
-					siteWorks = _repository.AllReadOnly<SiteWork>()
-				.Where(ss => ss.SiteId == siteId && ss.Work.Stage.Name == stage);
+					works = _repository.AllReadOnly<Work>()
+				.Where(w => w.SiteId == siteId && w.Stage.Name == stage);
 				}
 
 				DateTime date;
@@ -63,26 +63,26 @@ namespace ConstructionSiteReportingSystem.Core.Services
 
 				if (isDateValid)
 				{
-					siteWorks = siteWorks
-						.Where(sw => sw.Work.CarryOutDate.Year == date.Year
-						&& sw.Work.CarryOutDate.Month == date.Month
-						&& sw.Work.CarryOutDate.Day == date.Day);
+					works = works
+						.Where(w => w.CarryOutDate.Year == date.Year
+						&& w.CarryOutDate.Month == date.Month
+						&& w.CarryOutDate.Day == date.Day);
 				}
 
-				var workModels = await siteWorks
+				var workModels = await works
 				.Select(w => new WorkViewModel()
 				{
-					Id = w.Work.Id,
-					WorkName = w.Work.WorkType.Name,
-					Description = w.Work.Description,
-					CarryOutDate = w.Work.CarryOutDate,
-					Stage = w.Work.Stage.Name,
-					Contractor = w.Work.Contractor.Name,
-					Quantity = w.Work.Quantity,
-					Unit = w.Work.Unit.Type,
-					CostPerUnit = w.Work.CostPerUnit,
-					TotalCost = w.Work.TotalCost,
-					Creator = w.Work.Creator.UserName
+					Id = w.Id,
+					WorkName = w.WorkType.Name,
+					Description = w.Description,
+					CarryOutDate = w.CarryOutDate,
+					Stage = w.Stage.Name,
+					Contractor = w.Contractor.Name,
+					Quantity = w.Quantity,
+					Unit = w.Unit.Type,
+					CostPerUnit = w.CostPerUnit,
+					TotalCost = w.TotalCost,
+					Creator = w.Creator.UserName
 				})
 				.ToListAsync();
 
