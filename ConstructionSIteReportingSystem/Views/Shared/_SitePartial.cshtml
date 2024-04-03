@@ -1,12 +1,20 @@
 ﻿@model WorkViewModel
 
 <tr>
-	<th scope="row">@Model.CarryOutDate.ToString(DateTimePreferredFormat, CultureInfo.InvariantCulture)</th>
+	<th scope="row">@DateTimeConverter.ConvertDateToString(Model.CarryOutDate)</th>
 	<td>@Model.WorkName</td>
 	<td>@Model.Description</td>
 	<td>@Model.Contractor</td>
 	<td>@Model.Quantity</td>
 	<td>@Model.Unit</td>
 	<td>@Model.CostPerUnit</td>
-	<td>@Model.TotalCost</td>
+	<td>
+		@Model.TotalCost
+	</td>
+	@if (User?.Identity?.Name == Model.Creator)
+	{
+		<td>
+			<a asp-controller="Work" asp-action="EditWork" asp-route-id="@Model.Id" class="btn btn-outline-primary" type="button">Edit</a>
+		</td>
+	}
 </tr>
