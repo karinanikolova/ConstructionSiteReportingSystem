@@ -1,17 +1,16 @@
-﻿using Microsoft.AspNetCore.Identity;
-using ConstructionSiteReportingSystem.Infrastructure.Data.Models;
-using Task = ConstructionSiteReportingSystem.Infrastructure.Data.Models.Task;
+﻿using ConstructionSiteReportingSystem.Infrastructure.Enums;
+using Microsoft.AspNetCore.Identity;
 using Contractor = ConstructionSiteReportingSystem.Infrastructure.Data.Models.Contractor;
 using Site = ConstructionSiteReportingSystem.Infrastructure.Data.Models.Site;
 using Stage = ConstructionSiteReportingSystem.Infrastructure.Data.Models.Stage;
+using Task = ConstructionSiteReportingSystem.Infrastructure.Data.Models.Task;
 using Unit = ConstructionSiteReportingSystem.Infrastructure.Data.Models.Unit;
-using WorkType = ConstructionSiteReportingSystem.Infrastructure.Data.Models.WorkType;
 using Work = ConstructionSiteReportingSystem.Infrastructure.Data.Models.Work;
-using ConstructionSiteReportingSystem.Infrastructure.Enums;
+using WorkType = ConstructionSiteReportingSystem.Infrastructure.Data.Models.WorkType;
 
 namespace ConstructionSiteReportingSystem.Infrastructure.Data.Configuration
 {
-    internal class DataSeed
+	internal class DataSeed
     {
         public List<IdentityUser> Users { get; set; }
 
@@ -20,8 +19,6 @@ namespace ConstructionSiteReportingSystem.Infrastructure.Data.Configuration
         public IEnumerable<Site> Sites { get; set; }
 
         public IEnumerable<Stage> Stages { get; set; }
-
-        public IEnumerable<SiteWork> SitesWorks { get; set; }
 
         public IEnumerable<Unit> Units { get; set; }
 
@@ -37,7 +34,6 @@ namespace ConstructionSiteReportingSystem.Infrastructure.Data.Configuration
             SeedContractors();
             SeedSites();
             SeedStages();
-            SeedSitesWorks();
             SeedUnits();
             SeedWorkTypes();
             SeedWorks();
@@ -166,113 +162,6 @@ namespace ConstructionSiteReportingSystem.Infrastructure.Data.Configuration
             };
         }
 
-        private void SeedSitesWorks()
-        { 
-            SitesWorks = new List<SiteWork>()
-            {
-                new SiteWork()
-                {
-                    SiteId = 1,
-                    WorkId = 1
-                },
-                new SiteWork()
-                {
-                    SiteId = 1,
-                    WorkId = 2
-                },
-                new SiteWork()
-                {
-                    SiteId = 1,
-                    WorkId = 3
-                },
-                new SiteWork()
-                {
-                    SiteId = 1,
-                    WorkId = 4
-                },
-                new SiteWork()
-                {
-                    SiteId = 1,
-                    WorkId = 5
-                },
-                new SiteWork()
-                {
-                    SiteId = 1,
-                    WorkId = 6
-                },
-                new SiteWork()
-                {
-                    SiteId = 1,
-                    WorkId = 7
-                },
-                new SiteWork()
-                {
-                    SiteId = 1,
-                    WorkId = 8
-                },
-                new SiteWork()
-                {
-                    SiteId = 1,
-                    WorkId = 9
-                },
-                new SiteWork()
-                {
-                    SiteId = 1,
-                    WorkId = 10
-                },
-				new SiteWork()
-				{
-					SiteId = 1,
-					WorkId = 11
-				},
-				new SiteWork()
-				{
-					SiteId = 1,
-					WorkId = 12
-				},
-				new SiteWork()
-				{
-					SiteId = 1,
-					WorkId = 13
-				},
-				new SiteWork()
-				{
-					SiteId = 1,
-					WorkId = 14
-				},
-				new SiteWork()
-				{
-					SiteId = 2,
-					WorkId = 1
-				},
-				new SiteWork()
-				{
-					SiteId = 2,
-					WorkId = 2
-				},
-				new SiteWork()
-				{
-					SiteId = 2,
-					WorkId = 3
-				},
-				new SiteWork()
-				{
-					SiteId = 3,
-					WorkId = 12
-				},
-				new SiteWork()
-				{
-					SiteId = 3,
-					WorkId = 13
-				},
-				new SiteWork()
-				{
-					SiteId = 3,
-					WorkId = 14
-				}
-			};
-        }
-
         private void SeedUnits()
         {
             Units = new List<Unit>()
@@ -315,7 +204,7 @@ namespace ConstructionSiteReportingSystem.Infrastructure.Data.Configuration
                 new Unit()
                 {
                     Id = 8,
-                    Type = "machine hours"
+                    Type = "machine shift"
                 },
                 new Unit()
                 {
@@ -379,6 +268,7 @@ namespace ConstructionSiteReportingSystem.Infrastructure.Data.Configuration
                 new Work()
                 {
                     Id = 1,
+                    SiteId = 1,
                     WorkTypeId = 1,
                     CarryOutDate = DateTime.Now,
                     StageId = 4,
@@ -392,7 +282,8 @@ namespace ConstructionSiteReportingSystem.Infrastructure.Data.Configuration
                 new Work()
                 {
                     Id = 2,
-                    WorkTypeId = 2,
+					SiteId = 1,
+					WorkTypeId = 2,
                     CarryOutDate = DateTime.Now,
                     StageId = 1,
                     ContractorId = 4,
@@ -405,9 +296,10 @@ namespace ConstructionSiteReportingSystem.Infrastructure.Data.Configuration
                 new Work()
                 {
                     Id = 3,
-                    WorkTypeId = 2,
+					SiteId = 1,
+					WorkTypeId = 2,
                     Description = "Entered cost for crushed aggredate material and delivery",
-                    CarryOutDate = DateTime.Now.AddDays(1),
+                    CarryOutDate = DateTime.Now.AddDays(-1),
                     StageId = 1,
                     ContractorId = 4,
                     Quantity = 150,
@@ -419,9 +311,10 @@ namespace ConstructionSiteReportingSystem.Infrastructure.Data.Configuration
                 new Work()
                 {
                     Id = 4,
-                    WorkTypeId = 2,
+					SiteId = 1,
+					WorkTypeId = 2,
                     Description = "Entered cost for crushed aggredate compaction using 11 ton roller",
-                    CarryOutDate = DateTime.Now.AddDays(1),
+                    CarryOutDate = DateTime.Now.AddDays(-1),
                     StageId = 1,
                     ContractorId = 2,
                     Quantity = 1,
@@ -433,8 +326,9 @@ namespace ConstructionSiteReportingSystem.Infrastructure.Data.Configuration
                 new Work()
                 {
                     Id = 5,
-                    WorkTypeId = 2,
-                    CarryOutDate = DateTime.Now.AddDays(2),
+					SiteId = 1,
+					WorkTypeId = 2,
+                    CarryOutDate = DateTime.Now.AddDays(-2),
                     StageId = 1,
                     ContractorId = 4,
                     Quantity = 250,
@@ -446,9 +340,10 @@ namespace ConstructionSiteReportingSystem.Infrastructure.Data.Configuration
                 new Work()
                 {
                     Id = 6,
-                    WorkTypeId = 3,
+					SiteId = 1,
+					WorkTypeId = 3,
                     Description = "Used combined excavators",
-                    CarryOutDate = DateTime.Now.AddDays(10),
+                    CarryOutDate = DateTime.Now.AddDays(-10),
                     StageId = 1,
                     ContractorId = 4,
                     Quantity = 150,
@@ -460,8 +355,9 @@ namespace ConstructionSiteReportingSystem.Infrastructure.Data.Configuration
                 new Work()
                 {
                     Id = 7,
-                    WorkTypeId = 4,
-                    CarryOutDate = DateTime.Now.AddDays(12),
+					SiteId = 1,
+					WorkTypeId = 4,
+                    CarryOutDate = DateTime.Now.AddDays(-12),
                     StageId = 1,
                     ContractorId = 4,
                     Quantity = 163,
@@ -473,8 +369,9 @@ namespace ConstructionSiteReportingSystem.Infrastructure.Data.Configuration
                 new Work()
                 {
                     Id = 8,
-                    WorkTypeId = 4,
-                    CarryOutDate = DateTime.Now.AddDays(13),
+					SiteId = 1,
+					WorkTypeId = 4,
+                    CarryOutDate = DateTime.Now.AddDays(-13),
                     StageId = 1,
                     ContractorId = 4,
                     Quantity = 158,
@@ -486,8 +383,9 @@ namespace ConstructionSiteReportingSystem.Infrastructure.Data.Configuration
                 new Work()
                 {
                     Id = 9,
-                    WorkTypeId = 4,
-                    CarryOutDate = DateTime.Now.AddDays(14),
+					SiteId = 1,
+					WorkTypeId = 4,
+                    CarryOutDate = DateTime.Now.AddDays(-14),
                     StageId = 1,
                     ContractorId = 4,
                     Quantity = 75,
@@ -499,8 +397,9 @@ namespace ConstructionSiteReportingSystem.Infrastructure.Data.Configuration
                 new Work()
                 {
                     Id = 10,
-                    WorkTypeId = 5,
-                    CarryOutDate = DateTime.Now.AddDays(15),
+					SiteId = 1,
+					WorkTypeId = 5,
+                    CarryOutDate = DateTime.Now.AddDays(-15),
                     StageId = 1,
                     ContractorId = 4,
                     Quantity = 210,
@@ -512,8 +411,9 @@ namespace ConstructionSiteReportingSystem.Infrastructure.Data.Configuration
                 new Work()
                 {
                     Id = 11,
-                    WorkTypeId = 6,
-                    CarryOutDate = DateTime.Now.AddDays(5),
+					SiteId = 1,
+					WorkTypeId = 6,
+                    CarryOutDate = DateTime.Now.AddDays(-5),
                     StageId = 1,
                     ContractorId = 2,
                     Quantity = 20,
@@ -525,9 +425,10 @@ namespace ConstructionSiteReportingSystem.Infrastructure.Data.Configuration
                 new Work()
                 {
                     Id = 12,
-                    WorkTypeId = 7,
+					SiteId = 1,
+					WorkTypeId = 7,
                     Description = "Entered cost for reinforcement steel and delivery",
-                    CarryOutDate = DateTime.Now.AddDays(4),
+                    CarryOutDate = DateTime.Now.AddDays(-4),
                     StageId = 1,
                     ContractorId = 5,
                     Quantity = 57,
@@ -539,9 +440,10 @@ namespace ConstructionSiteReportingSystem.Infrastructure.Data.Configuration
                 new Work()
                 {
                     Id = 13,
-                    WorkTypeId = 7,
+					SiteId = 1,
+					WorkTypeId = 7,
                     Description = "Entered cost for reinforcement steel laying",
-                    CarryOutDate = DateTime.Now.AddDays(4),
+                    CarryOutDate = DateTime.Now.AddDays(-4),
                     StageId = 1,
                     ContractorId = 1,
                     Quantity = 57,
@@ -553,9 +455,10 @@ namespace ConstructionSiteReportingSystem.Infrastructure.Data.Configuration
                 new Work()
                 {
                     Id = 14,
-                    WorkTypeId = 8,
+					SiteId = 1,
+					WorkTypeId = 8,
                     Description = "Entered cost for formwork assembly",
-                    CarryOutDate = DateTime.Now.AddDays(17),
+                    CarryOutDate = DateTime.Now.AddDays(-17),
                     StageId = 2,
                     ContractorId = 1,
                     Quantity = 57,
@@ -563,8 +466,136 @@ namespace ConstructionSiteReportingSystem.Infrastructure.Data.Configuration
                     CostPerUnit = 8M,
                     TotalCost = 456M,
                     CreatorId = "32f9a0f0-4d62-4573-96e3-fbb7ad7f321f"
-                }
-            };
+                },
+				new Work()
+				{
+					Id = 15,
+					SiteId = 2,
+					WorkTypeId = 3,
+					Description = "Used combined excavators",
+					CarryOutDate = DateTime.Now.AddDays(-5),
+					StageId = 1,
+					ContractorId = 4,
+					Quantity = 200,
+					UnitId = 3,
+					CostPerUnit = 8M,
+					TotalCost = 1600M,
+					CreatorId = "32f9a0f0-4d62-4573-96e3-fbb7ad7f321f"
+				},
+				new Work()
+				{
+					Id = 16,
+					SiteId = 2,
+					WorkTypeId = 3,
+					CarryOutDate = DateTime.Now.AddDays(-4),
+					StageId = 1,
+					ContractorId = 4,
+					Quantity = 100,
+					UnitId = 3,
+					CostPerUnit = 8M,
+					TotalCost = 800M,
+					CreatorId = "32f9a0f0-4d62-4573-96e3-fbb7ad7f321f"
+				},
+				new Work()
+				{
+					Id = 17,
+					SiteId = 2,
+					WorkTypeId = 3,
+                    Description = "Entered cost for combined excavator use",
+					CarryOutDate = DateTime.Now.AddDays(-3),
+					StageId = 1,
+					ContractorId = 2,
+					Quantity = 2,
+					UnitId = 8,
+					CostPerUnit = 450M,
+					TotalCost = 900M,
+					CreatorId = "32f9a0f0-4d62-4573-96e3-fbb7ad7f321f"
+				},
+				new Work()
+				{
+					Id = 18,
+					SiteId = 2,
+					WorkTypeId = 4,
+					CarryOutDate = DateTime.Now.AddDays(-2),
+					StageId = 1,
+					ContractorId = 4,
+					Quantity = 130,
+					UnitId = 1,
+					CostPerUnit = 164M,
+					TotalCost = 21320M,
+					CreatorId = "32f9a0f0-4d62-4573-96e3-fbb7ad7f321f"
+				},
+				new Work()
+				{
+					Id = 19,
+					SiteId = 2,
+					WorkTypeId = 4,
+					CarryOutDate = DateTime.Now.AddDays(1),
+					StageId = 1,
+					ContractorId = 4,
+					Quantity = 250,
+					UnitId = 1,
+					CostPerUnit = 164M,
+					TotalCost = 41000M,
+					CreatorId = "32f9a0f0-4d62-4573-96e3-fbb7ad7f321f"
+				},
+				new Work()
+				{
+					Id = 20,
+					SiteId = 3,
+					WorkTypeId = 1,
+					CarryOutDate = DateTime.Now,
+					StageId = 4,
+					ContractorId = 3,
+					Quantity = 950,
+					UnitId = 5,
+					CostPerUnit = 23M,
+					TotalCost = 21850M,
+					CreatorId = "a615552b-5981-4730-be32-12c087492aef"
+				},
+				new Work()
+				{
+					Id = 21,
+					SiteId = 3,
+					WorkTypeId = 1,
+					CarryOutDate = DateTime.Now.AddDays(-1),
+					StageId = 4,
+					ContractorId = 3,
+					Quantity = 350,
+					UnitId = 5,
+					CostPerUnit = 23M,
+					TotalCost = 8050M,
+					CreatorId = "a615552b-5981-4730-be32-12c087492aef"
+				},
+				 new Work()
+				{
+					Id = 22,
+					SiteId = 3,
+					WorkTypeId = 2,
+					CarryOutDate = DateTime.Now.AddDays(-1),
+					StageId = 1,
+					ContractorId = 4,
+					Quantity = 200,
+					UnitId = 3,
+					CostPerUnit = 42.5M,
+					TotalCost = 8500M,
+					CreatorId = "a615552b-5981-4730-be32-12c087492aef"
+				},
+				  new Work()
+				{
+					Id = 23,
+					SiteId = 3,
+					WorkTypeId = 2,
+					CarryOutDate = DateTime.Now,
+					StageId = 1,
+					ContractorId = 4,
+					Quantity = 390,
+					UnitId = 3,
+					CostPerUnit = 42.5M,
+					TotalCost = 16575M,
+					CreatorId = "a615552b-5981-4730-be32-12c087492aef"
+				}
+			};
         }
 
         private void SeedTasks()
