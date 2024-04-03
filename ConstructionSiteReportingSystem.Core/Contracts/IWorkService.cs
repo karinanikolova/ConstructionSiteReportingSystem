@@ -1,4 +1,5 @@
 ﻿using ConstructionSiteReportingSystem.Core.Models.Work;
+using Task = System.Threading.Tasks.Task;
 
 namespace ConstructionSiteReportingSystem.Core.Contracts
 {
@@ -14,6 +15,8 @@ namespace ConstructionSiteReportingSystem.Core.Contracts
 
 		Task<IEnumerable<UnitServiceModel>> GetAllUnitsAsync();
 
+		Task<WorkFormModel> GetWorkByIdAsync(int workId);
+
 		Task<bool> DoesSiteExistAsync(int siteId);
 
 		Task<bool> DoesWorkTypeExistAsync(int workTypeId);
@@ -24,6 +27,10 @@ namespace ConstructionSiteReportingSystem.Core.Contracts
 
 		Task<bool> DoesUnitExistAsync(int unitId);
 
+		Task<bool> DoesWorkExistAsync(int workId);
+
 		Task<int> CreateWorkAsync(WorkFormModel workModel, DateTime carryOutDate, string userId);
+
+		Task EditWorkAsync(int workId, WorkFormModel workModel, DateTime carryOutDate);
 	}
 }
