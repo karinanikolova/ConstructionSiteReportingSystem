@@ -15,7 +15,13 @@ namespace ConstructionSiteReportingSystem.Infrastructure.Data.Configuration
                 .HasForeignKey(w => w.WorkTypeId)
                 .OnDelete(DeleteBehavior.Restrict);
 
-            builder
+			builder
+				.HasOne(w => w.Site)
+				.WithMany(w => w.Works)
+				.HasForeignKey(w => w.SiteId)
+				.OnDelete(DeleteBehavior.Restrict);
+
+			builder
                 .HasOne(w => w.Stage)
                 .WithMany(w => w.Works)
                 .HasForeignKey(w => w.StageId)
