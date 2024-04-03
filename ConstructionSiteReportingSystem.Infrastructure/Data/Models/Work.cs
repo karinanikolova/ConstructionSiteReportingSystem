@@ -21,6 +21,13 @@ namespace ConstructionSiteReportingSystem.Infrastructure.Data.Models
         [ForeignKey(nameof(WorkTypeId))]
         public WorkType WorkType { get; set; } = null!;
 
+        [Required]
+		[Comment("Construction and assembly work site identifier")]
+		public int SiteId { get; set; }
+
+        [ForeignKey(nameof(SiteId))]
+        public Site Site { get; set; } = null!;
+
         [MaxLength(DescriptionMaxLength)]
         [Comment("Construction and assembly work description")]
         public string? Description { get; set; }
@@ -70,7 +77,5 @@ namespace ConstructionSiteReportingSystem.Infrastructure.Data.Models
 
         [ForeignKey(nameof(CreatorId))]
         public IdentityUser Creator { get; set; } = null!;
-
-		public ICollection<SiteWork> SitesWorks { get; set; } = new List<SiteWork>();
 	}
 }
