@@ -22,6 +22,6 @@
 
         public decimal TotalCost { get; set; }
 
-        public string CreatorId { get; set; } = string.Empty;
+        public string Creator { get; set; } = string.Empty;
     }
 }
