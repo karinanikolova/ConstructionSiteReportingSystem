@@ -124,6 +124,7 @@ namespace ConstructionSiteReportingSystem.Infrastructure.Migrations
                     Id = table.Column<int>(type: "int", nullable: false, comment: "Construction and assembly work identifier")
                         .Annotation("SqlServer:Identity", "1, 1"),
                     WorkTypeId = table.Column<int>(type: "int", nullable: false, comment: "Construction and assembly work type identifier"),
+                    SiteId = table.Column<int>(type: "int", nullable: false, comment: "Construction and assembly work site identifier"),
                     Description = table.Column<string>(type: "nvarchar(500)", maxLength: 500, nullable: true, comment: "Construction and assembly work description"),
                     CarryOutDate = table.Column<DateTime>(type: "datetime2", nullable: false, comment: "Construction and assembly work carry out date and time"),
                     StageId = table.Column<int>(type: "int", nullable: false, comment: "Construction and assembly work stage identifier"),
@@ -152,6 +153,12 @@ namespace ConstructionSiteReportingSystem.Infrastructure.Migrations
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
+                        name: "FK_Works_Sites_SiteId",
+                        column: x => x.SiteId,
+                        principalTable: "Sites",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
                         name: "FK_Works_Stages_StageId",
                         column: x => x.StageId,
                         principalTable: "Stages",
@@ -172,38 +179,6 @@ namespace ConstructionSiteReportingSystem.Infrastructure.Migrations
                 },
                 comment: "Construction and assembly work");
 
-            migrationBuilder.CreateTable(
-                name: "SitesWorks",
-                columns: table => new
-                {
-                    SiteId = table.Column<int>(type: "int", nullable: false, comment: "Construction site identifier"),
-                    WorkId = table.Column<int>(type: "int", nullable: false, comment: "Construction and assembly work identifier"),
-                    IsDeleted = table.Column<bool>(type: "bit", nullable: false),
-                    DeletedAt = table.Column<DateTimeOffset>(type: "datetimeoffset", nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_SitesWorks", x => new { x.SiteId, x.WorkId });
-                    table.ForeignKey(
-                        name: "FK_SitesWorks_Sites_SiteId",
-                        column: x => x.SiteId,
-                        principalTable: "Sites",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
-                    table.ForeignKey(
-                        name: "FK_SitesWorks_Works_WorkId",
-                        column: x => x.WorkId,
-                        principalTable: "Works",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
-                },
-                comment: "Construction site and construction/assembly work mapping table");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_SitesWorks_WorkId",
-                table: "SitesWorks",
-                column: "WorkId");
-
             migrationBuilder.CreateIndex(
                 name: "IX_Tasks_CreatorId",
                 table: "Tasks",
@@ -218,6 +193,11 @@ namespace ConstructionSiteReportingSystem.Infrastructure.Migrations
                 name: "IX_Works_CreatorId",
                 table: "Works",
                 column: "CreatorId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Works_SiteId",
+                table: "Works",
+                column: "SiteId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Works_StageId",
@@ -238,19 +218,16 @@ namespace ConstructionSiteReportingSystem.Infrastructure.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "SitesWorks");
-
-            migrationBuilder.DropTable(
                 name: "Tasks");
-
-            migrationBuilder.DropTable(
-                name: "Sites");
 
             migrationBuilder.DropTable(
                 name: "Works");
 
             migrationBuilder.DropTable(
                 name: "Contractors");
+
+            migrationBuilder.DropTable(
+                name: "Sites");
 
             migrationBuilder.DropTable(
                 name: "Stages");

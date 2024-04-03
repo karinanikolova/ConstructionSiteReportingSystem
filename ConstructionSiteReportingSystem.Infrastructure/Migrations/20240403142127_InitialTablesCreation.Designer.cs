@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace ConstructionSiteReportingSystem.Infrastructure.Migrations
 {
     [DbContext(typeof(ConstructionSiteDbContext))]
-    [Migration("20240327101709_InitialTablesCreation")]
+    [Migration("20240403142127_InitialTablesCreation")]
     partial class InitialTablesCreation
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -87,31 +87,6 @@ namespace ConstructionSiteReportingSystem.Infrastructure.Migrations
                     b.ToTable("Sites");
 
                     b.HasComment("Construction site");
-                });
-
-            modelBuilder.Entity("ConstructionSiteReportingSystem.Infrastructure.Data.Models.SiteWork", b =>
-                {
-                    b.Property<int>("SiteId")
-                        .HasColumnType("int")
-                        .HasComment("Construction site identifier");
-
-                    b.Property<int>("WorkId")
-                        .HasColumnType("int")
-                        .HasComment("Construction and assembly work identifier");
-
-                    b.Property<DateTimeOffset?>("DeletedAt")
-                        .HasColumnType("datetimeoffset");
-
-                    b.Property<bool>("IsDeleted")
-                        .HasColumnType("bit");
-
-                    b.HasKey("SiteId", "WorkId");
-
-                    b.HasIndex("WorkId");
-
-                    b.ToTable("SitesWorks");
-
-                    b.HasComment("Construction site and construction/assembly work mapping table");
                 });
 
             modelBuilder.Entity("ConstructionSiteReportingSystem.Infrastructure.Data.Models.Stage", b =>
@@ -260,6 +235,10 @@ namespace ConstructionSiteReportingSystem.Infrastructure.Migrations
                         .HasColumnType("float")
                         .HasComment("Construction and assembly work quantity");
 
+                    b.Property<int>("SiteId")
+                        .HasColumnType("int")
+                        .HasComment("Construction and assembly work site identifier");
+
                     b.Property<int>("StageId")
                         .HasColumnType("int")
                         .HasComment("Construction and assembly work stage identifier");
@@ -281,6 +260,8 @@ namespace ConstructionSiteReportingSystem.Infrastructure.Migrations
                     b.HasIndex("ContractorId");
 
                     b.HasIndex("CreatorId");
+
+                    b.HasIndex("SiteId");
 
                     b.HasIndex("StageId");
 
@@ -523,25 +504,6 @@ namespace ConstructionSiteReportingSystem.Infrastructure.Migrations
                     b.ToTable("AspNetUserTokens", (string)null);
                 });
 
-            modelBuilder.Entity("ConstructionSiteReportingSystem.Infrastructure.Data.Models.SiteWork", b =>
-                {
-                    b.HasOne("ConstructionSiteReportingSystem.Infrastructure.Data.Models.Site", "Site")
-                        .WithMany("SitesWorks")
-                        .HasForeignKey("SiteId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
-
-                    b.HasOne("ConstructionSiteReportingSystem.Infrastructure.Data.Models.Work", "Work")
-                        .WithMany("SitesWorks")
-                        .HasForeignKey("WorkId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
-
-                    b.Navigation("Site");
-
-                    b.Navigation("Work");
-                });
-
             modelBuilder.Entity("ConstructionSiteReportingSystem.Infrastructure.Data.Models.Task", b =>
                 {
                     b.HasOne("Microsoft.AspNetCore.Identity.IdentityUser", "Creator")
@@ -567,6 +529,12 @@ namespace ConstructionSiteReportingSystem.Infrastructure.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
+                    b.HasOne("ConstructionSiteReportingSystem.Infrastructure.Data.Models.Site", "Site")
+                        .WithMany("Works")
+                        .HasForeignKey("SiteId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
                     b.HasOne("ConstructionSiteReportingSystem.Infrastructure.Data.Models.Stage", "Stage")
                         .WithMany("Works")
                         .HasForeignKey("StageId")
@@ -588,6 +556,8 @@ namespace ConstructionSiteReportingSystem.Infrastructure.Migrations
                     b.Navigation("Contractor");
 
                     b.Navigation("Creator");
+
+                    b.Navigation("Site");
 
                     b.Navigation("Stage");
 
@@ -654,7 +624,7 @@ namespace ConstructionSiteReportingSystem.Infrastructure.Migrations
 
             modelBuilder.Entity("ConstructionSiteReportingSystem.Infrastructure.Data.Models.Site", b =>
                 {
-                    b.Navigation("SitesWorks");
+                    b.Navigation("Works");
                 });
 
             modelBuilder.Entity("ConstructionSiteReportingSystem.Infrastructure.Data.Models.Stage", b =>
@@ -665,11 +635,6 @@ namespace ConstructionSiteReportingSystem.Infrastructure.Migrations
             modelBuilder.Entity("ConstructionSiteReportingSystem.Infrastructure.Data.Models.Unit", b =>
                 {
                     b.Navigation("Works");
-                });
-
-            modelBuilder.Entity("ConstructionSiteReportingSystem.Infrastructure.Data.Models.Work", b =>
-                {
-                    b.Navigation("SitesWorks");
                 });
 
             modelBuilder.Entity("ConstructionSiteReportingSystem.Infrastructure.Data.Models.WorkType", b =>
