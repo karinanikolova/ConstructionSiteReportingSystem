@@ -29,7 +29,7 @@
 			<label asp-for="SearchDate"></label>
 			<input asp-for="SearchDate" class="form-control" placeholder="Enter search date here...">
 			<div id="SearchDate" class="form-text">
-				Enter date in format: @DateTime.UtcNow.ToString(DateTimePreferredFormat, CultureInfo.InvariantCulture)
+				Enter date in format: @DateTimeConverter.ConvertDateToString(DateTime.UtcNow)
 			</div>
 		</div>
 
@@ -108,6 +108,10 @@
 			<th scope="col">Unit</th>
 			<th scope="col">Cost per unit</th>
 			<th scope="col">Total cost</th>
+			@if (siteWorks.Any(w => w.Creator == User?.Identity?.Name))
+			{
+				<th scope="col"></th>
+			}
 		</tr>
 	</thead>
 	<tbody>
