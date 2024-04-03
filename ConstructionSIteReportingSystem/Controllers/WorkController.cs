@@ -87,18 +87,29 @@ namespace ConstructionSiteReportingSystem.Controllers
 				return View(workModel);
 			}
 
-			var userId = GetCurrentUserId();
+			var userId = User.Id();
 
 			var siteId = await _workService.CreateWorkAsync(workModel, date, userId);
 
 			return RedirectToAction("Site", "ConstructionSite", new {id = siteId, model = new SiteQueryModel()});
 		}
 
-		private string GetCurrentUserId() => User.FindFirstValue(ClaimTypes.NameIdentifier);
-
-		private static string ConvertDateToString(DateTime date)
+		[HttpGet]
+		public async Task<IActionResult> EditWork(int id)
 		{
-			return date.ToString(DateTimePreferredFormat, CultureInfo.InvariantCulture);
+			if (await _workService.DoesWorkExistAsync(id) == false)
+			{
+				return BadRequest();
+			}
+
+			var work = await _workService.GetWorkByIdAsync(id);
+
+			if (User.Id() != work.CreatorId)
+			{
+				return Unauthorized();
+			}
+
+			return View(work);
 		}
 	}
 }
