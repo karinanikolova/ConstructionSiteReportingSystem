@@ -1,4 +1,5 @@
-﻿using ConstructionSiteReportingSystem.Core.Contracts;
+﻿using ConstructionSiteReportingSystem.Core.Common;
+using ConstructionSiteReportingSystem.Core.Contracts;
 using ConstructionSiteReportingSystem.Core.Models.Site;
 using ConstructionSiteReportingSystem.Infrastructure.Data.Models;
 using ConstructionSiteReportingSystem.Infrastructure.Data.Utilities.Contracts;
@@ -27,7 +28,7 @@ namespace ConstructionSiteReportingSystem.Core.Services
 				{
 					Id = s.Id,
 					Name = s.Name,
-					FinishDate = ConvertDateToString(s.FinishDate)
+					FinishDate = DateTimeConverter.ConvertDateToString(s.FinishDate)
 				})
 				.ToListAsync();
 		}
@@ -81,7 +82,7 @@ namespace ConstructionSiteReportingSystem.Core.Services
 					Unit = w.Work.Unit.Type,
 					CostPerUnit = w.Work.CostPerUnit,
 					TotalCost = w.Work.TotalCost,
-					CreatorId = w.Work.CreatorId
+					Creator = w.Work.Creator.UserName
 				})
 				.ToListAsync();
 
@@ -108,11 +109,6 @@ namespace ConstructionSiteReportingSystem.Core.Services
 				.Select(s => s.Name)
 				.Distinct()
 				.ToListAsync();
-		}
-
-		private static string ConvertDateToString(DateTime date)
-		{
-			return date.ToString(DateTimePreferredFormat, CultureInfo.InvariantCulture);
 		}
 	}
 }
