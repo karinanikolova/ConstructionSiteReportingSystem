@@ -45,7 +45,7 @@ namespace ConstructionSiteReportingSystem.Infrastructure.Data.Utilities
             DbSet<TEntity>().RemoveRange(entitiesToDelete);
         }
 
-        public int SaveChanges()
+		public int SaveChanges()
         {
             return _context.SaveChanges();
         }
@@ -55,7 +55,12 @@ namespace ConstructionSiteReportingSystem.Infrastructure.Data.Utilities
             return await _context.SaveChangesAsync();
         }
 
-        private DbSet<TEntity> DbSet<TEntity>() where TEntity : class
+		public async Task<TEntity?> GetByIdAsync<TEntity>(object id) where TEntity : class
+		{
+            return await DbSet<TEntity>().FindAsync(id);
+		}
+
+		private DbSet<TEntity> DbSet<TEntity>() where TEntity : class
         {
             return _context.Set<TEntity>();
         }
