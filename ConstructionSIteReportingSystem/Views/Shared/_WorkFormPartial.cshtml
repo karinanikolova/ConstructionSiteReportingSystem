@@ -32,7 +32,7 @@
 				<label asp-for="CarryOutDate"></label>
 				<input asp-for="CarryOutDate" class="form-control" placeholder="Enter construction and assembly work carry out date here...">
 				<div id="CarryOutDate" class="form-text">
-					Enter date in format: @DateTime.UtcNow.ToString(DateTimePreferredFormat, CultureInfo.InvariantCulture)
+					Enter date in format: @DateTimeConverter.ConvertDateToString(DateTime.UtcNow)
 				</div>
 				<span asp-validation-for="CarryOutDate" class="small text-danger"></span>
 			</div>
@@ -76,10 +76,6 @@
 				<input asp-for="CostPerUnit" class="form-control" placeholder="Enter cost per measurement unit of work here...">
 				<span asp-validation-for="CostPerUnit" class="small text-danger"></span>
 			</div>
-			@* <div class="form-group">
-				<label asp-for="TotalCost"></label>
-				<input asp-for="TotalCost" class="form-control" value="@Model.TotalCost.ToString("F2")" aria-label="readonly input example" readonly />
-			</div> *@
 
 			<div class="text-center">
 				<input class="btn btn-primary mt-3" type="submit" value="Save" />
