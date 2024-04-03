@@ -43,6 +43,8 @@ namespace ConstructionSiteReportingSystem.Core.Models.Work
 		[Display(Name = "Total cost")]
 		public decimal TotalCost { get; set; }
 
+		public string CreatorId { get; set; } = string.Empty;
+
 		public IEnumerable<WorkTypeServiceModel> WorkTypes { get; set; } = new List<WorkTypeServiceModel>();
 
 		public IEnumerable<StageServiceModel> Stages { get; set; } = new List<StageServiceModel>();
