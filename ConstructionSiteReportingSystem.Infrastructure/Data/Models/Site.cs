@@ -25,6 +25,6 @@ namespace ConstructionSiteReportingSystem.Infrastructure.Data.Models
 		[Comment("Construction site image URL")]
 		public string ImageUrl { get; set; } = string.Empty;
 
-		public ICollection<SiteWork> SitesWorks { get; set; } = new List<SiteWork>();
+		public ICollection<Work> Works { get; set; } = new List<Work>();
     }
 }
