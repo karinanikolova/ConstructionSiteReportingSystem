@@ -20,5 +20,7 @@
         void Delete<TEntity>(TEntity entityToDelete) where TEntity : class;
 
         void DeleteRange<TEntity>(params TEntity[] entitiesToDelete) where TEntity : class;
-    }
+
+        Task<TEntity?> GetByIdAsync<TEntity>(object id) where TEntity : class;
+	}
 }
