@@ -82,7 +82,7 @@ namespace ConstructionSiteReportingSystem.Core.Services
 		public async Task<bool> DoesWorkTypeExistAsync(int workTypeId)
 		{
 			return await _repository.AllReadOnly<WorkType>()
-				.AnyAsync(s => s.Id == workTypeId);
+				.AnyAsync(wt => wt.Id == workTypeId);
 		}
 
 		public async Task<bool> DoesStageExistAsync(int stageId)
@@ -94,19 +94,19 @@ namespace ConstructionSiteReportingSystem.Core.Services
 		public async Task<bool> DoesContractorExistAsync(int contractorId)
 		{
 			return await _repository.AllReadOnly<Contractor>()
-				.AnyAsync(s => s.Id == contractorId);
+				.AnyAsync(c => c.Id == contractorId);
 		}
 
 		public async Task<bool> DoesUnitExistAsync(int unitId)
 		{
 			return await _repository.AllReadOnly<Unit>()
-				.AnyAsync(s => s.Id == unitId);
+				.AnyAsync(u => u.Id == unitId);
 		}
 
 		public async Task<bool> DoesWorkExistAsync(int workId)
 		{
 			return await _repository.AllReadOnly<Work>()
-				.AnyAsync(s => s.Id == workId);
+				.AnyAsync(w => w.Id == workId);
 		}
 
 		public async Task<WorkFormModel> GetWorkByIdAsync(int workId) //Should probably rename method.
@@ -115,7 +115,7 @@ namespace ConstructionSiteReportingSystem.Core.Services
 				.Where(w => w.Id == workId)
 				.Select(w => new WorkFormModel()
 				{
-					WorkTypeId = w.Id,
+					WorkTypeId = w.WorkTypeId,
 					SiteId = w.SiteId, //
 					Description = w.Description,
 					CarryOutDate = DateTimeConverter.ConvertDateToString(w.CarryOutDate),
@@ -170,6 +170,7 @@ namespace ConstructionSiteReportingSystem.Core.Services
 
 			if (work != null)
 			{
+				work.SiteId = workModel.SiteId;
 				work.WorkTypeId = workModel.WorkTypeId;
 				work.Description = workModel.Description;
 				work.CarryOutDate = carryOutDate;
