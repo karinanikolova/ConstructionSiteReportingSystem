@@ -88,8 +88,8 @@ namespace ConstructionSiteReportingSystem.Core.Services
 
 				workModels = dateSorting switch
 				{
-					DateSorting.Newest => workModels.OrderBy(w => w.CarryOutDate).ToList(),
-					DateSorting.Oldest => workModels.OrderByDescending(w => w.CarryOutDate).ToList(),
+					DateSorting.Newest => workModels.OrderByDescending(w => w.CarryOutDate).ToList(),
+					DateSorting.Oldest => workModels.OrderBy(w => w.CarryOutDate).ToList(),
 					_ => workModels.OrderBy(w => w.CarryOutDate).ToList()
 				};
 
