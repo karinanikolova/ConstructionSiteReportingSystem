@@ -76,6 +76,7 @@
 				<input asp-for="CostPerUnit" class="form-control" placeholder="Enter cost per measurement unit of work here...">
 				<span asp-validation-for="CostPerUnit" class="small text-danger"></span>
 			</div>
+			<input type="hidden" asp-for="CreatorId" />
 
 			<div class="text-center">
 				<input class="btn btn-primary mt-3" type="submit" value="Save" />
