@@ -111,5 +111,69 @@ namespace ConstructionSiteReportingSystem.Controllers
 
 			return View(work);
 		}
+
+		[HttpPost]
+		public async Task<IActionResult> EditWork(int id, WorkFormModel workModel)
+		{
+			if (await _workService.DoesWorkExistAsync(id) == false)
+			{
+				return BadRequest();
+			}
+
+			if (User.Id() != workModel.CreatorId)
+			{
+				return Unauthorized();
+			}
+
+			if (await _workService.DoesSiteExistAsync(workModel.SiteId) == false)
+			{
+				ModelState.AddModelError(nameof(workModel.SiteId), "Construction site does not exist");
+			}
+
+			if (await _workService.DoesWorkTypeExistAsync(workModel.WorkTypeId) == false)
+			{
+				ModelState.AddModelError(nameof(workModel.WorkTypeId), "Construction and assembly work type does not exist");
+			}
+
+			if (await _workService.DoesStageExistAsync(workModel.StageId) == false)
+			{
+				ModelState.AddModelError(nameof(workModel.StageId), "Construction stage does not exist");
+			}
+
+			if (await _workService.DoesContractorExistAsync(workModel.ContractorId) == false)
+			{
+				ModelState.AddModelError(nameof(workModel.ContractorId), "Contractor does not exist");
+			}
+
+			if (await _workService.DoesUnitExistAsync(workModel.UnitId) == false)
+			{
+				ModelState.AddModelError(nameof(workModel.UnitId), "Measurement unit does not exist");
+			}
+
+			DateTime date;
+			bool isDateValid = DateTime.TryParseExact(workModel.CarryOutDate, DateTimePreferredFormat, CultureInfo.InvariantCulture, DateTimeStyles.None, out date);
+
+			if (!isDateValid || date.Year < DateTime.UtcNow.Year)
+			{
+				ModelState.AddModelError(nameof(workModel.CarryOutDate), "The specified date is not valid");
+			}
+
+			if (!ModelState.IsValid)
+			{
+				workModel.Sites = await _workService.GetAllSitesAsync();
+				workModel.WorkTypes = await _workService.GetAllWorkTypesAsync();
+				workModel.Stages = await _workService.GetAllStagesAsync();
+				workModel.Contractors = await _workService.GetAllContractorsAsync();
+				workModel.Units = await _workService.GetAllUnitsAsync();
+
+				return View(workModel);
+			}
+
+			await _workService.EditWorkAsync(id, workModel, date);
+
+			var siteId = workModel.SiteId;
+
+			return RedirectToAction("Site", "ConstructionSite", new { id = siteId, model = new SiteQueryModel() });
+		}
 	}
 }
