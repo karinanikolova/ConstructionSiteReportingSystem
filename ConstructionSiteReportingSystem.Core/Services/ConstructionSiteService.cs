@@ -33,7 +33,7 @@ namespace ConstructionSiteReportingSystem.Core.Services
 				.ToListAsync();
 		}
 
-		public async Task<SiteQueryServiceModel> GetSiteAsync(int siteId, string? stage = null, string? searchDate = null, DateSorting dateSorting = DateSorting.Newest, int currentPage = 1, int worksPerPage = 1)
+		public async Task<SiteQueryServiceModel?> GetSiteAsync(int siteId, string? stage = null, string? searchDate = null, DateSorting dateSorting = DateSorting.Newest, int currentPage = 1, int worksPerPage = 1)
 		{
 			var site = await _repository.AllReadOnly<Site>()
 				.Where(s => s.Id == siteId)
