@@ -1,10 +1,9 @@
 ﻿using ConstructionSiteReportingSystem.Core.Contracts;
-using DateTimeConverter = ConstructionSiteReportingSystem.Core.Common.DateTimeConverter;
 using ConstructionSiteReportingSystem.Core.Models.Work;
 using ConstructionSiteReportingSystem.Infrastructure.Data.Models;
 using ConstructionSiteReportingSystem.Infrastructure.Data.Utilities.Contracts;
 using Microsoft.EntityFrameworkCore;
-using System.ComponentModel;
+using DateTimeConverter = ConstructionSiteReportingSystem.Core.Common.DateTimeConverter;
 using Task = System.Threading.Tasks.Task;
 
 namespace ConstructionSiteReportingSystem.Core.Services
@@ -109,14 +108,14 @@ namespace ConstructionSiteReportingSystem.Core.Services
 				.AnyAsync(w => w.Id == workId);
 		}
 
-		public async Task<WorkFormModel> GetWorkByIdAsync(int workId) //Should probably rename method.
+		public async Task<WorkEditFormModel?> GetWorkEditFormModelByIdAsync(int workId)
 		{
 			var work = await _repository.AllReadOnly<Work>() // Should use _repository.GetByIdAsync<Work>(workId) method.
 				.Where(w => w.Id == workId)
-				.Select(w => new WorkFormModel()
+				.Select(w => new WorkEditFormModel()
 				{
 					WorkTypeId = w.WorkTypeId,
-					SiteId = w.SiteId, //
+					SiteId = w.SiteId,
 					Description = w.Description,
 					CarryOutDate = DateTimeConverter.ConvertDateToString(w.CarryOutDate),
 					StageId = w.StageId,
@@ -141,7 +140,27 @@ namespace ConstructionSiteReportingSystem.Core.Services
 			return work;
 		}
 
-		public async Task<int> CreateWorkAsync(WorkFormModel workModel, DateTime carryOutDate, string userId)
+		public async Task<WorkServiceModel?> GetWorkServiceModelByIdAsync(int workId) =>
+			await _repository.AllReadOnly<Work>()
+			.Where(w => w.Id == workId)
+			.Select(w => new WorkServiceModel()
+			{
+				Id = w.Id,
+				WorkType = w.WorkType.Name,
+				Description = w.Description,
+				CarryOutDate = DateTimeConverter.ConvertDateToString(w.CarryOutDate),
+				SiteId = w.SiteId,
+				Stage = w.Stage.Name,
+				Contractor = w.Contractor.Name,
+				Quantity = w.Quantity,
+				Unit = w.Unit.Type,
+				CostPerUnit = w.CostPerUnit,
+				TotalCost = w.TotalCost,
+				CreatorId = w.CreatorId
+			})
+			.FirstOrDefaultAsync();
+
+		public async Task<int> CreateWorkAsync(WorkAddFormModel workModel, DateTime carryOutDate, string userId)
 		{
 			var work = new Work()
 			{
@@ -164,7 +183,7 @@ namespace ConstructionSiteReportingSystem.Core.Services
 			return workModel.SiteId;
 		}
 
-		public async Task EditWorkAsync(int workId, WorkFormModel workModel,  DateTime carryOutDate)
+		public async Task EditWorkAsync(int workId, WorkEditFormModel workModel,  DateTime carryOutDate)
 		{
 			var work = await _repository.GetByIdAsync<Work>(workId);
 
@@ -185,10 +204,20 @@ namespace ConstructionSiteReportingSystem.Core.Services
 			await _repository.SaveChangesAsync();
 		}
 
+		public async Task DeleteWorkAsync(int workId)
+		{
+			var workToDelete = await _repository.GetByIdAsync<Work>(workId);
+
+			if (workToDelete != null)
+			{
+				_repository.Delete<Work>(workToDelete);
+				await _repository.SaveChangesAsync();
+			}
+		}
+
 		private decimal CalculateTotalCost(double quantity, decimal costPerUnit)
 		{
 			return (decimal)quantity * costPerUnit;
 		}
-
 	}
 }
