@@ -1,4 +1,7 @@
 
+using ConstructionSiteReportingSystem.ModelBinders;
+using Microsoft.AspNetCore.Mvc;
+
 namespace ConstructionSiteReportingSystem
 {
     public class Program
@@ -10,7 +13,11 @@ namespace ConstructionSiteReportingSystem
             builder.Services.AddApplicationDbContext(builder.Configuration);
             builder.Services.AddApplicationIdentity(builder.Configuration);
 
-            builder.Services.AddControllersWithViews();
+            builder.Services.AddControllersWithViews(options =>
+			{
+				options.ModelBinderProviders.Insert(0, new DecimalModelBinderProvider());
+				options.ModelBinderProviders.Insert(1, new DoubleModelBinderProvider());
+			});
 
             builder.Services.AddApplicationServices();
 
