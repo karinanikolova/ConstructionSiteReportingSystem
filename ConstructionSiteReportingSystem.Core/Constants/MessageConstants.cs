@@ -8,7 +8,7 @@
 
         public const string RequiredFieldMessage = "The field is required";
 
-        public const string QuantityMessage = "{0} must be a positive number bigger than zero";
+        public const string QuantityMessage = "{0} must be a whole positive number bigger than zero";
 
         public const string CostPerUnitMessage = "{0} must be a positive number bigger than zero";
 	}
