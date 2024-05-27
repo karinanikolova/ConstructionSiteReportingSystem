@@ -15,7 +15,9 @@ namespace ConstructionSiteReportingSystem.Core.Contracts
 
 		Task<IEnumerable<UnitServiceModel>> GetAllUnitsAsync();
 
-		Task<WorkFormModel> GetWorkByIdAsync(int workId);
+		Task<WorkEditFormModel?> GetWorkEditFormModelByIdAsync(int workId);
+
+		Task<WorkServiceModel?> GetWorkServiceModelByIdAsync(int workId);
 
 		Task<bool> DoesSiteExistAsync(int siteId);
 
@@ -29,8 +31,10 @@ namespace ConstructionSiteReportingSystem.Core.Contracts
 
 		Task<bool> DoesWorkExistAsync(int workId);
 
-		Task<int> CreateWorkAsync(WorkFormModel workModel, DateTime carryOutDate, string userId);
+		Task<int> CreateWorkAsync(WorkAddFormModel workModel, DateTime carryOutDate, string userId);
 
-		Task EditWorkAsync(int workId, WorkFormModel workModel, DateTime carryOutDate);
+		Task EditWorkAsync(int workId, WorkEditFormModel workModel, DateTime carryOutDate);
+
+		Task DeleteWorkAsync(int workId);
 	}
 }
