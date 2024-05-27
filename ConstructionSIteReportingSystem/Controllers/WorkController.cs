@@ -28,7 +28,7 @@ namespace ConstructionSiteReportingSystem.Controllers
 			var contractors = await _workService.GetAllContractorsAsync();
 			var units = await _workService.GetAllUnitsAsync();
 
-			var workModel = new WorkFormModel()
+			var workModel = new WorkAddFormModel()
 			{
 				Sites = sites,
 				WorkTypes = workTypes,
@@ -41,7 +41,7 @@ namespace ConstructionSiteReportingSystem.Controllers
 		}
 
 		[HttpPost]
-		public async Task<IActionResult> AddWork(WorkFormModel workModel)
+		public async Task<IActionResult> AddWork(WorkAddFormModel workModel)
 		{
 			if (await _workService.DoesSiteExistAsync(workModel.SiteId) == false)
 			{
@@ -102,9 +102,9 @@ namespace ConstructionSiteReportingSystem.Controllers
 				return BadRequest();
 			}
 
-			var work = await _workService.GetWorkByIdAsync(id);
+			var work = await _workService.GetWorkEditFormModelByIdAsync(id);
 
-			if (User.Id() != work.CreatorId)
+			if (User.Id() != work!.CreatorId)
 			{
 				return Unauthorized();
 			}
@@ -113,7 +113,7 @@ namespace ConstructionSiteReportingSystem.Controllers
 		}
 
 		[HttpPost]
-		public async Task<IActionResult> EditWork(int id, WorkFormModel workModel)
+		public async Task<IActionResult> EditWork(int id, WorkEditFormModel workModel)
 		{
 			if (await _workService.DoesWorkExistAsync(id) == false)
 			{
@@ -170,6 +170,44 @@ namespace ConstructionSiteReportingSystem.Controllers
 			}
 
 			await _workService.EditWorkAsync(id, workModel, date);
+
+			var siteId = workModel.SiteId;
+
+			return RedirectToAction("Site", "ConstructionSite", new { id = siteId, model = new SiteQueryModel() });
+		}
+
+		[HttpGet]
+		public async Task<IActionResult> DeleteWork(int id)
+		{
+			if (await _workService.DoesWorkExistAsync(id) == false)
+			{
+				return BadRequest();
+			}
+
+			var work = await _workService.GetWorkServiceModelByIdAsync(id);
+
+			if (User.Id() != work!.CreatorId)
+			{
+				return Unauthorized();
+			}
+
+			return View(work);
+		}
+
+		[HttpPost]
+		public async Task<IActionResult> DeleteWork(int id, WorkServiceModel workModel)
+		{
+			if (await _workService.DoesWorkExistAsync(id) == false)
+			{
+				return BadRequest();
+			}
+
+			if (User.Id() != workModel.CreatorId)
+			{
+				return Unauthorized();
+			}
+
+			await _workService.DeleteWorkAsync(id);
 
 			var siteId = workModel.SiteId;
 
