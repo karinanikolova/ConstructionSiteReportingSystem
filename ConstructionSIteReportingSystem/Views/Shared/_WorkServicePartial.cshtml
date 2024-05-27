@@ -1,0 +1,63 @@
+﻿@model WorkServiceModel
+
+<form method="post">
+	<div class="mb-3 row">
+		<label asp-for="@Model.CarryOutDate" class="col-sm-2 col-form-label"><strong>Carry out date:</strong></label>
+		<div class="col-sm-10">
+			<input asp-for="@Model.CarryOutDate" type="text" readonly class="form-control-plaintext" id="@Model.CarryOutDate" value="@Model.CarryOutDate">
+		</div>
+	</div>
+	<div class="mb-3 row">
+		<label asp-for="@Model.Stage" class="col-sm-2 col-form-label"><strong>Stage:</strong></label>
+		<div class="col-sm-10">
+			<input asp-for="@Model.Stage" type="text" readonly class="form-control-plaintext" id="@Model.Stage" value="@Model.Stage">
+		</div>
+	</div>
+	<div class="mb-3 row">
+		<label asp-for="@Model.WorkType" class="col-sm-2 col-form-label"><strong>Type:</strong></label>
+		<div class="col-sm-10">
+			<input asp-for="@Model.WorkType" type="text" readonly class="form-control-plaintext" id="@Model.WorkType" value="@Model.WorkType">
+		</div>
+	</div>
+	<div class="mb-3 row">
+		<label asp-for="@Model.Description" class="col-sm-2 col-form-label"><strong>Description:</strong></label>
+		<div class="col-sm-10">
+			<input asp-for="@Model.Description" type="text" readonly class="form-control-plaintext" id="@Model.Description" value="@Model.Description">
+		</div>
+	</div>
+	<div class="mb-3 row">
+		<label asp-for="@Model.Contractor" class="col-sm-2 col-form-label"><strong>Contractor:</strong></label>
+		<div class="col-sm-10">
+			<input asp-for="@Model.Contractor" type="text" readonly class="form-control-plaintext" id="@Model.Contractor" value="@Model.Contractor">
+		</div>
+	</div>
+	<div class="mb-3 row">
+		<label asp-for="@Model.Quantity" class="col-sm-2 col-form-label"><strong>Quantity:</strong></label>
+		<div class="col-sm-10">
+			<input asp-for="@Model.Quantity" type="text" readonly class="form-control-plaintext" id="@Model.Quantity" value="@Model.Quantity">
+		</div>
+	</div>
+	<div class="mb-3 row">
+		<label asp-for="@Model.Unit" class="col-sm-2 col-form-label"><strong>Unit:</strong></label>
+		<div class="col-sm-10">
+			<input asp-for="@Model.Unit" type="text" readonly class="form-control-plaintext" id="Unit" value="@Model.Unit">
+		</div>
+	</div>
+	<div class="mb-3 row">
+		<label asp-for="@Model.CostPerUnit" class="col-sm-2 col-form-label"><strong>Cost per unit:</strong></label>
+		<div class="col-sm-10">
+			<input asp-for="@Model.CostPerUnit" type="text" readonly class="form-control-plaintext" id="@Model.CostPerUnit" value="@Model.CostPerUnit">
+		</div>
+	</div>
+	<div class="mb-3 row">
+		<label asp-for="@Model.TotalCost" class="col-sm-2 col-form-label"><strong>Total cost:</strong></label>
+		<div class="col-sm-10">
+			<input asp-for="@Model.TotalCost" type="text" readonly class="form-control-plaintext" id="@Model.TotalCost" value="@Model.TotalCost">
+		</div>
+	</div>
+	<input type="hidden" asp-for="SiteId" />
+	<input type="hidden" asp-for="CreatorId" />
+	<div class="text-center">
+		<input class="btn btn-primary mt-3" type="submit" value="Delete" />
+	</div>
+</form>
