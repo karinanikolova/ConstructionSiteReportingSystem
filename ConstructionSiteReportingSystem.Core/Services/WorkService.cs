@@ -110,7 +110,7 @@ namespace ConstructionSiteReportingSystem.Core.Services
 
 		public async Task<WorkEditFormModel?> GetWorkEditFormModelByIdAsync(int workId)
 		{
-			var work = await _repository.AllReadOnly<Work>() // Should use _repository.GetByIdAsync<Work>(workId) method.
+			var work = await _repository.AllReadOnly<Work>()
 				.Where(w => w.Id == workId)
 				.Select(w => new WorkEditFormModel()
 				{
