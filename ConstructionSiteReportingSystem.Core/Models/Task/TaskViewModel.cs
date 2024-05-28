@@ -1,8 +1,4 @@
 ﻿using ConstructionSiteReportingSystem.Infrastructure.Enums;
-using Microsoft.AspNetCore.Identity;
-using Microsoft.EntityFrameworkCore;
-using System.ComponentModel.DataAnnotations.Schema;
-using System.ComponentModel.DataAnnotations;
 
 namespace ConstructionSiteReportingSystem.Core.Models.Task
 {
