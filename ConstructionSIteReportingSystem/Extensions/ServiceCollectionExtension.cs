@@ -1,5 +1,5 @@
-﻿using ConstructionSiteReportingSystem.Core.Contracts;
-using ConstructionSiteReportingSystem.Core.Services;
+﻿using ConstructionSiteReportingSystem.Core.Services;
+using ConstructionSiteReportingSystem.Core.Services.Contracts;
 using ConstructionSiteReportingSystem.Infrastructure.Data;
 using ConstructionSiteReportingSystem.Infrastructure.Data.Utilities;
 using ConstructionSiteReportingSystem.Infrastructure.Data.Utilities.Contracts;
@@ -24,6 +24,7 @@ namespace Microsoft.Extensions.DependencyInjection
             services.AddScoped<IHomeService, HomeService>();
             services.AddScoped<IConstructionSiteService, ConstructionSiteService>();
             services.AddScoped<IWorkService, WorkService>();
+            services.AddScoped<ITaskService, TaskService>();
 
 			return services;
         }
