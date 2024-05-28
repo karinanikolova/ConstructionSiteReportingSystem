@@ -1,0 +1,36 @@
+﻿@model TaskViewModel
+
+<div class="col">
+	<div class="card h-100 border-info mb-3 text-center">
+		<div class="card-header">
+			<strong>@Model.Title</strong>
+		</div>
+		<ul class="list-group list-group-flush">
+			<li class="list-group-item"><strong>Description: </strong>@Model.Description</li>
+			<li class="list-group-item"><strong>Created on: </strong>@DateTimeConverter.ConvertDateToString(Model.CreatedOn)</li>
+			<li class="list-group-item">
+				<strong>Status: </strong>
+				@{
+					if (Model.Status.ToString() == "NotStarted")
+					{
+						<option value="@Model.Status">Not started</option>
+					}
+					else if (Model.Status.ToString() == "InProgress")
+					{
+						<option value="@Model.Status">In progress</option>
+					}
+					else
+					{
+						<option value="@Model.Status">@Model.Status</option>
+					}
+				}
+			</li>
+		</ul>
+		<div class="card-body">
+			<div class="btn-group" role="group" aria-label="Basic outlined example">
+				<a asp-controller="Task" asp-action="EditTask" asp-route-id="@Model.Id" class="btn btn-outline-primary" type="button">Edit</a>
+				<a asp-controller="Task" asp-action="DeleteTask" asp-route-id="@Model.Id" class="btn btn-outline-primary" type="button">Delete</a>
+			</div>
+		</div>
+	</div>
+</div>
