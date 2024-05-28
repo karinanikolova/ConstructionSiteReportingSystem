@@ -1,0 +1,118 @@
+﻿@model AllTasksQueryModel
+
+@{
+	ViewData["Title"] = "User Tasks";
+
+	var tasks = Model.Tasks;
+}
+
+<div class="mb-5">
+	<h3 class="text-center">@ViewData["Title"]</h3>
+</div>
+
+<form method="get">
+	<div class="row">
+		<div class="form-group col-md-3 d-flex justify-content-between">
+			<div class="form-group">
+				<label asp-for="Status"></label>
+				<select asp-for="Status" class="form-control">
+					<option value="">All</option>
+					@foreach (var status in Model.Statuses)
+					{
+						if (status == "NotStarted")
+						{
+							<option value="@status">Not started</option>
+						}
+						else if (status == "InProgress")
+						{
+							<option value="@status">In progress</option>
+						}
+						else
+						{
+							<option value="@status">@status</option>
+						}
+					}
+				</select>
+			</div>
+		</div>
+
+		<div class="form-group col-md-3">
+			<label asp-for="SearchTerm"></label>
+			<input asp-for="SearchTerm" class="form-control" placeholder="Enter search text here...">
+		</div>
+
+		<div class="form-group col-md-3">
+			<div class="form-group">
+				<label asp-for="Sorting"></label>
+				<select asp-for="Sorting" class="form-control">
+					<option value="0">Newest</option>
+					<option value="1">Oldest</option>
+				</select>
+			</div>
+		</div>
+
+		<div class="col-md-3">
+			<div class="form-group mt-4 p-2">
+				<input type="submit" value="Filter" class="btn btn-outline-primary" />
+			</div>
+		</div>
+	</div>
+</form>
+
+@{
+	var previousPage = Model.CurrentPage - 1;
+	if (previousPage < 1)
+	{
+		previousPage = 1;
+	}
+
+	var maxPage = Math.Ceiling((double)Model.TotalTasksCount /
+		AllTasksQueryModel.TasksPerPage);
+}
+
+<div class="row mb-5">
+	<div class="col-md-6 d-grid gap-2 d-md-flex justify-content-md-start">
+		<a class="btn btn-primary @(Model.CurrentPage == 1 ? "disabled" : string.Empty)"
+		   asp-controller="Task"
+		   asp-action="All"
+		   asp-route-currentPage="@previousPage"
+		   asp-route-status="@Model.Status"
+		   asp-route-searchTerm="@Model.SearchTerm"
+		   asp-route-sorting="@((int)Model.Sorting)"><<</a>
+	</div>
+
+	@{
+		bool areThereTasks = false;
+
+		if (Model.Tasks.Any())
+		{
+			areThereTasks = true;
+		}
+
+		var shouldButtonBeDisabled = Model.CurrentPage == maxPage ||
+		!areThereTasks;
+	}
+
+	<div class="col-md-6 d-grid gap-2 d-md-flex justify-content-md-end">
+		<a class="btn btn-primary
+           @(shouldButtonBeDisabled ? "disabled" : string.Empty)"
+		   asp-controller="Task"
+		   asp-action="All"
+		   asp-route-currentPage="@(Model.CurrentPage + 1)"
+		   asp-route-status="@Model.Status"
+		   asp-route-searchTerm="@Model.SearchTerm"
+		   asp-route-sorting="@((int)Model.Sorting)">>></a>
+	</div>
+</div>
+
+@if (!Model.Tasks.Any())
+{
+	<h2 class="text-center">No tasks found by the given criteria!</h2>
+}
+
+<div class="row row-cols-1 row-cols-md-3 g-4">
+	@foreach (var task in Model.Tasks)
+	{
+		<partial name="_TaskPartial" model="@task" />
+	}
+</div>
