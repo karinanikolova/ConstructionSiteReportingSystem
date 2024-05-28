@@ -1,5 +1,5 @@
-﻿using ConstructionSiteReportingSystem.Core.Contracts;
-using ConstructionSiteReportingSystem.Core.Models.Work;
+﻿using ConstructionSiteReportingSystem.Core.Models.Work;
+using ConstructionSiteReportingSystem.Core.Services.Contracts;
 using ConstructionSiteReportingSystem.Infrastructure.Data.Models;
 using ConstructionSiteReportingSystem.Infrastructure.Data.Utilities.Contracts;
 using Microsoft.EntityFrameworkCore;
@@ -8,7 +8,7 @@ using Task = System.Threading.Tasks.Task;
 
 namespace ConstructionSiteReportingSystem.Core.Services
 {
-	public class WorkService : IWorkService
+    public class WorkService : IWorkService
 	{
 		private readonly IRepository _repository;
 

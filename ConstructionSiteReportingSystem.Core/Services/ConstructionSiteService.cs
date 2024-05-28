@@ -1,6 +1,6 @@
 ﻿using ConstructionSiteReportingSystem.Core.Common;
-using ConstructionSiteReportingSystem.Core.Contracts;
 using ConstructionSiteReportingSystem.Core.Models.Site;
+using ConstructionSiteReportingSystem.Core.Services.Contracts;
 using ConstructionSiteReportingSystem.Infrastructure.Data.Models;
 using ConstructionSiteReportingSystem.Infrastructure.Data.Utilities.Contracts;
 using ConstructionSiteReportingSystem.Infrastructure.Enums;
@@ -11,7 +11,7 @@ using Stage = ConstructionSiteReportingSystem.Infrastructure.Data.Models.Stage;
 
 namespace ConstructionSiteReportingSystem.Core.Services
 {
-	public class ConstructionSiteService : IConstructionSiteService
+    public class ConstructionSiteService : IConstructionSiteService
 	{
 		private readonly IRepository _repository;
 
