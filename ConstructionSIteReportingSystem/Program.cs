@@ -1,10 +1,9 @@
 
 using ConstructionSiteReportingSystem.ModelBinders;
-using Microsoft.AspNetCore.Mvc;
 
 namespace ConstructionSiteReportingSystem
 {
-    public class Program
+	public class Program
     {
         public static async Task Main(string[] args)
         {
