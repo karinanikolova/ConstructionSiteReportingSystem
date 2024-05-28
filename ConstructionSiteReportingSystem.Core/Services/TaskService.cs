@@ -1,5 +1,5 @@
-﻿using ConstructionSiteReportingSystem.Core.Contracts;
-using ConstructionSiteReportingSystem.Core.Models.Task;
+﻿using ConstructionSiteReportingSystem.Core.Models.Task;
+using ConstructionSiteReportingSystem.Core.Services.Contracts;
 using ConstructionSiteReportingSystem.Infrastructure.Data.Utilities.Contracts;
 using ConstructionSiteReportingSystem.Infrastructure.Enums;
 using Microsoft.EntityFrameworkCore;
@@ -16,11 +16,12 @@ namespace ConstructionSiteReportingSystem.Core.Services
 			_repository = repository;
 		}
 
-		public async Task<TaskQueryServiceModel> GetAllTasksAsync(string? searchStatus = null, string? searchTerm = null, DateSorting dateSorting = DateSorting.Newest, int currentPage = 1, int tasksPerPage = 1)
+		public async Task<TaskQueryServiceModel> GetAllUserTasksAsync(string userId, string? searchStatus = null, string? searchTerm = null, DateSorting dateSorting = DateSorting.Newest, int currentPage = 1, int tasksPerPage = 1)
 		{
-			var tasks = _repository.AllReadOnly<Task>();
+			var tasks = _repository.AllReadOnly<Task>().Where(t => t.CreatorId == userId);
+			var statuses = GetAllStatusesAsString();
 
-			if (!string.IsNullOrWhiteSpace(searchStatus) && (searchStatus == Status.NotStarted.ToString() || searchStatus == Status.InProgress.ToString()) || searchStatus == Status.Finished.ToString())
+			if (!string.IsNullOrWhiteSpace(searchStatus) && statuses.Any(s => s == searchStatus))
 			{
 				Status status;
 				bool isStatusValid = Enum.TryParse(searchStatus, true, out status);
@@ -53,7 +54,8 @@ namespace ConstructionSiteReportingSystem.Core.Services
 					Title = t.Title,
 					Description = t.Description,
 					CreatedOn = t.CreatedOn,
-					Status = t.Status
+					Status = t.Status/*.ToString() == "NotStarted" ? "Not started" : t.Status.ToString() == "InProgress" ? "In progress" : t.Status.ToString()*/,
+					Creator = t.CreatorId
 				})
 				.ToListAsync();
 
@@ -65,5 +67,14 @@ namespace ConstructionSiteReportingSystem.Core.Services
 				Tasks = taskModels
 			};
 		}
+
+		public IEnumerable<string> GetAllStatusesAsString() =>
+			new List<string>()
+		{
+			Status.NotStarted.ToString(),
+			Status.InProgress.ToString(),
+			Status.Finished.ToString()
+		};
+
 	}
 }
