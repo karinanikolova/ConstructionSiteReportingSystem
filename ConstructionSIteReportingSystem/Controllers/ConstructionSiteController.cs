@@ -1,10 +1,10 @@
-﻿using ConstructionSiteReportingSystem.Core.Contracts;
-using ConstructionSiteReportingSystem.Core.Models.Site;
+﻿using ConstructionSiteReportingSystem.Core.Models.Site;
+using ConstructionSiteReportingSystem.Core.Services.Contracts;
 using Microsoft.AspNetCore.Mvc;
 
 namespace ConstructionSiteReportingSystem.Controllers
 {
-	public class ConstructionSiteController : BaseController
+    public class ConstructionSiteController : BaseController
 	{
 		private readonly ILogger<ConstructionSiteController> _logger;
 		private readonly IConstructionSiteService _constructionSiteService;

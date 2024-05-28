@@ -1,4 +1,4 @@
-﻿using ConstructionSiteReportingSystem.Core.Contracts;
+﻿using ConstructionSiteReportingSystem.Core.Services.Contracts;
 using ConstructionSiteReportingSystem.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -6,7 +6,7 @@ using System.Diagnostics;
 
 namespace ConstructionSiteReportingSystem.Controllers
 {
-	public class HomeController : BaseController
+    public class HomeController : BaseController
     {
         private readonly ILogger<HomeController> _logger;
         private readonly IHomeService _homeService;

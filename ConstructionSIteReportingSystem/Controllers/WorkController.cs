@@ -1,6 +1,6 @@
-﻿using ConstructionSiteReportingSystem.Core.Contracts;
-using ConstructionSiteReportingSystem.Core.Models.Site;
+﻿using ConstructionSiteReportingSystem.Core.Models.Site;
 using ConstructionSiteReportingSystem.Core.Models.Work;
+using ConstructionSiteReportingSystem.Core.Services.Contracts;
 using Microsoft.AspNetCore.Mvc;
 using System.Globalization;
 using System.Security.Claims;
@@ -8,7 +8,7 @@ using static ConstructionSiteReportingSystem.Core.Constants.ValidationConstants;
 
 namespace ConstructionSiteReportingSystem.Controllers
 {
-	public class WorkController : BaseController
+    public class WorkController : BaseController
 	{
 		private readonly ILogger<WorkController> _logger;
 		private readonly IWorkService _workService;
