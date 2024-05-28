@@ -5,7 +5,7 @@ namespace ConstructionSiteReportingSystem.Core.Models.Task
 {
 	public class AllTasksQueryModel
 	{
-		public const int TasksPerPage = 5;
+		public const int TasksPerPage = 3;
 
 		public string Status { get; init; } = null!;
 
