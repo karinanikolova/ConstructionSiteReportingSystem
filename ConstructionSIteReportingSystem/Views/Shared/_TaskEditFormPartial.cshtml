@@ -1,0 +1,44 @@
+﻿@model TaskEditFormModel
+
+<div class="row">
+	<div class="col-sm-12 offset-lg-2 col-lg-8 offset-xl-3 col-xl-6">
+		<form method="post">
+			<div class="form-group">
+				<label asp-for="Title"></label>
+				<input asp-for="Title" class="form-control" placeholder="Enter task title here...">
+				<span asp-validation-for="Title" class="small text-danger"></span>
+			</div>
+			<div class="form-group">
+				<label asp-for="Description"></label>
+				<textarea asp-for="Description" rows="4" class="form-control" placeholder="Enter task description here..."></textarea>
+				<span asp-validation-for="Description" class="small text-danger"></span>
+			</div>
+			<div class="form-group">
+				<label asp-for="StatusId"></label>
+				<select asp-for="StatusId" class="form-control">
+					@foreach (var status in Model.Statuses)
+					{
+						if (status == 0)
+						{
+							<option value="@status">Not started</option>
+						}
+						else if (status == 1)
+						{
+							<option value="@status">In progress</option>
+						}
+						else
+						{
+							<option value="@status">Finished</option>
+						}
+					}
+				</select>
+				<span asp-validation-for="StatusId" class="small text-danger"></span>
+			</div>
+			<input type="hidden" asp-for="CreatorId" />
+
+			<div class="text-center">
+				<input class="btn btn-primary mt-3" type="submit" value="Save" />
+			</div>
+		</form>
+	</div>
+</div>
