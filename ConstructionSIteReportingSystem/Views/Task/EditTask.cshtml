@@ -1,0 +1,14 @@
+﻿@model TaskEditFormModel
+
+@{
+	ViewData["Title"] = "Edit Task";
+}
+
+<h2 class="text-center">@ViewData["Title"]</h2>
+<hr />
+
+<partial name="_TaskEditFormPartial" model="@Model" />
+
+@section Scripts {
+	<partial name="_ValidationScriptsPartial" />
+}
