@@ -13,6 +13,8 @@ namespace ConstructionSiteReportingSystem.Core.Services.Contracts
 
 		Task<TaskEditFormModel?> GetTaskEditFormModelByIdAsync(int taskId);
 
+		Task<TaskViewModel?> GetTaskViewModelByIdAsync(int taskId);
+
 		bool DoesStatusExist(int statusId);
 
 		Task CreateTaskAsync(TaskAddFormModel taskModel, string userId);
@@ -20,5 +22,7 @@ namespace ConstructionSiteReportingSystem.Core.Services.Contracts
 		Task<bool> DoesTaskExistAsync(int taskId);
 
 		Task EditTaskAsync(int taskId, TaskEditFormModel taskModel);
+
+		Task DeleteTaskAsync(int taskId);
 	}
 }
