@@ -1,0 +1,14 @@
+﻿@model TaskViewModel
+
+@{
+	ViewData["Title"] = "Task to Delete";
+}
+
+<h2 class="text-center">@ViewData["Title"]</h2>
+<hr />
+
+<partial name="_TaskViewPartial" model="@Model" />
+
+@section Scripts {
+	<partial name="_ValidationScriptsPartial" />
+}
