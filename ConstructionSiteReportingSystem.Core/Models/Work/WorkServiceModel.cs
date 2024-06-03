@@ -10,7 +10,7 @@
 
 		public string CarryOutDate { get; set; } = string.Empty;
 
-		public int SiteId { get; set; } //
+		public int SiteId { get; set; }
 
 		public string Stage { get; set; } = string.Empty;
 
@@ -24,6 +24,6 @@
 
 		public decimal TotalCost { get; set; }
 
-		public string CreatorId { get; set; } = string.Empty; //
+		public string CreatorId { get; set; } = string.Empty;
 	}
 }
