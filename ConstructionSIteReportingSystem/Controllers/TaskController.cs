@@ -118,5 +118,41 @@ namespace ConstructionSiteReportingSystem.Controllers
 
 			return RedirectToAction(nameof(All));
 		}
+
+		[HttpGet]
+		public async Task<IActionResult> DeleteTask(int id)
+		{
+			if (await _taskService.DoesTaskExistAsync(id) == false)
+			{
+				return BadRequest();
+			}
+
+			var task = await _taskService.GetTaskViewModelByIdAsync(id);
+
+			if (User.Id() != task!.Creator)
+			{
+				return Unauthorized();
+			}
+
+			return View(task);
+		}
+
+		[HttpPost]
+		public async Task<IActionResult> DeleteTask(int id, TaskViewModel taskModel)
+		{
+			if (await _taskService.DoesTaskExistAsync(id) == false)
+			{
+				return BadRequest();
+			}
+
+			if (User.Id() != taskModel.Creator)
+			{
+				return Unauthorized();
+			}
+
+			await _taskService.DeleteTaskAsync(id);
+
+			return RedirectToAction(nameof(All));
+		}
 	}
 }
