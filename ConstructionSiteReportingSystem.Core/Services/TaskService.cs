@@ -1,4 +1,5 @@
 ﻿using ConstructionSiteReportingSystem.Core.Models.Task;
+using ConstructionSiteReportingSystem.Core.Models.Work;
 using ConstructionSiteReportingSystem.Core.Services.Contracts;
 using ConstructionSiteReportingSystem.Infrastructure.Data.Utilities.Contracts;
 using ConstructionSiteReportingSystem.Infrastructure.Enums;
@@ -82,6 +83,8 @@ namespace ConstructionSiteReportingSystem.Core.Services
 			(int)Status.Finished
 		};
 
+
+
 		public bool DoesStatusExist(int statusId)
 		{
 			var statuses = GetAllStatusesAsInt();
@@ -140,6 +143,31 @@ namespace ConstructionSiteReportingSystem.Core.Services
 			}
 
 			await _repository.SaveChangesAsync();
+		}
+
+		public async Task<TaskViewModel?> GetTaskViewModelByIdAsync(int taskId) =>
+			await _repository.AllReadOnly<Task>()
+			.Where(w => w.Id == taskId)
+			.Select(w => new TaskViewModel()
+			{
+				Id = w.Id,
+				Title = w.Title,
+				Description = w.Description,
+				CreatedOn = w.CreatedOn,
+				Status = w.Status,
+				Creator = w.CreatorId
+			})
+			.FirstOrDefaultAsync();
+
+		public async System.Threading.Tasks.Task DeleteTaskAsync(int taskId)
+		{
+			var taskToDelete = await _repository.GetByIdAsync<Task>(taskId);
+
+			if (taskToDelete != null)
+			{
+				_repository.Delete<Task>(taskToDelete);
+				await _repository.SaveChangesAsync();
+			}
 		}
 	}
 }
