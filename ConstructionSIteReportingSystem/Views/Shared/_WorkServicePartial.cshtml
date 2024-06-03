@@ -58,6 +58,25 @@
 	<input type="hidden" asp-for="SiteId" />
 	<input type="hidden" asp-for="CreatorId" />
 	<div class="text-center">
-		<input class="btn btn-primary mt-3" type="submit" value="Delete" />
+		<button type="button" class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+			Delete
+		</button>
+	</div>
+	<div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h1 class="modal-title fs-5" id="staticBackdropLabel">Attention</h1>
+					<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+				</div>
+				<div class="modal-body">
+					<p class="text-center">You are about to delete the selected entry from <strong>@Model.CarryOutDate</strong>. Do you wish to proceed?</p>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+					<input class="btn btn-primary" type="submit" value="Proceed" />
+				</div>
+			</div>
+		</div>
 	</div>
 </form>
