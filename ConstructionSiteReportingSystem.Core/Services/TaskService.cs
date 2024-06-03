@@ -1,5 +1,4 @@
 ﻿using ConstructionSiteReportingSystem.Core.Models.Task;
-using ConstructionSiteReportingSystem.Core.Models.Work;
 using ConstructionSiteReportingSystem.Core.Services.Contracts;
 using ConstructionSiteReportingSystem.Infrastructure.Data.Utilities.Contracts;
 using ConstructionSiteReportingSystem.Infrastructure.Enums;
@@ -83,8 +82,6 @@ namespace ConstructionSiteReportingSystem.Core.Services
 			(int)Status.Finished
 		};
 
-
-
 		public bool DoesStatusExist(int statusId)
 		{
 			var statuses = GetAllStatusesAsInt();
@@ -131,20 +128,6 @@ namespace ConstructionSiteReportingSystem.Core.Services
 			return task;
 		}
 
-		public async System.Threading.Tasks.Task EditTaskAsync(int taskId, TaskEditFormModel taskModel)
-		{
-			var task = await _repository.GetByIdAsync<Task>(taskId);
-
-			if (task != null)
-			{
-				task.Title = taskModel.Title;
-				task.Description = taskModel.Description;
-				task.Status = (Status)taskModel.StatusId;
-			}
-
-			await _repository.SaveChangesAsync();
-		}
-
 		public async Task<TaskViewModel?> GetTaskViewModelByIdAsync(int taskId) =>
 			await _repository.AllReadOnly<Task>()
 			.Where(w => w.Id == taskId)
@@ -158,6 +141,20 @@ namespace ConstructionSiteReportingSystem.Core.Services
 				Creator = w.CreatorId
 			})
 			.FirstOrDefaultAsync();
+
+		public async System.Threading.Tasks.Task EditTaskAsync(int taskId, TaskEditFormModel taskModel)
+		{
+			var task = await _repository.GetByIdAsync<Task>(taskId);
+
+			if (task != null)
+			{
+				task.Title = taskModel.Title;
+				task.Description = taskModel.Description;
+				task.Status = (Status)taskModel.StatusId;
+			}
+
+			await _repository.SaveChangesAsync();
+		}
 
 		public async System.Threading.Tasks.Task DeleteTaskAsync(int taskId)
 		{
