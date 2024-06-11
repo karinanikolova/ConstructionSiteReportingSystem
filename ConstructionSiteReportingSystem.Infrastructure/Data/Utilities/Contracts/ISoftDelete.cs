@@ -6,7 +6,7 @@
     public interface ISoftDelete
     {
         /// <summary>
-        /// Represents the current deleted state of the Entity.
+        /// Represents the current delete state of the Entity.
         /// </summary>
         public bool IsDeleted { get; }
 
