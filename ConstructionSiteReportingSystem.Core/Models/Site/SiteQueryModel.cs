@@ -1,9 +1,10 @@
-﻿using ConstructionSiteReportingSystem.Infrastructure.Enums;
+﻿using ConstructionSiteReportingSystem.Core.Extensions.Contracts;
+using ConstructionSiteReportingSystem.Infrastructure.Enums;
 using System.ComponentModel.DataAnnotations;
 
 namespace ConstructionSiteReportingSystem.Core.Models.Site
 {
-	public class SiteQueryModel
+	public class SiteQueryModel : ISiteModel
     {
         public const int WorksPerPage = 5;
 
@@ -18,12 +19,14 @@ namespace ConstructionSiteReportingSystem.Core.Models.Site
 
         public int TotalWorksCount { get; set; }
 
-        public string SiteName { get; set; } = string.Empty;
+        public string Name { get; set; } = string.Empty;
 
         public DateTime ConstructionFinishDate { get; set; }
 
         public IEnumerable<string> Stages { get; set; } = new List<string>();
 
 		public IEnumerable<WorkViewModel> Works { get; set; } = new List<WorkViewModel>();
+
+		public string FinishDate { get; set; } = string.Empty;
 	}
 }
