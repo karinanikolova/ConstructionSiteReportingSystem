@@ -1,6 +1,8 @@
 ﻿using ConstructionSiteReportingSystem.Core.Models.Site;
 using ConstructionSiteReportingSystem.Core.Services.Contracts;
+using ConstructionSiteReportingSystem.Core.Extensions;
 using Microsoft.AspNetCore.Mvc;
+using ConstructionSiteReportingSystem.Core.Common;
 
 namespace ConstructionSiteReportingSystem.Controllers
 {
@@ -24,7 +26,7 @@ namespace ConstructionSiteReportingSystem.Controllers
 		}
 
 		[HttpGet]
-		public async Task<IActionResult> Site(int id, [FromQuery]SiteQueryModel model)
+		public async Task<IActionResult> Site(int id, string information, [FromQuery]SiteQueryModel model)
 		{
 			var site = await _constructionSiteService.GetSiteAsync(
 				id,
@@ -41,9 +43,15 @@ namespace ConstructionSiteReportingSystem.Controllers
 
 			model.TotalWorksCount = site.TotalWorksCount;
 			model.Works = site.Works;
-			model.SiteName = site.SiteName;
+			model.Name = site.SiteName;
 			model.ConstructionFinishDate = site.ConstructionFinishDate;
 			model.Stages = await _constructionSiteService.GetAllStagesNamesAsync();
+			model.FinishDate = DateTimeConverter.ConvertDateToString(site.ConstructionFinishDate);
+
+			if (information != model.GetInformation())
+			{
+				return BadRequest();
+			}
 
 			return View(model);
 		}
