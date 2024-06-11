@@ -27,7 +27,7 @@
 					<div class="mb-3">
 						Finish date: @sites[i].FinishDate
 					</div>
-					<a asp-controller="ConstructionSite" asp-action="Site" asp-route-id="@sites[i].Id" class="btn btn-outline-primary" type="button">View Report</a>
+					<a asp-controller="ConstructionSite" asp-action="Site" asp-route-id="@sites[i].Id" asp-route-information="@sites[i].GetInformation()" class="btn btn-outline-primary" type="button">View Report</a>
 				</div>
 			</div>
 		</div>
