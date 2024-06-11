@@ -1,5 +1,6 @@
 
 using ConstructionSiteReportingSystem.ModelBinders;
+using Microsoft.AspNetCore.Mvc;
 
 namespace ConstructionSiteReportingSystem
 {
@@ -16,7 +17,8 @@ namespace ConstructionSiteReportingSystem
 			{
 				options.ModelBinderProviders.Insert(0, new DecimalModelBinderProvider());
 				options.ModelBinderProviders.Insert(1, new DoubleModelBinderProvider());
-			});
+                options.Filters.Add<AutoValidateAntiforgeryTokenAttribute>();
+            });
 
             builder.Services.AddApplicationServices();
 
@@ -42,10 +44,17 @@ namespace ConstructionSiteReportingSystem
             app.UseAuthentication();
             app.UseAuthorization();
 
-            app.MapControllerRoute(
-                name: "default",
-                pattern: "{controller=Home}/{action=Index}/{id?}");
-            app.MapRazorPages();
+            app.UseEndpoints(endpoints =>
+            {
+                endpoints.MapControllerRoute(
+                    name: "ConstructionSite Site",
+                    pattern: "/ConstructionSite/Site/{id}/{information}",
+                    defaults: new { Controller = "ConstructionSite", Action = "Site" }
+                );
+
+                endpoints.MapDefaultControllerRoute();
+                endpoints.MapRazorPages();
+            });
 
             await app.RunAsync();
         }
