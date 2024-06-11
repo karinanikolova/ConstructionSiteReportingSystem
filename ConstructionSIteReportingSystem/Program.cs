@@ -1,4 +1,3 @@
-
 using ConstructionSiteReportingSystem.ModelBinders;
 using Microsoft.AspNetCore.Mvc;
 
