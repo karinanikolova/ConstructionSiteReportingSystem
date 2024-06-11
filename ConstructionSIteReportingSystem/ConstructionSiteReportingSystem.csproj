@@ -25,4 +25,8 @@
     <ProjectReference Include="..\ConstructionSiteReportingSystem.Infrastructure\ConstructionSiteReportingSystem.Infrastructure.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Models\" />
+  </ItemGroup>
+
 </Project>
