@@ -12,11 +12,13 @@ namespace ConstructionSiteReportingSystem.Controllers
 	{
 		private readonly ILogger<WorkController> _logger;
 		private readonly IWorkService _workService;
+		private readonly IConstructionSiteService _siteService;
 
-		public WorkController(ILogger<WorkController> logger, IWorkService workService)
+		public WorkController(ILogger<WorkController> logger, IWorkService workService, IConstructionSiteService siteService)
 		{
 			_logger = logger;
 			_workService = workService;
+			_siteService = siteService;
 		}
 
 		[HttpGet]
@@ -91,7 +93,9 @@ namespace ConstructionSiteReportingSystem.Controllers
 
 			var siteId = await _workService.CreateWorkAsync(workModel, date, userId);
 
-			return RedirectToAction("Site", "ConstructionSite", new {id = siteId, model = new SiteQueryModel()});
+			var siteInformation = await _siteService.GetSiteInformationAsync(siteId);
+
+			return RedirectToAction("Site", "ConstructionSite", new {id = siteId, information = siteInformation, model = new SiteQueryModel()});
 		}
 
 		[HttpGet]
@@ -173,7 +177,9 @@ namespace ConstructionSiteReportingSystem.Controllers
 
 			var siteId = workModel.SiteId;
 
-			return RedirectToAction("Site", "ConstructionSite", new { id = siteId, model = new SiteQueryModel() });
+			var siteInformation = await _siteService.GetSiteInformationAsync(siteId);
+			
+			return RedirectToAction("Site", "ConstructionSite", new { id = siteId, information = siteInformation, model = new SiteQueryModel() });
 		}
 
 		[HttpGet]
@@ -211,7 +217,9 @@ namespace ConstructionSiteReportingSystem.Controllers
 
 			var siteId = workModel.SiteId;
 
-			return RedirectToAction("Site", "ConstructionSite", new { id = siteId, model = new SiteQueryModel() });
+			var siteInformation = await _siteService.GetSiteInformationAsync(siteId);
+
+			return RedirectToAction("Site", "ConstructionSite", new { id = siteId, information = siteInformation, model = new SiteQueryModel() });
 		}
 	}
 }
