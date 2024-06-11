@@ -1,6 +1,8 @@
-﻿namespace ConstructionSiteReportingSystem.Core.Models.Site
+﻿using ConstructionSiteReportingSystem.Core.Extensions.Contracts;
+
+namespace ConstructionSiteReportingSystem.Core.Models.Site
 {
-    public class SiteInfoViewModel
+    public class SiteInfoViewModel : ISiteModel
     {
         public int Id { get; set; }
 
