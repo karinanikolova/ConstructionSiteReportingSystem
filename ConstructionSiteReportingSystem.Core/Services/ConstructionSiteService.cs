@@ -1,4 +1,5 @@
 ﻿using ConstructionSiteReportingSystem.Core.Common;
+using ConstructionSiteReportingSystem.Core.Extensions;
 using ConstructionSiteReportingSystem.Core.Models.Site;
 using ConstructionSiteReportingSystem.Core.Services.Contracts;
 using ConstructionSiteReportingSystem.Infrastructure.Data.Models;
@@ -109,6 +110,22 @@ namespace ConstructionSiteReportingSystem.Core.Services
 				.Select(s => s.Name)
 				.Distinct()
 				.ToListAsync();
+		}
+
+		public async Task<string> GetSiteInformationAsync(int siteId)
+		{
+			var site = await _repository
+				.AllReadOnly<Site>()
+				.Where(s => s.Id == siteId)
+				.Select(s => new SiteInfoViewModel()
+				{
+					Id = s.Id,
+					Name = s.Name,
+					FinishDate = DateTimeConverter.ConvertDateToString(s.FinishDate)
+				})
+				.FirstAsync();
+
+			return site.GetInformation();
 		}
 	}
 }
