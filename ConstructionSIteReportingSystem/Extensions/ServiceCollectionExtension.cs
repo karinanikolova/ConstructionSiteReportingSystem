@@ -60,7 +60,12 @@ namespace Microsoft.Extensions.DependencyInjection
             services
                 .AddDefaultIdentity<IdentityUser>(options =>
                 {
+                    options.User.RequireUniqueEmail = true;
                     options.SignIn.RequireConfirmedAccount = false;
+                    options.Password.RequireNonAlphanumeric = true;
+                    options.Password.RequireDigit = true;
+                    options.Password.RequireLowercase = true;
+                    options.Password.RequireUppercase = true;
                 })
                 .AddEntityFrameworkStores<ConstructionSiteDbContext>();
 
