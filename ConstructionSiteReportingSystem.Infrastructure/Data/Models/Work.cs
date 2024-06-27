@@ -1,13 +1,12 @@
-﻿using Microsoft.AspNetCore.Identity;
+﻿using ConstructionSiteReportingSystem.Infrastructure.Data.Utilities;
 using Microsoft.EntityFrameworkCore;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using ConstructionSiteReportingSystem.Infrastructure.Data.Utilities;
 using static ConstructionSiteReportingSystem.Infrastructure.Constants.DataConstants.Work;
 
 namespace ConstructionSiteReportingSystem.Infrastructure.Data.Models
 {
-    [Comment("Construction and assembly work")]
+	[Comment("Construction and assembly work")]
     public class Work : SoftDelete
     {
         [Key]
@@ -76,6 +75,6 @@ namespace ConstructionSiteReportingSystem.Infrastructure.Data.Models
         public string CreatorId { get; set; } = string.Empty;
 
         [ForeignKey(nameof(CreatorId))]
-        public IdentityUser Creator { get; set; } = null!;
+        public ApplicationUser Creator { get; set; } = null!;
 	}
 }
