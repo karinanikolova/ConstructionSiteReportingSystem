@@ -7,7 +7,7 @@ using Task = ConstructionSiteReportingSystem.Infrastructure.Data.Models.Task;
 
 namespace ConstructionSiteReportingSystem.Infrastructure.Data
 {
-    public class ConstructionSiteDbContext : IdentityDbContext
+    public class ConstructionSiteDbContext : IdentityDbContext<ApplicationUser>
     {
         public ConstructionSiteDbContext(DbContextOptions<ConstructionSiteDbContext> options)
             : base(options)
