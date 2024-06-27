@@ -52,5 +52,17 @@
             public const int NameMinLength = 3;
             public const int NameMaxLength = 100;
         }
+
+        public static class ApplicationUser
+        {
+            public const int FirstNameMinLength = 1;
+            public const int FirstNameMaxLength = 50;
+
+			public const int MiddleNameMinLength = 1;
+			public const int MiddleNameMaxLength = 50;
+
+			public const int LastNameMinLength = 1;
+			public const int LastNameMaxLength = 50;
+		}
     }
 }
