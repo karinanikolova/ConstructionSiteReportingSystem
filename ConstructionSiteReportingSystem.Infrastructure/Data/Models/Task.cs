@@ -1,14 +1,13 @@
-﻿using Microsoft.AspNetCore.Identity;
+﻿using ConstructionSiteReportingSystem.Infrastructure.Data.Utilities;
+using ConstructionSiteReportingSystem.Infrastructure.Enums;
 using Microsoft.EntityFrameworkCore;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using ConstructionSiteReportingSystem.Infrastructure.Enums;
-using ConstructionSiteReportingSystem.Infrastructure.Data.Utilities;
 using static ConstructionSiteReportingSystem.Infrastructure.Constants.DataConstants.Task;
 
 namespace ConstructionSiteReportingSystem.Infrastructure.Data.Models
 {
-    [Comment("User tasks")]
+	[Comment("User tasks")]
     public class Task : SoftDelete
     {
         [Key]
@@ -34,7 +33,7 @@ namespace ConstructionSiteReportingSystem.Infrastructure.Data.Models
         public string CreatorId { get; set; } = null!;
 
         [ForeignKey(nameof(CreatorId))]
-        public IdentityUser Creator { get; set; } = null!;
+        public ApplicationUser Creator { get; set; } = null!;
 
         [Required]
         [Comment("Task's current status")]
