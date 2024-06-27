@@ -1,17 +1,17 @@
 ﻿using ConstructionSiteReportingSystem.Core.Services;
 using ConstructionSiteReportingSystem.Core.Services.Contracts;
 using ConstructionSiteReportingSystem.Infrastructure.Data;
+using ConstructionSiteReportingSystem.Infrastructure.Data.Models;
 using ConstructionSiteReportingSystem.Infrastructure.Data.Utilities;
 using ConstructionSiteReportingSystem.Infrastructure.Data.Utilities.Contracts;
-using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
 namespace Microsoft.Extensions.DependencyInjection
 {
-    /// <summary>
-    /// Providing methods to register services in order to declutter the Program.cs file.
-    /// </summary>
-    public static class ServiceCollectionExtension
+	/// <summary>
+	/// Providing methods to register services in order to declutter the Program.cs file.
+	/// </summary>
+	public static class ServiceCollectionExtension
     {
         /// <summary>
         /// Adds services holding business logic for the application to the specified IServiceCollection.
@@ -58,7 +58,7 @@ namespace Microsoft.Extensions.DependencyInjection
         public static IServiceCollection AddApplicationIdentity(this IServiceCollection services, IConfiguration configuration)
         {
             services
-                .AddDefaultIdentity<IdentityUser>(options =>
+                .AddDefaultIdentity<ApplicationUser>(options =>
                 {
                     options.User.RequireUniqueEmail = true;
                     options.SignIn.RequireConfirmedAccount = false;
