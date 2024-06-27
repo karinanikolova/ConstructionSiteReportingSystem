@@ -1,4 +1,5 @@
-﻿using ConstructionSiteReportingSystem.Infrastructure.Enums;
+﻿using ConstructionSiteReportingSystem.Infrastructure.Data.Models;
+using ConstructionSiteReportingSystem.Infrastructure.Enums;
 using Microsoft.AspNetCore.Identity;
 using Contractor = ConstructionSiteReportingSystem.Infrastructure.Data.Models.Contractor;
 using Site = ConstructionSiteReportingSystem.Infrastructure.Data.Models.Site;
@@ -12,7 +13,7 @@ namespace ConstructionSiteReportingSystem.Infrastructure.Data.Configuration
 {
 	internal class DataSeed
     {
-        public List<IdentityUser> Users { get; set; }
+        public List<ApplicationUser> Users { get; set; }
 
         public IEnumerable<Contractor> Contractors { get; set; }
 
@@ -42,29 +43,35 @@ namespace ConstructionSiteReportingSystem.Infrastructure.Data.Configuration
 
         private void SeedUsers()
         {
-            var hasher = new PasswordHasher<IdentityUser>();
-            Users = new List<IdentityUser>();
+            var hasher = new PasswordHasher<ApplicationUser>();
+            Users = new List<ApplicationUser>();
 
-            var testUser = new IdentityUser()
+            var testUser = new ApplicationUser()
             {
                 Id = "32f9a0f0-4d62-4573-96e3-fbb7ad7f321f",
                 UserName = "test@mail.com",
                 NormalizedUserName = "TEST@MAIL.COM",
                 Email = "test@mail.com",
-                NormalizedEmail = "TEST@MAIL.COM"
+                NormalizedEmail = "TEST@MAIL.COM",
+                FirstName = "Konstantin",
+                MiddleName = "Kirilov",
+                LastName = "Georgiev"
             };
 
             testUser.PasswordHash = hasher.HashPassword(testUser, "Test123!");
             Users.Add(testUser);
 
-            var guestUser = new IdentityUser()
+            var guestUser = new ApplicationUser()
             {
                 Id = "a615552b-5981-4730-be32-12c087492aef",
                 UserName = "guest@mail.com",
                 NormalizedUserName = "GUEST@MAIL.COM",
                 Email = "guest@mail.com",
-                NormalizedEmail = "GUEST@MAIL.COM"
-            };
+                NormalizedEmail = "GUEST@MAIL.COM",
+				FirstName = "Ivan",
+				MiddleName = "Metodiev",
+				LastName = "Petrov"
+			};
 
             guestUser.PasswordHash = hasher.HashPassword(guestUser, "Guest123!");
             Users.Add(guestUser);
