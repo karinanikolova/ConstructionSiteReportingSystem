@@ -43,6 +43,7 @@ namespace ConstructionSiteReportingSystem.Infrastructure.Data
         {
             // Applying configurations for each entity, including query filters, defining table keys, relations and DeleteBehaviors
             builder.ApplyConfiguration(new UserConfiguration());
+            builder.ApplyConfiguration(new UserClaimsConfiguration());
             builder.ApplyConfiguration(new ContractorConfiguration());
             builder.ApplyConfiguration(new SiteConfiguration());
             builder.ApplyConfiguration(new StageConfiguration());
