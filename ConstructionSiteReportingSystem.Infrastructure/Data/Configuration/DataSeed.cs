@@ -8,12 +8,15 @@ using Task = ConstructionSiteReportingSystem.Infrastructure.Data.Models.Task;
 using Unit = ConstructionSiteReportingSystem.Infrastructure.Data.Models.Unit;
 using Work = ConstructionSiteReportingSystem.Infrastructure.Data.Models.Work;
 using WorkType = ConstructionSiteReportingSystem.Infrastructure.Data.Models.WorkType;
+using static ConstructionSiteReportingSystem.Infrastructure.Constants.CustomClaims;
 
 namespace ConstructionSiteReportingSystem.Infrastructure.Data.Configuration
 {
 	internal class DataSeed
     {
         public List<ApplicationUser> Users { get; set; }
+
+        public List<IdentityUserClaim<string>> UserClaims { get; set; }
 
         public IEnumerable<Contractor> Contractors { get; set; }
 
@@ -45,6 +48,7 @@ namespace ConstructionSiteReportingSystem.Infrastructure.Data.Configuration
         {
             var hasher = new PasswordHasher<ApplicationUser>();
             Users = new List<ApplicationUser>();
+            UserClaims = new List<IdentityUserClaim<string>>();
 
             var testUser = new ApplicationUser()
             {
@@ -58,8 +62,17 @@ namespace ConstructionSiteReportingSystem.Infrastructure.Data.Configuration
                 LastName = "Georgiev"
             };
 
+            var testUserClaim = new IdentityUserClaim<string>()
+            {
+                Id = 1,
+                UserId = "32f9a0f0-4d62-4573-96e3-fbb7ad7f321f",
+                ClaimType = UserFirstLastNameClaim,
+                ClaimValue = "Konstantin Kirilov",
+            };
+
             testUser.PasswordHash = hasher.HashPassword(testUser, "Test123!");
             Users.Add(testUser);
+            UserClaims.Add(testUserClaim);
 
             var guestUser = new ApplicationUser()
             {
@@ -73,8 +86,41 @@ namespace ConstructionSiteReportingSystem.Infrastructure.Data.Configuration
 				LastName = "Petrov"
 			};
 
+            var guestUserClaim = new IdentityUserClaim<string>()
+            {
+                Id = 2,
+                UserId = "a615552b-5981-4730-be32-12c087492aef",
+                ClaimType = UserFirstLastNameClaim,
+                ClaimValue = "Ivan Metodiev",
+            };
+
             guestUser.PasswordHash = hasher.HashPassword(guestUser, "Guest123!");
             Users.Add(guestUser);
+            UserClaims.Add(guestUserClaim);
+
+            var adminUser = new ApplicationUser()
+            {
+                Id = "51d6e97b-9c12-4832-95e1-c0dfa1715ad9",
+                UserName = "admin@mail.com",
+                NormalizedUserName = "ADMIN@MAIL.COM",
+                Email = "admin@mail.com",
+                NormalizedEmail = "ADMIN@MAIL.COM",
+                FirstName = "Anton",
+                MiddleName = "Naidenov",
+                LastName = "Kovadzhiev"
+            };
+
+            var adminUserClaim = new IdentityUserClaim<string>()
+            {
+                Id = 3,
+                UserId = "51d6e97b-9c12-4832-95e1-c0dfa1715ad9",
+                ClaimType = UserFirstLastNameClaim,
+                ClaimValue = "Anton Kovadzhiev",
+            };
+
+            adminUser.PasswordHash = hasher.HashPassword(adminUser, "Admin123!");
+            Users.Add(adminUser);
+            UserClaims.Add(adminUserClaim);
         }
 
         private void SeedContractors()
