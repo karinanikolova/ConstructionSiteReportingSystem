@@ -11,7 +11,7 @@
 	<td>
 		@Model.TotalCost
 	</td>
-	@if (User?.Identity?.Name == Model.Creator)
+	@if (User?.Identity?.Name == Model.Creator || User.IsAdmin())
 	{
 		<td>
 			<div class="btn-group" role="group" aria-label="Basic outlined example">
