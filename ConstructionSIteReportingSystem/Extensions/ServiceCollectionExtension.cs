@@ -4,6 +4,7 @@ using ConstructionSiteReportingSystem.Infrastructure.Data;
 using ConstructionSiteReportingSystem.Infrastructure.Data.Models;
 using ConstructionSiteReportingSystem.Infrastructure.Data.Utilities;
 using ConstructionSiteReportingSystem.Infrastructure.Data.Utilities.Contracts;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
 namespace Microsoft.Extensions.DependencyInjection
@@ -67,6 +68,7 @@ namespace Microsoft.Extensions.DependencyInjection
                     options.Password.RequireLowercase = true;
                     options.Password.RequireUppercase = true;
                 })
+                .AddRoles<IdentityRole>()
                 .AddEntityFrameworkStores<ConstructionSiteDbContext>();
 
             return services;
