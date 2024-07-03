@@ -55,6 +55,8 @@ namespace ConstructionSiteReportingSystem
                 endpoints.MapRazorPages();
             });
 
+            await app.CreateAdminRoleAsync();
+
             await app.RunAsync();
         }
     }
