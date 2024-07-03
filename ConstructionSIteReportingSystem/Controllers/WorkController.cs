@@ -108,7 +108,7 @@ namespace ConstructionSiteReportingSystem.Controllers
 
 			var work = await _workService.GetWorkEditFormModelByIdAsync(id);
 
-			if (User.Id() != work!.CreatorId)
+			if (User.Id() != work!.CreatorId && User.IsAdmin() == false)
 			{
 				return Unauthorized();
 			}
@@ -124,7 +124,7 @@ namespace ConstructionSiteReportingSystem.Controllers
 				return BadRequest();
 			}
 
-			if (User.Id() != workModel.CreatorId)
+			if (User.Id() != workModel.CreatorId && User.IsAdmin() == false)
 			{
 				return Unauthorized();
 			}
@@ -192,7 +192,7 @@ namespace ConstructionSiteReportingSystem.Controllers
 
 			var work = await _workService.GetWorkServiceModelByIdAsync(id);
 
-			if (User.Id() != work!.CreatorId)
+			if (User.Id() != work!.CreatorId && User.IsAdmin() == false)
 			{
 				return Unauthorized();
 			}
@@ -208,7 +208,7 @@ namespace ConstructionSiteReportingSystem.Controllers
 				return BadRequest();
 			}
 
-			if (User.Id() != workModel.CreatorId)
+			if (User.Id() != workModel.CreatorId && User.IsAdmin() == false)
 			{
 				return Unauthorized();
 			}
