@@ -20,10 +20,12 @@ namespace ConstructionSiteReportingSystem.Controllers
 		public async Task<IActionResult> All([FromQuery] AllTasksQueryModel model)
         {
 			var userId = User.Id();
+			bool isAdmin = User.IsAdmin();
 
 			var tasks = await _taskService.GetAllUserTasksAsync(
 				userId,
-				model.Status,
+				isAdmin,
+                model.Status,
 				model.SearchTerm,
 				model.Sorting,
 				model.CurrentPage,
@@ -81,7 +83,7 @@ namespace ConstructionSiteReportingSystem.Controllers
 
 			var task = await _taskService.GetTaskEditFormModelByIdAsync(id);
 
-			if (User.Id() != task!.CreatorId)
+			if (User.Id() != task!.CreatorId && User.IsAdmin() == false)
 			{
 				return Unauthorized();
 			}
@@ -97,7 +99,7 @@ namespace ConstructionSiteReportingSystem.Controllers
 				return BadRequest();
 			}
 
-			if (User.Id() != taskModel!.CreatorId)
+			if (User.Id() != taskModel!.CreatorId && User.IsAdmin() == false)
 			{
 				return Unauthorized();
 			}
@@ -129,7 +131,7 @@ namespace ConstructionSiteReportingSystem.Controllers
 
 			var task = await _taskService.GetTaskViewModelByIdAsync(id);
 
-			if (User.Id() != task!.Creator)
+			if (User.Id() != task!.Creator && User.IsAdmin() == false)
 			{
 				return Unauthorized();
 			}
@@ -145,7 +147,7 @@ namespace ConstructionSiteReportingSystem.Controllers
 				return BadRequest();
 			}
 
-			if (User.Id() != taskModel.Creator)
+			if (User.Id() != taskModel.Creator && User.IsAdmin() == false)
 			{
 				return Unauthorized();
 			}
