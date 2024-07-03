@@ -16,9 +16,15 @@ namespace ConstructionSiteReportingSystem.Core.Services
 			_repository = repository;
 		}
 
-		public async Task<TaskQueryServiceModel> GetAllUserTasksAsync(string userId, string? searchStatus = null, string? searchTerm = null, DateSorting dateSorting = DateSorting.Newest, int currentPage = 1, int tasksPerPage = 1)
+		public async Task<TaskQueryServiceModel> GetAllUserTasksAsync(string userId, bool isAdmin, string? searchStatus = null, string? searchTerm = null, DateSorting dateSorting = DateSorting.Newest, int currentPage = 1, int tasksPerPage = 1)
 		{
-			var tasks = _repository.AllReadOnly<Task>().Where(t => t.CreatorId == userId);
+			var tasks = _repository.AllReadOnly<Task>();
+
+			if (!isAdmin)
+			{
+				tasks = tasks.Where(t => t.CreatorId == userId);
+            }
+
 			var statuses = GetAllStatusesAsString();
 
 			if (!string.IsNullOrWhiteSpace(searchStatus) && statuses.Any(s => s == searchStatus))
