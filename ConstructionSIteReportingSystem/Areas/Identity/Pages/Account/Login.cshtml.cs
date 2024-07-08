@@ -9,6 +9,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using System.ComponentModel.DataAnnotations;
 using Task = System.Threading.Tasks.Task;
+using static ConstructionSiteReportingSystem.Core.Constants.AdministratorConstants;
 
 namespace ConstructionSiteReportingSystem.Areas.Identity.Pages.Account
 {
@@ -113,7 +114,14 @@ namespace ConstructionSiteReportingSystem.Areas.Identity.Pages.Account
 
                 if (result.Succeeded)
                 {
+                    var user = await _userManager.FindByEmailAsync(Input.Email);
+
                     _logger.LogInformation("User logged in.");
+
+                    if (await _userManager.IsInRoleAsync(user, AdminRole))
+                    {
+                        return RedirectToAction("Index", "Home", new { area = AdminAreaName });
+                    }
 
                     return LocalRedirect(returnUrl);
                 }
