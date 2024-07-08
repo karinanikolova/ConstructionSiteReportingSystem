@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace ConstructionSiteReportingSystem
 {
-	public class Program
+    public class Program
     {
         public static async Task Main(string[] args)
         {
@@ -13,9 +13,9 @@ namespace ConstructionSiteReportingSystem
             builder.Services.AddApplicationIdentity(builder.Configuration);
 
             builder.Services.AddControllersWithViews(options =>
-			{
-				options.ModelBinderProviders.Insert(0, new DecimalModelBinderProvider());
-				options.ModelBinderProviders.Insert(1, new DoubleModelBinderProvider());
+            {
+                options.ModelBinderProviders.Insert(0, new DecimalModelBinderProvider());
+                options.ModelBinderProviders.Insert(1, new DoubleModelBinderProvider());
                 options.Filters.Add<AutoValidateAntiforgeryTokenAttribute>();
             });
 
@@ -49,6 +49,11 @@ namespace ConstructionSiteReportingSystem
                     name: "ConstructionSite Site",
                     pattern: "/ConstructionSite/Site/{id}/{information}",
                     defaults: new { Controller = "ConstructionSite", Action = "Site" }
+                );
+
+                endpoints.MapControllerRoute(
+                    name: "areas",
+                    pattern: "{area:exists}/{controller=Home}/{action=Index}/{id?}"
                 );
 
                 endpoints.MapDefaultControllerRoute();
