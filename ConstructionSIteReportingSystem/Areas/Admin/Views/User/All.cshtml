@@ -1,0 +1,36 @@
+﻿@model IEnumerable<UserViewModel>
+
+@{
+	ViewData["Title"] = "All Users";
+
+	var users = Model.ToArray();
+}
+
+<div class="mb-5">
+	<h3 class="text-center">@ViewData["Title"]</h3>
+</div>
+
+<table class="table table-hover">
+	<thead>
+		<tr>
+			<th scope="col">#</th>
+			<th scope="col">First name</th>
+			<th scope="col">Middle name</th>
+			<th scope="col">Last name</th>
+			<th scope="col">Email</th>
+			<th scope="col">Status</th>
+			<th scope="col"></th>
+		</tr>
+	</thead>
+	<tbody>
+		@for (int i = 1; i <= users.Length; i++)
+		{
+			<tr>
+				<th scope="row">@i</th>
+
+				<partial name="_UserPartial" model="@users[--i]" />
+			</tr>
+			i++;
+		}
+	</tbody>
+</table>
