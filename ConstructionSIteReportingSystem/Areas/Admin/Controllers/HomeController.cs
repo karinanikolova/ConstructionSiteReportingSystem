@@ -4,12 +4,8 @@ namespace ConstructionSiteReportingSystem.Areas.Admin.Controllers
 {
     public class HomeController : AdminBaseController
     {
+        [HttpGet]
         public IActionResult Index()
-        {
-            return View();
-        }
-
-        public IActionResult ForReview()
         {
             return View();
         }
