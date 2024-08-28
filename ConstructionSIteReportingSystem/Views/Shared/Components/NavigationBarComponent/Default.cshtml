@@ -13,5 +13,12 @@
 		<li class="nav-item">
 			<a class="nav-link text-dark" asp-area="" asp-controller="Task" asp-action="AddTask">Add Task</a>
 		</li>
+
+		@if (User.IsInRole(AdminRole))
+		{
+			<li class="nav-item">
+				<a class="nav-link text-dark" asp-area="Admin" asp-controller="Home" asp-action="Index">Admin Area</a>
+			</li>
+		}
 	}
 </ul>
