@@ -1,9 +1,9 @@
-﻿using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Mvc;
+﻿using ConstructionSiteReportingSystem.Core.Models.Admin.User;
 using ConstructionSiteReportingSystem.Infrastructure.Data.Models;
-using ConstructionSiteReportingSystem.Areas.Admin.Models.User;
-using static ConstructionSiteReportingSystem.Core.Constants.AdministratorConstants;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc;
 using System.Security.Claims;
+using static ConstructionSiteReportingSystem.Core.Constants.AdministratorConstants;
 
 namespace ConstructionSiteReportingSystem.Areas.Admin.Controllers
 {
@@ -21,20 +21,19 @@ namespace ConstructionSiteReportingSystem.Areas.Admin.Controllers
 		[HttpGet]
 		public async Task<IActionResult> All()
 		{
-			var headAdmin = await _userManager.FindByEmailAsync(AdminEmail);
-			var admins = await _userManager.GetUsersInRoleAsync(AdminRole);
-			var currentUserId = User.Id();
-
 			var users = _userManager.Users
-				.Where(u => u.Email != headAdmin.Email && u.Id != currentUserId)
+				.Where(u => u.Email != AdminEmail)
 				.Select(u => new UserViewModel()
 				{
+					Id = u.Id,
 					Email = u.Email,
 					FirstName = u.FirstName,
 					MiddleName = u.LastName,
 					LastName = u.LastName
 				})
 				.ToList();
+
+			var admins = await _userManager.GetUsersInRoleAsync(AdminRole);
 
 			users.ForEach(u => u.IsAdmin = true ? admins.Any(a => a.Email == u.Email) : false);
 
