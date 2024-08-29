@@ -10,16 +10,19 @@
 <td>@Model.Email</td>
 <td>@status</td>
 <td>
-	@if (Model.IsAdmin)
+	@if (Model.Id != User.Id())
 	{
-		<form asp-controller="User" asp-action="RemoveAdmin" asp-route-email="@Model.Email">
-			<input class="btn btn-outline-primary btn-sm" type="submit" value="Remove admin" />
-		</form>
-	}
-	else
-	{
-		<form asp-controller="User" asp-action="MakeAdmin" asp-route-email="@Model.Email">
-			<input class="btn btn-outline-primary btn-sm" type="submit" value="Make admin" />
-		</form>
+		@if (Model.IsAdmin)
+		{
+			<form asp-controller="User" asp-action="RemoveAdmin" asp-route-email="@Model.Email">
+				<input class="btn btn-outline-primary btn-sm" type="submit" value="Remove admin" />
+			</form>
+		}
+		else
+		{
+			<form asp-controller="User" asp-action="MakeAdmin" asp-route-email="@Model.Email">
+				<input class="btn btn-outline-primary btn-sm" type="submit" value="Make admin" />
+			</form>
+		}
 	}
 </td>
