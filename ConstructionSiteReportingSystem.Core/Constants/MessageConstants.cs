@@ -13,5 +13,8 @@
         public const string CostPerUnitMessage = "{0} must be a positive number bigger than zero";
 
         public const string TaskFieldLengthMessage = "Field {0} must contain between {2} and {1} characters";
-	}
+
+        public const string UserInfoMessage = "UserInfoMessage";
+
+    }
 }
