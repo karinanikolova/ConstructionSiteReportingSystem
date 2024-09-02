@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using System.Security.Claims;
 using static ConstructionSiteReportingSystem.Core.Constants.AdministratorConstants;
+using static ConstructionSiteReportingSystem.Core.Constants.MessageConstants;
 
 namespace ConstructionSiteReportingSystem.Areas.Admin.Controllers
 {
@@ -57,6 +58,8 @@ namespace ConstructionSiteReportingSystem.Areas.Admin.Controllers
 
 			await _userManager.AddToRoleAsync(newAdminUser, AdminRole);
 
+			TempData[UserInfoMessage] = $"You have successfully made {newAdminUser.FirstName} {newAdminUser.MiddleName} {newAdminUser.LastName} an administrator.";
+
 			return RedirectToAction(nameof(All));
 		}
 
@@ -77,7 +80,9 @@ namespace ConstructionSiteReportingSystem.Areas.Admin.Controllers
 
 			await _userManager.RemoveFromRoleAsync(adminUser, AdminRole);
 
-			return RedirectToAction(nameof(All));
+            TempData[UserInfoMessage] = $"You have successfully removed {adminUser.FirstName} {adminUser.MiddleName} {adminUser.LastName} from the administrator list.";
+
+            return RedirectToAction(nameof(All));
 		}
 	}
 }
