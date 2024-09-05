@@ -1,9 +1,32 @@
-﻿@{
+﻿@model ForReviewViewModel
+
+@{
 	ViewData["Title"] = "Welcome to the administrator area";
 	ViewData["SecondTitle"] = "Pending for review";
+}
+
+@{
+	string buttonDisabledForContractors = Model.AreThereContractorsForReview ? string.Empty : "disabled";
+	string disabledAreaForContractors = Model.AreThereContractorsForReview ? "false" : "true";
+
+	string buttonDisabledForStages = Model.AreThereStagesForReview ? string.Empty : "disabled";
+	string disabledAreaForStages = Model.AreThereStagesForReview ? "false" : "true";
+
+	string buttonDisabledForUnits = Model.AreThereUnitsForReview ? string.Empty : "disabled";
+	string disabledAreaForUnits = Model.AreThereUnitsForReview ? "false" : "true";
+
+	string buttonDisabledForWorkTypes = Model.AreThereWorkTypesForReview ? string.Empty : "disabled";
+	string disabledAreaForWorkTypes = Model.AreThereWorkTypesForReview ? "false" : "true";
 }
 
 <div class="mb-5">
 	<h3 class="text-center">@ViewData["Title"]</h3>
 	<h5 class="text-center">@ViewData["SecondTitle"]</h5>
+</div>
+
+<div class="list-group">
+	<a asp-controller="ForReview" asp-action="ApproveContractors" class="list-group-item list-group-item-action @buttonDisabledForContractors" aria-disabled="@disabledAreaForContractors">Contractor Suggestions For Review</a>
+	<a asp-controller="ForReview" asp-action="ApproveStages" class="list-group-item list-group-item-action @buttonDisabledForStages" aria-disabled="@disabledAreaForStages">Stage Suggestions For Review</a>
+	<a asp-controller="ForReview" asp-action="ApproveUnits" class="list-group-item list-group-item-action @buttonDisabledForUnits" ria-disabled="@disabledAreaForUnits">Unit Suggestions For Review</a>
+	<a asp-controller="ForReview" asp-action="ApproveWorkTypes" class="list-group-item list-group-item-action @buttonDisabledForWorkTypes" ria-disabled="@disabledAreaForWorkTypes">Work Type Suggestions For Review</a>
 </div>
