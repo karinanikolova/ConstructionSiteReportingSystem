@@ -7,6 +7,17 @@
 		<li class="nav-item">
 			<a class="nav-link text-dark" asp-area="" asp-controller="Work" asp-action="AddWork">Add Work</a>
 		</li>
+		<li class="nav-item dropdown">
+			<a class="nav-link text-dark dropdown-toggle" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+				Suggest
+			</a>
+			<ul class="dropdown-menu">
+				<li><a class="dropdown-item" asp-area="" asp-controller="Suggest" asp-action="Contractor">Contractor</a></li>
+				<li><a class="dropdown-item" asp-area="" asp-controller="Suggest" asp-action="Stage">Stage</a></li>
+				<li><a class="dropdown-item" asp-area="" asp-controller="Suggest" asp-action="Unit">Unit</a></li>
+				<li><a class="dropdown-item" asp-area="" asp-controller="Suggest" asp-action="WorkType">Work Type</a></li>
+			</ul>
+		</li>
 		<li class="nav-item">
 			<a class="nav-link text-dark" asp-area="" asp-controller="Task" asp-action="All">Tasks</a>
 		</li>
