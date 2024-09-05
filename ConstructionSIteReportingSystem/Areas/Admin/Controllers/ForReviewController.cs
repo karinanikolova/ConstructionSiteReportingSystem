@@ -1,5 +1,4 @@
-﻿using ConstructionSiteReportingSystem.Core.Models.Work;
-using ConstructionSiteReportingSystem.Core.Services.Contracts;
+﻿using ConstructionSiteReportingSystem.Core.Services.Contracts;
 using Microsoft.AspNetCore.Mvc;
 
 namespace ConstructionSiteReportingSystem.Areas.Admin.Controllers
@@ -20,7 +19,7 @@ namespace ConstructionSiteReportingSystem.Areas.Admin.Controllers
 		{
 			var contractorModels = await _forReviewService.GetContractorsForReviewAsync();
 
-			if (contractorModels == null)
+			if (!contractorModels.Any())
 			{
 				return BadRequest();
 			}
