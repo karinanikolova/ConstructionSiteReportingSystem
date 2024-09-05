@@ -17,6 +17,10 @@ namespace ConstructionSiteReportingSystem.Infrastructure.Data.Models
         [Comment("Construction and assembly work type name")]
         public string Name { get; set; } = string.Empty;
 
-        public ICollection<Work> Works { get; set; } = new List<Work>();
+		[Required]
+		[Comment("Is construction and assembly work type approved by the administrator")]
+		public bool IsApproved { get; set; }
+
+		public ICollection<Work> Works { get; set; } = new List<Work>();
     }
 }
