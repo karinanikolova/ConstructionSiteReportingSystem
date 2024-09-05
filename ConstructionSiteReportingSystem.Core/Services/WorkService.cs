@@ -31,6 +31,7 @@ namespace ConstructionSiteReportingSystem.Core.Services
 		public async Task<IEnumerable<ContractorServiceModel>> GetAllContractorsAsync()
 		{
 			return await _repository.AllReadOnly<Contractor>()
+				.Where(c => c.IsApproved == true)
 				.Select(c => new ContractorServiceModel()
 				{ 
 					Id = c.Id,
@@ -42,6 +43,7 @@ namespace ConstructionSiteReportingSystem.Core.Services
 		public async Task<IEnumerable<StageServiceModel>> GetAllStagesAsync()
 		{
 			return await _repository.AllReadOnly<Stage>()
+				.Where(c => c.IsApproved == true)
 				.Select(s => new StageServiceModel()
 				{
 					Id = s.Id,
@@ -53,6 +55,7 @@ namespace ConstructionSiteReportingSystem.Core.Services
 		public async Task<IEnumerable<UnitServiceModel>> GetAllUnitsAsync()
 		{
 			return await _repository.AllReadOnly<Unit>()
+				.Where(c => c.IsApproved == true)
 				.Select(u => new UnitServiceModel()
 				{
 					Id = u.Id,
@@ -64,6 +67,7 @@ namespace ConstructionSiteReportingSystem.Core.Services
 		public async Task<IEnumerable<WorkTypeServiceModel>> GetAllWorkTypesAsync()
 		{
 			return await _repository.AllReadOnly<WorkType>()
+				.Where(c => c.IsApproved == true)
 				.Select(wt => new WorkTypeServiceModel()
 				{
 					Id = wt.Id,
@@ -81,24 +85,28 @@ namespace ConstructionSiteReportingSystem.Core.Services
 		public async Task<bool> DoesWorkTypeExistAsync(int workTypeId)
 		{
 			return await _repository.AllReadOnly<WorkType>()
+				.Where(c => c.IsApproved == true)
 				.AnyAsync(wt => wt.Id == workTypeId);
 		}
 
 		public async Task<bool> DoesStageExistAsync(int stageId)
 		{
 			return await _repository.AllReadOnly<Stage>()
+				.Where(c => c.IsApproved == true)
 				.AnyAsync(s => s.Id == stageId);
 		}
 
 		public async Task<bool> DoesContractorExistAsync(int contractorId)
 		{
 			return await _repository.AllReadOnly<Contractor>()
+				.Where(c => c.IsApproved == true)
 				.AnyAsync(c => c.Id == contractorId);
 		}
 
 		public async Task<bool> DoesUnitExistAsync(int unitId)
 		{
 			return await _repository.AllReadOnly<Unit>()
+				.Where(c => c.IsApproved == true)
 				.AnyAsync(u => u.Id == unitId);
 		}
 
