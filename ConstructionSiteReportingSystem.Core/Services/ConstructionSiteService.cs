@@ -12,7 +12,7 @@ using Stage = ConstructionSiteReportingSystem.Infrastructure.Data.Models.Stage;
 
 namespace ConstructionSiteReportingSystem.Core.Services
 {
-    public class ConstructionSiteService : IConstructionSiteService
+	public class ConstructionSiteService : IConstructionSiteService
 	{
 		private readonly IRepository _repository;
 
@@ -56,7 +56,7 @@ namespace ConstructionSiteReportingSystem.Core.Services
 				if (!string.IsNullOrWhiteSpace(stage) && allStages.Any(s => s == stage))
 				{
 					works = _repository.AllReadOnly<Work>()
-				.Where(w => w.SiteId == siteId && w.Stage.Name == stage);
+						.Where(w => w.SiteId == siteId && w.Stage.Name == stage);
 				}
 
 				DateTime date;
@@ -107,6 +107,7 @@ namespace ConstructionSiteReportingSystem.Core.Services
 		public async Task<IEnumerable<string>> GetAllStagesNamesAsync()
 		{
 			return await _repository.AllReadOnly<Stage>()
+				.Where(c => c.IsApproved == true)
 				.Select(s => s.Name)
 				.Distinct()
 				.ToListAsync();
