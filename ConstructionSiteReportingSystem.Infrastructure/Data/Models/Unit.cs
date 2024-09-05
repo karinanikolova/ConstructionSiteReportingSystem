@@ -17,6 +17,10 @@ namespace ConstructionSiteReportingSystem.Infrastructure.Data.Models
         [Comment("Measurement unit type")]
         public string Type { get; set; } = string.Empty;
 
-        public ICollection<Work> Works { get; set; } = new List<Work>();
+		[Required]
+		[Comment("Is measurement unit approved by the administrator")]
+		public bool IsApproved { get; set; }
+
+		public ICollection<Work> Works { get; set; } = new List<Work>();
     }
 }
