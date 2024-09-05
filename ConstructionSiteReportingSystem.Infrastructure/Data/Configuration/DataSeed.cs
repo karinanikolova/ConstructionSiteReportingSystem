@@ -130,28 +130,33 @@ namespace ConstructionSiteReportingSystem.Infrastructure.Data.Configuration
                 new Contractor()
                 {
                     Id = 1,
-                    Name = "GBS Build"
+                    Name = "GBS Build",
+                    IsApproved = true
                 },
                 new Contractor()
                 {
                     Id = 2,
-                    Name = "M Constructions"
-                },
+                    Name = "M Constructions",
+					IsApproved = true
+				},
                 new Contractor()
                 {
                     Id = 3,
-                    Name = "Quality Plumbing"
-                },
+                    Name = "Quality Plumbing",
+					IsApproved = true
+				},
                 new Contractor()
                 {
                     Id = 4,
-                    Name = "Pavement Systems"
-                },
+                    Name = "Pavement Systems",
+					IsApproved = true
+				},
                 new Contractor()
                 {
                     Id = 5,
-                    Name = "NewSteel LTD"
-                }
+                    Name = "NewSteel LTD",
+					IsApproved = true
+				}
             };
         }
 
@@ -190,28 +195,33 @@ namespace ConstructionSiteReportingSystem.Infrastructure.Data.Configuration
                 new Stage()
                 {
                     Id = 1,
-                    Name = "Sitework and foundation"
-                },
+                    Name = "Sitework and foundation",
+					IsApproved = true
+				},
                 new Stage()
                 {
                     Id = 2,
-                    Name = "Rough framing"
-                },
+                    Name = "Rough framing",
+					IsApproved = true
+				},
                 new Stage()
                 {
                     Id = 3,
-                    Name = "Exterior construction"
-                },
+                    Name = "Exterior construction",
+					IsApproved = true
+				},
                 new Stage()
                 {
                     Id = 4,
-                    Name = "Mechanical, electrical and plumbing"
-                },
+                    Name = "Mechanical, electrical and plumbing",
+					IsApproved = true
+				},
                 new Stage()
                 {
                     Id = 5,
-                    Name = "Finishes and fixtures"
-                }
+                    Name = "Finishes and fixtures",
+					IsApproved = true
+				}
             };
         }
 
@@ -222,48 +232,57 @@ namespace ConstructionSiteReportingSystem.Infrastructure.Data.Configuration
                 new Unit()
                 {
                     Id = 1,
-                    Type = "ton"
-                },
+                    Type = "ton",
+					IsApproved = true
+				},
                 new Unit()
                 {
                     Id = 2,
-                    Type = "kg"
-                },
+                    Type = "kg",
+					IsApproved = true
+				},
                 new Unit()
                 {
                     Id = 3,
-                    Type = "cu.m"
-                },
+                    Type = "cu.m",
+					IsApproved = true
+				},
                 new Unit()
                 {
                     Id = 4,
-                    Type = "sq.m"
-                },
+                    Type = "sq.m",
+					IsApproved = true
+				},
                 new Unit()
                 {
                     Id = 5,
-                    Type = "m"
-                },
+                    Type = "m",
+					IsApproved = true
+				},
                 new Unit()
                 {
                     Id = 6,
-                    Type = "piece"
-                },
+                    Type = "piece",
+					IsApproved = true
+				},
                 new Unit()
                 {
                     Id = 7,
-                    Type = "piece/m"
-                },
+                    Type = "piece/m",
+					IsApproved = true
+				},
                 new Unit()
                 {
                     Id = 8,
-                    Type = "machine shift"
-                },
+                    Type = "machine shift",
+					IsApproved = true
+				},
                 new Unit()
                 {
                     Id = 9,
-                    Type = "man hours"
-                }
+                    Type = "man hours",
+					IsApproved = true
+				}
             };
         }
 
@@ -274,43 +293,51 @@ namespace ConstructionSiteReportingSystem.Infrastructure.Data.Configuration
                 new WorkType()
                 {
                     Id = 1,
-                    Name = "PE400 SN8 pipe installation"
-                },
+                    Name = "PE400 SN8 pipe installation",
+					IsApproved = true
+				},
                 new WorkType()
                 {
                     Id = 2,
-                    Name = "Delivery,laying and compaction of crushed aggregate for road base"
-                },
+                    Name = "Delivery,laying and compaction of crushed aggregate for road base",
+					IsApproved = true
+				},
                 new WorkType()
                 {
                     Id = 3,
-                    Name = "Earthwork excavation"
-                },
+                    Name = "Earthwork excavation",
+					IsApproved = true
+				},
                 new WorkType()
                 {
                     Id = 4,
-                    Name = "Delivery, laying and compaction of asphalt concrete binder course"
-                },
+                    Name = "Delivery, laying and compaction of asphalt concrete binder course",
+					IsApproved = true
+				},
                 new WorkType()
                 {
                     Id = 5,
-                    Name = "Delivery, laying and compaction of asphalt concrete surface course"
-                },
+                    Name = "Delivery, laying and compaction of asphalt concrete surface course",
+					IsApproved = true
+				},
                 new WorkType()
                 {
                     Id = 6,
-                    Name = "Delivery and pouring concrete for foundation slab"
-                },
+                    Name = "Delivery and pouring concrete for foundation slab",
+					IsApproved = true
+				},
                 new WorkType()
                 {
                     Id = 7,
-                    Name = "Delivery and laying of reinforcement steel for foundation slab"
-                },
+                    Name = "Delivery and laying of reinforcement steel for foundation slab",
+					IsApproved = true
+				},
                 new WorkType()
                 {
                     Id = 8,
-                    Name = "Large-area formwork for concrete slab"
-                }
+                    Name = "Large-area formwork for concrete slab",
+					IsApproved = true
+				}
             };
         }
 
