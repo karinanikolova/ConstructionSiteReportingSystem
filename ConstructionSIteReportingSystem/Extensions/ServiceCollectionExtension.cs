@@ -26,6 +26,8 @@ namespace Microsoft.Extensions.DependencyInjection
             services.AddScoped<IConstructionSiteService, ConstructionSiteService>();
             services.AddScoped<IWorkService, WorkService>();
             services.AddScoped<ITaskService, TaskService>();
+			services.AddScoped<ISuggestService, SuggestService>();
+			services.AddScoped<IForReviewService, ForReviewService>();
 
 			return services;
         }
