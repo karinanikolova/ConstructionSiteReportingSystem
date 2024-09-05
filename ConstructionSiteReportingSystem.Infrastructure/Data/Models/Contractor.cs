@@ -17,6 +17,10 @@ namespace ConstructionSiteReportingSystem.Infrastructure.Data.Models
         [Comment("Construction contractor name")]
         public string Name { get; set; } = string.Empty;
 
+        [Required]
+		[Comment("Is construction contractor approved by the administrator")]
+		public bool IsApproved { get; set; }
+
         public ICollection<Work> Works { get; set; } = new List<Work>();
     }
 }
