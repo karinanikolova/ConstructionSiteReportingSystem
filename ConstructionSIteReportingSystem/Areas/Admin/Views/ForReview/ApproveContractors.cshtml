@@ -30,6 +30,7 @@
 							<input type="hidden" name="id" value="@contractor.Id" />
 							<button type="submit" class="btn btn-outline-primary">Approve</button>
 						</form>
+						<a asp-controller="ForReview" asp-action="EditContractor" asp-area="Admin" asp-route-id="@contractor.Id" class="btn btn-outline-primary" type="button">Edit</a>
 						<form asp-controller="ForReview" asp-action="RemoveContractor" asp-area="Admin" method="post">
 							<input type="hidden" name="id" value="@contractor.Id" />
 							<button type="submit" class="btn btn-outline-primary">Remove</button>
