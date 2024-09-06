@@ -5,7 +5,6 @@ using ConstructionSiteReportingSystem.Core.Services.Contracts;
 using ConstructionSiteReportingSystem.Infrastructure.Data.Models;
 using ConstructionSiteReportingSystem.Infrastructure.Data.Utilities.Contracts;
 using Microsoft.EntityFrameworkCore;
-//using static ConstructionSiteReportingSystem.Infrastructure.Constants.DataConstants;
 using Task = System.Threading.Tasks.Task;
 
 namespace ConstructionSiteReportingSystem.Core.Services
