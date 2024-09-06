@@ -1,0 +1,33 @@
+﻿@model WorkTypeAddFormModel
+
+@{
+	ViewData["Title"] = "Suggest New Work Type";
+
+	ViewData["Note"] = "Take into consideration that your suggestion will be manually reviewed by the site administrator and will only appear if approved.";
+}
+
+<h2 class="text-center">@ViewData["Title"]</h2>
+<hr />
+
+<div class="row">
+	<div class="col-sm-12 offset-lg-2 col-lg-8 offset-xl-3 col-xl-6">
+		<form method="post">
+			<div class="form-group">
+				<label asp-for="Name"></label>
+				<input asp-for="Name" class="form-control" placeholder="Enter new work type here...">
+				<span asp-validation-for="Name" class="small text-danger"></span>
+			</div>
+
+			<div class="text-center">
+				<input class="btn btn-primary mt-3" type="submit" value="Enter suggestion" />
+			</div>
+		</form>
+	</div>
+</div>
+
+<br>
+<p class="text-center">*@ViewData["Note"]</p>
+
+@section Scripts {
+	<partial name="_ValidationScriptsPartial" />
+}
