@@ -7,11 +7,11 @@ namespace ConstructionSiteReportingSystem.Core.Models.Task
 	public class TaskAddFormModel
 	{
 		[Required(ErrorMessage = RequiredFieldMessage)]
-		[StringLength(TitleMaxLength, MinimumLength = TitleMinLength, ErrorMessage = TaskFieldLengthMessage)]
+		[StringLength(TitleMaxLength, MinimumLength = TitleMinLength, ErrorMessage = FieldLengthMessage)]
 		public string Title { get; set; } = string.Empty;
 
 		[Required(ErrorMessage = RequiredFieldMessage)]
-		[StringLength(DescriptionMaxLength, MinimumLength = DescriptionMinLength, ErrorMessage = TaskFieldLengthMessage)]
+		[StringLength(DescriptionMaxLength, MinimumLength = DescriptionMinLength, ErrorMessage = FieldLengthMessage)]
 		public string Description { get; set; } = string.Empty;
 
 		[Display(Name = "Status")]
