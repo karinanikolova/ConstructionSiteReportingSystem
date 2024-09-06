@@ -7,7 +7,7 @@ namespace ConstructionSiteReportingSystem.Core.Models.Suggest
 	public class ContractorAddFormModel
 	{
 		[Required(ErrorMessage = RequiredFieldMessage)]
-		[StringLength(NameMaxLength, MinimumLength = NameMinLength, ErrorMessage = ContractorFieldLengthMessage)]
+		[StringLength(NameMaxLength, MinimumLength = NameMinLength, ErrorMessage = FieldLengthMessage)]
 		public string Name { get; set; } = string.Empty;
 	}
 }
