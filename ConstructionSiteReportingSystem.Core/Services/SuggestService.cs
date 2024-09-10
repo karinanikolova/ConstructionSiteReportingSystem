@@ -2,6 +2,7 @@
 using ConstructionSiteReportingSystem.Core.Services.Contracts;
 using ConstructionSiteReportingSystem.Infrastructure.Data.Models;
 using ConstructionSiteReportingSystem.Infrastructure.Data.Utilities.Contracts;
+using Microsoft.EntityFrameworkCore;
 using Task = System.Threading.Tasks.Task;
 
 namespace ConstructionSiteReportingSystem.Core.Services
@@ -19,7 +20,7 @@ namespace ConstructionSiteReportingSystem.Core.Services
 		{
 			var contractor = new Contractor()
 			{
-				Name = contractorModel.Name,
+				Name = contractorModel.Name.Trim(),
 				IsApproved = isUserAdmin ? true : false
 			};
 
@@ -31,7 +32,7 @@ namespace ConstructionSiteReportingSystem.Core.Services
 		{
 			var stage = new Stage()
 			{
-				Name = stageModel.Name,
+				Name = stageModel.Name.Trim(),
 				IsApproved = isUserAdmin ? true : false
 			};
 
@@ -43,7 +44,7 @@ namespace ConstructionSiteReportingSystem.Core.Services
 		{
 			var unit = new Unit()
 			{
-				Type = unitModel.Type,
+				Type = unitModel.Type.Trim(),
 				IsApproved = isUserAdmin ? true : false
 			};
 
@@ -55,12 +56,36 @@ namespace ConstructionSiteReportingSystem.Core.Services
 		{
 			var workType = new WorkType()
 			{
-				Name = workTypeModel.Name,
+				Name = workTypeModel.Name.Trim(),
 				IsApproved = isUserAdmin ? true : false
 			};
 
 			await _repository.AddAsync<WorkType>(workType);
 			await _repository.SaveChangesAsync();
+		}
+
+		public async Task<bool> DoesContractorNameExistAsync(string contractorName)
+		{
+			return await _repository.AllReadOnly<Contractor>()
+				.AnyAsync(c => c.Name == contractorName.Trim());
+		}
+
+		public async Task<bool> DoesStageNameExistAsync(string stageName)
+		{
+			return await _repository.AllReadOnly<Stage>()
+				.AnyAsync(s => s.Name == stageName.Trim());
+		}
+
+		public async Task<bool> DoesUnitTypeExistAsync(string unitType)
+		{
+			return await _repository.AllReadOnly<Unit>()
+				.AnyAsync(s => s.Type == unitType.Trim());
+		}
+
+		public async Task<bool> DoesWorkTypeNameExistAsync(string workTypeName)
+		{
+			return await _repository.AllReadOnly<WorkType>()
+				.AnyAsync(wt => wt.Name == workTypeName.Trim());
 		}
 	}
 }
