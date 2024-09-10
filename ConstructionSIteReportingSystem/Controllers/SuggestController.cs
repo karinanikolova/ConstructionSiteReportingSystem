@@ -25,6 +25,15 @@ namespace ConstructionSiteReportingSystem.Controllers
 		[HttpPost]
 		public async Task<IActionResult> Contractor(ContractorAddFormModel contractorModel)
 		{
+			if (string.IsNullOrWhiteSpace(contractorModel.Name))
+			{
+				ModelState.AddModelError(nameof(contractorModel.Name), "A contractor name cannot contain only white space characters");
+			}
+			else if (await _suggestService.DoesContractorNameExistAsync(contractorModel.Name) == true)
+			{
+				ModelState.AddModelError(nameof(contractorModel.Name), "A contractor with the given name already exists");
+			}
+
 			if (!ModelState.IsValid)
 			{
 				return View(contractorModel);
@@ -46,6 +55,15 @@ namespace ConstructionSiteReportingSystem.Controllers
 		[HttpPost]
 		public async Task<IActionResult> Stage(StageAddFormModel stageModel)
 		{
+			if (string.IsNullOrWhiteSpace(stageModel.Name))
+			{
+				ModelState.AddModelError(nameof(stageModel.Name), "A construction stage name cannot contain only white space characters");
+			}
+			else if (await _suggestService.DoesStageNameExistAsync(stageModel.Name) == true)
+			{
+				ModelState.AddModelError(nameof(stageModel.Name), "A construction stage with the given name already exists");
+			}
+
 			if (!ModelState.IsValid)
 			{
 				return View(stageModel);
@@ -67,6 +85,15 @@ namespace ConstructionSiteReportingSystem.Controllers
 		[HttpPost]
 		public async Task<IActionResult> Unit(UnitAddFormModel unitModel)
 		{
+			if (string.IsNullOrWhiteSpace(unitModel.Type))
+			{
+				ModelState.AddModelError(nameof(unitModel.Type), "A measurement unit type cannot contain only white space characters");
+			}
+			else if (await _suggestService.DoesUnitTypeExistAsync(unitModel.Type) == true)
+			{
+				ModelState.AddModelError(nameof(unitModel.Type), "A measurement unit type with the given name already exists");
+			}
+
 			if (!ModelState.IsValid)
 			{
 				return View(unitModel);
@@ -88,6 +115,15 @@ namespace ConstructionSiteReportingSystem.Controllers
 		[HttpPost]
 		public async Task<IActionResult> WorkType(WorkTypeAddFormModel workTypeModel)
 		{
+			if (string.IsNullOrWhiteSpace(workTypeModel.Name))
+			{
+				ModelState.AddModelError(nameof(workTypeModel.Name), "A construction and assembly work type name cannot contain only white space characters");
+			}
+			else if (await _suggestService.DoesWorkTypeNameExistAsync(workTypeModel.Name) == true)
+			{
+				ModelState.AddModelError(nameof(workTypeModel.Name), "A construction and assembly work type with the given name already exists");
+			}
+
 			if (!ModelState.IsValid)
 			{
 				return View(workTypeModel);
