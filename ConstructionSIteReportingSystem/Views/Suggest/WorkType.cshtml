@@ -1,7 +1,7 @@
 ﻿@model WorkTypeAddFormModel
 
 @{
-	ViewData["Title"] = "Suggest New Work Type";
+	ViewData["Title"] = "Suggest New Construction and Assembly Work Type";
 
 	ViewData["Note"] = "Take into consideration that your suggestion will be manually reviewed by the site administrator and will only appear if approved.";
 }
@@ -14,7 +14,7 @@
 		<form method="post">
 			<div class="form-group">
 				<label asp-for="Name"></label>
-				<input asp-for="Name" class="form-control" placeholder="Enter new work type here...">
+				<input asp-for="Name" class="form-control" placeholder="Enter new construction and assembly work type here...">
 				<span asp-validation-for="Name" class="small text-danger"></span>
 			</div>
 
