@@ -27,7 +27,9 @@ namespace Microsoft.Extensions.DependencyInjection
             services.AddScoped<IWorkService, WorkService>();
             services.AddScoped<ITaskService, TaskService>();
 			services.AddScoped<ISuggestService, SuggestService>();
-			services.AddScoped<IForReviewService, ForReviewService>();
+			services.AddScoped<IContractorService, ContractorService>();
+			services.AddScoped<IStageService, StageService>();
+			services.AddScoped<IUnitService, UnitService>();
 
 			return services;
         }
