@@ -1,23 +1,24 @@
-﻿using ConstructionSiteReportingSystem.Core.Services.Contracts;
+﻿using ConstructionSiteReportingSystem.Core.Services;
+using ConstructionSiteReportingSystem.Core.Services.Contracts;
 using Microsoft.AspNetCore.Mvc;
 
 namespace ConstructionSiteReportingSystem.Areas.Admin.Controllers
 {
 	public class HomeController : AdminBaseController
     {
-		private readonly ILogger<ForReviewController> _logger;
-		private readonly IForReviewService _forReviewService;
+		private readonly ILogger<ContractorController> _logger;
+		private readonly IHomeService _homeService;
 
-        public HomeController(ILogger<ForReviewController> logger, IForReviewService forReviewService)
+        public HomeController(ILogger<ContractorController> logger, IHomeService homeService)
         {
 			_logger = logger;
-			_forReviewService = forReviewService;
+			_homeService = homeService;
 		}
 
         [HttpGet]
-        public async Task<IActionResult> Index()
-        {
-            var forReviewViewModel = await _forReviewService.GetForReviewViewModelAsync();
+		public async Task<IActionResult> Index()
+		{
+            var forReviewViewModel = await _homeService.GetForReviewViewModelAsync();
 
             return View(forReviewViewModel);
         }
