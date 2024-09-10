@@ -6,10 +6,18 @@ namespace ConstructionSiteReportingSystem.Core.Services.Contracts
     {
         Task CreateContractorAsync(ContractorAddFormModel contractorModel, bool isUserAdmin);
 
+        Task<bool> DoesContractorNameExistAsync(string contractorName);
+
         Task CreateStageAsync(StageAddFormModel stageModel, bool isUserAdmin);
 
-        Task CreateUnitAsync(UnitAddFormModel unitModel, bool isUserAdmin);
+		Task<bool> DoesStageNameExistAsync(string stageName);
 
-        Task CreateWorkTypeAsync(WorkTypeAddFormModel workTypeModel, bool isUserAdmin);
+		Task CreateUnitAsync(UnitAddFormModel unitModel, bool isUserAdmin);
+
+		Task<bool> DoesUnitTypeExistAsync(string unitType);
+
+		Task CreateWorkTypeAsync(WorkTypeAddFormModel workTypeModel, bool isUserAdmin);
+
+		Task<bool> DoesWorkTypeNameExistAsync(string workTypeName);
 	}
 }
