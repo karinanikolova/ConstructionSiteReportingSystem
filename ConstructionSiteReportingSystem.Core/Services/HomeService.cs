@@ -1,4 +1,5 @@
-﻿using ConstructionSiteReportingSystem.Core.Models.Home;
+﻿using ConstructionSiteReportingSystem.Core.Models.Admin.Index;
+using ConstructionSiteReportingSystem.Core.Models.Home;
 using ConstructionSiteReportingSystem.Core.Services.Contracts;
 using ConstructionSiteReportingSystem.Infrastructure.Data.Models;
 using ConstructionSiteReportingSystem.Infrastructure.Data.Utilities.Contracts;
@@ -26,6 +27,29 @@ namespace ConstructionSiteReportingSystem.Core.Services
 					ImageUrl = s.ImageUrl
 				})
 				.ToListAsync();
+		}
+
+		public async Task<ForReviewViewModel> GetForReviewViewModelAsync()
+		{
+			var forReviewViewModel = new ForReviewViewModel();
+
+			forReviewViewModel.AreThereContractorsForReview = await _repository.AllReadOnly<Contractor>()
+				.Where(c => c.IsApproved == false)
+				.AnyAsync();
+
+			forReviewViewModel.AreThereStagesForReview = await _repository.AllReadOnly<Stage>()
+				.Where(s => s.IsApproved == false)
+				.AnyAsync();
+
+			forReviewViewModel.AreThereUnitsForReview = await _repository.AllReadOnly<Unit>()
+				.Where(u => u.IsApproved == false)
+				.AnyAsync();
+
+			forReviewViewModel.AreThereWorkTypesForReview = await _repository.AllReadOnly<WorkType>()
+				.Where(wt => wt.IsApproved == false)
+				.AnyAsync();
+
+			return forReviewViewModel;
 		}
 	}
 }
