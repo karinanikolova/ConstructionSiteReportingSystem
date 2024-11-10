@@ -20,7 +20,7 @@ namespace ConstructionSiteReportingSystem.Core.Services
 		{
 			var contractor = new Contractor()
 			{
-				Name = contractorModel.Name.Trim(),
+				Name = contractorModel.Name,
 				IsApproved = isUserAdmin ? true : false
 			};
 
@@ -32,7 +32,7 @@ namespace ConstructionSiteReportingSystem.Core.Services
 		{
 			var stage = new Stage()
 			{
-				Name = stageModel.Name.Trim(),
+				Name = stageModel.Name,
 				IsApproved = isUserAdmin ? true : false
 			};
 
@@ -44,7 +44,7 @@ namespace ConstructionSiteReportingSystem.Core.Services
 		{
 			var unit = new Unit()
 			{
-				Type = unitModel.Type.Trim(),
+				Type = unitModel.Type,
 				IsApproved = isUserAdmin ? true : false
 			};
 
@@ -56,7 +56,7 @@ namespace ConstructionSiteReportingSystem.Core.Services
 		{
 			var workType = new WorkType()
 			{
-				Name = workTypeModel.Name.Trim(),
+				Name = workTypeModel.Name,
 				IsApproved = isUserAdmin ? true : false
 			};
 
@@ -67,25 +67,25 @@ namespace ConstructionSiteReportingSystem.Core.Services
 		public async Task<bool> DoesContractorNameExistAsync(string contractorName)
 		{
 			return await _repository.AllReadOnly<Contractor>()
-				.AnyAsync(c => c.Name == contractorName.Trim());
+				.AnyAsync(c => c.Name == contractorName);
 		}
 
 		public async Task<bool> DoesStageNameExistAsync(string stageName)
 		{
 			return await _repository.AllReadOnly<Stage>()
-				.AnyAsync(s => s.Name == stageName.Trim());
+				.AnyAsync(s => s.Name == stageName);
 		}
 
 		public async Task<bool> DoesUnitTypeExistAsync(string unitType)
 		{
 			return await _repository.AllReadOnly<Unit>()
-				.AnyAsync(s => s.Type == unitType.Trim());
+				.AnyAsync(s => s.Type == unitType);
 		}
 
 		public async Task<bool> DoesWorkTypeNameExistAsync(string workTypeName)
 		{
 			return await _repository.AllReadOnly<WorkType>()
-				.AnyAsync(wt => wt.Name == workTypeName.Trim());
+				.AnyAsync(wt => wt.Name == workTypeName);
 		}
 	}
 }
