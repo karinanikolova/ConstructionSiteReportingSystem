@@ -1,6 +1,8 @@
 ﻿using ConstructionSiteReportingSystem.Core.Models.Suggest;
 using ConstructionSiteReportingSystem.Core.Services.Contracts;
+using ConstructionSiteReportingSystem.Infrastructure.Constants;
 using Microsoft.AspNetCore.Mvc;
+using System.Text.RegularExpressions;
 
 namespace ConstructionSiteReportingSystem.Areas.Admin.Controllers
 {
@@ -67,8 +69,22 @@ namespace ConstructionSiteReportingSystem.Areas.Admin.Controllers
 			if (string.IsNullOrWhiteSpace(unitModel.Type))
 			{
 				ModelState.AddModelError(nameof(unitModel.Type), "A measurement unit type cannot contain only white space characters");
+
+				return View(unitModel);
 			}
-			else if (await _suggestService.DoesUnitTypeExistAsync(unitModel.Type) == true)
+
+			unitModel.Type = unitModel.Type.Trim();
+
+			Regex unitTypeRegex = new Regex(DataConstants.Unit.TypeMatchRegex);
+
+			if (!unitTypeRegex.IsMatch(unitModel.Type))
+			{
+				ModelState.AddModelError(nameof(unitModel.Type), "The measurement unit type suggestion is not valid");
+
+				return View(unitModel);
+			}
+
+			if (await _suggestService.DoesUnitTypeExistAsync(unitModel.Type) == true)
 			{
 				ModelState.AddModelError(nameof(unitModel.Type), "A measurement unit type with the given name already exists");
 			}
