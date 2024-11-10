@@ -9,8 +9,6 @@ namespace ConstructionSiteReportingSystem.Core.Services.Contracts
 
 		Task<IEnumerable<ContractorServiceModel>> GetContractorsForReviewAsync();
 
-		Task<IEnumerable<WorkTypeServiceModel>> GetWorkTypesForReviewAsync();
-
 		Task ApproveContractorAsync(int contractorId);
 
 		Task EditContractorAsync(int contractorId, ContractorAddFormModel contractorModel);
