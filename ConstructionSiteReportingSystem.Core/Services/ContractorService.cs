@@ -29,18 +29,6 @@ namespace ConstructionSiteReportingSystem.Core.Services
 				.ToListAsync();
 		}
 
-		public async Task<IEnumerable<WorkTypeServiceModel>> GetWorkTypesForReviewAsync()
-		{
-			return await _repository.AllReadOnly<WorkType>()
-				.Where(wt => wt.IsApproved == false)
-				.Select(wt => new WorkTypeServiceModel()
-				{
-					Id = wt.Id,
-					Name = wt.Name
-				})
-				.ToListAsync();
-		}
-
 		public async Task ApproveContractorAsync(int contractorId)
 		{
 			var contractorToApprove = await _repository.GetByIdAsync<Contractor>(contractorId);
@@ -88,7 +76,7 @@ namespace ConstructionSiteReportingSystem.Core.Services
 
 			if (contractor != null)
 			{
-				contractor.Name = contractorModel.Name.Trim();
+				contractor.Name = contractorModel.Name;
 			}
 
 			await _repository.SaveChangesAsync();
