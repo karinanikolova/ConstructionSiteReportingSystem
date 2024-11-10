@@ -1,5 +1,4 @@
-﻿using ConstructionSiteReportingSystem.Core.Services;
-using ConstructionSiteReportingSystem.Core.Services.Contracts;
+﻿using ConstructionSiteReportingSystem.Core.Services.Contracts;
 using Microsoft.AspNetCore.Mvc;
 
 namespace ConstructionSiteReportingSystem.Areas.Admin.Controllers
