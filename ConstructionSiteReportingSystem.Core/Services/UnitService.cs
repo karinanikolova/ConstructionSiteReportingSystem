@@ -72,7 +72,7 @@ namespace ConstructionSiteReportingSystem.Core.Services
 
 			if (unit != null)
 			{
-				unit.Type = unitModel.Type.Trim();
+				unit.Type = unitModel.Type;
 			}
 
 			await _repository.SaveChangesAsync();
