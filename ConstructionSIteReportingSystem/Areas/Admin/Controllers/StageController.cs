@@ -1,6 +1,8 @@
 ﻿using ConstructionSiteReportingSystem.Core.Models.Suggest;
 using ConstructionSiteReportingSystem.Core.Services.Contracts;
+using ConstructionSiteReportingSystem.Infrastructure.Constants;
 using Microsoft.AspNetCore.Mvc;
+using System.Text.RegularExpressions;
 
 namespace ConstructionSiteReportingSystem.Areas.Admin.Controllers
 {
@@ -67,8 +69,22 @@ namespace ConstructionSiteReportingSystem.Areas.Admin.Controllers
 			if (string.IsNullOrWhiteSpace(stageModel.Name))
 			{
 				ModelState.AddModelError(nameof(stageModel.Name), "A construction stage name cannot contain only white space characters");
+
+				return View(stageModel);
 			}
-			else if (await _suggestService.DoesStageNameExistAsync(stageModel.Name) == true)
+
+			stageModel.Name = stageModel.Name.Trim();
+
+			Regex stageNameRegex = new Regex(DataConstants.Stage.NameMatchRegex);
+
+			if (!stageNameRegex.IsMatch(stageModel.Name))
+			{
+				ModelState.AddModelError(nameof(stageModel.Name), "The construction stage name suggestion is not valid");
+
+				return View(stageModel);
+			}
+
+			if (await _suggestService.DoesStageNameExistAsync(stageModel.Name) == true)
 			{
 				ModelState.AddModelError(nameof(stageModel.Name), "A construction stage with the given name already exists");
 			}
