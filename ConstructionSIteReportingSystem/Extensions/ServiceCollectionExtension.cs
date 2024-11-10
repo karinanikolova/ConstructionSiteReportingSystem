@@ -30,6 +30,7 @@ namespace Microsoft.Extensions.DependencyInjection
 			services.AddScoped<IContractorService, ContractorService>();
 			services.AddScoped<IStageService, StageService>();
 			services.AddScoped<IUnitService, UnitService>();
+			services.AddScoped<IWorkTypeService, WorkTypeService>();
 
 			return services;
         }
