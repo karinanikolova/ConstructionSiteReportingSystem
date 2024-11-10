@@ -61,7 +61,7 @@ namespace ConstructionSiteReportingSystem.Core.Services
 
 			if (stage != null)
 			{
-				stage.Name = stageModel.Name.Trim();
+				stage.Name = stageModel.Name;
 			}
 
 			await _repository.SaveChangesAsync();
