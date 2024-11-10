@@ -1,7 +1,9 @@
 ﻿using ConstructionSiteReportingSystem.Core.Models.Suggest;
 using ConstructionSiteReportingSystem.Core.Services.Contracts;
+using ConstructionSiteReportingSystem.Infrastructure.Constants;
 using Microsoft.AspNetCore.Mvc;
 using System.Security.Claims;
+using System.Text.RegularExpressions;
 
 namespace ConstructionSiteReportingSystem.Controllers
 {
@@ -28,8 +30,22 @@ namespace ConstructionSiteReportingSystem.Controllers
 			if (string.IsNullOrWhiteSpace(contractorModel.Name))
 			{
 				ModelState.AddModelError(nameof(contractorModel.Name), "A contractor name cannot contain only white space characters");
+
+				return View(contractorModel);
 			}
-			else if (await _suggestService.DoesContractorNameExistAsync(contractorModel.Name) == true)
+
+			contractorModel.Name = contractorModel.Name.Trim();
+
+			Regex contractorNameRegex = new Regex(DataConstants.Contractor.NameMatchRegex);
+
+			if (!contractorNameRegex.IsMatch(contractorModel.Name))
+			{
+				ModelState.AddModelError(nameof(contractorModel.Name), "The contractor name suggestion is not valid");
+
+				return View(contractorModel);
+			}
+			
+			if (await _suggestService.DoesContractorNameExistAsync(contractorModel.Name) == true)
 			{
 				ModelState.AddModelError(nameof(contractorModel.Name), "A contractor with the given name already exists");
 			}
@@ -58,8 +74,22 @@ namespace ConstructionSiteReportingSystem.Controllers
 			if (string.IsNullOrWhiteSpace(stageModel.Name))
 			{
 				ModelState.AddModelError(nameof(stageModel.Name), "A construction stage name cannot contain only white space characters");
+
+				return View(stageModel);
 			}
-			else if (await _suggestService.DoesStageNameExistAsync(stageModel.Name) == true)
+
+			stageModel.Name = stageModel.Name.Trim();
+
+			Regex stageNameRegex = new Regex(DataConstants.Stage.NameMatchRegex);
+
+			if (!stageNameRegex.IsMatch(stageModel.Name))
+			{
+				ModelState.AddModelError(nameof(stageModel.Name), "The construction stage name suggestion is not valid");
+
+				return View(stageModel);
+			}
+
+			if (await _suggestService.DoesStageNameExistAsync(stageModel.Name) == true)
 			{
 				ModelState.AddModelError(nameof(stageModel.Name), "A construction stage with the given name already exists");
 			}
@@ -88,8 +118,22 @@ namespace ConstructionSiteReportingSystem.Controllers
 			if (string.IsNullOrWhiteSpace(unitModel.Type))
 			{
 				ModelState.AddModelError(nameof(unitModel.Type), "A measurement unit type cannot contain only white space characters");
+
+				return View(unitModel);
 			}
-			else if (await _suggestService.DoesUnitTypeExistAsync(unitModel.Type) == true)
+
+			unitModel.Type = unitModel.Type.Trim();
+
+			Regex unitTypeRegex = new Regex(DataConstants.Unit.TypeMatchRegex);
+
+			if (!unitTypeRegex.IsMatch(unitModel.Type))
+			{
+				ModelState.AddModelError(nameof(unitModel.Type), "The measurement unit type suggestion is not valid");
+
+				return View(unitModel);
+			}
+
+			if (await _suggestService.DoesUnitTypeExistAsync(unitModel.Type) == true)
 			{
 				ModelState.AddModelError(nameof(unitModel.Type), "A measurement unit type with the given name already exists");
 			}
@@ -118,8 +162,22 @@ namespace ConstructionSiteReportingSystem.Controllers
 			if (string.IsNullOrWhiteSpace(workTypeModel.Name))
 			{
 				ModelState.AddModelError(nameof(workTypeModel.Name), "A construction and assembly work type name cannot contain only white space characters");
+
+				return View(workTypeModel);
 			}
-			else if (await _suggestService.DoesWorkTypeNameExistAsync(workTypeModel.Name) == true)
+
+			workTypeModel.Name = workTypeModel.Name.Trim();
+
+			Regex workTypeNameRegex = new Regex(DataConstants.WorkType.NameMatchRegex);
+
+			if (!workTypeNameRegex.IsMatch(workTypeModel.Name))
+			{
+				ModelState.AddModelError(nameof(workTypeModel.Name), "The construction and assembly work type name suggestion is not valid");
+
+				return View(workTypeModel);
+			}
+
+			if (await _suggestService.DoesWorkTypeNameExistAsync(workTypeModel.Name) == true)
 			{
 				ModelState.AddModelError(nameof(workTypeModel.Name), "A construction and assembly work type with the given name already exists");
 			}
