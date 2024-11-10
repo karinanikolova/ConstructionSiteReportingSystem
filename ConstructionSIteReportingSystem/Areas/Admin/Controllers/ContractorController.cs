@@ -1,6 +1,8 @@
 ﻿using ConstructionSiteReportingSystem.Core.Models.Suggest;
 using ConstructionSiteReportingSystem.Core.Services.Contracts;
+using ConstructionSiteReportingSystem.Infrastructure.Constants;
 using Microsoft.AspNetCore.Mvc;
+using System.Text.RegularExpressions;
 
 namespace ConstructionSiteReportingSystem.Areas.Admin.Controllers
 {
@@ -67,8 +69,22 @@ namespace ConstructionSiteReportingSystem.Areas.Admin.Controllers
 			if (string.IsNullOrWhiteSpace(contractorModel.Name))
 			{
 				ModelState.AddModelError(nameof(contractorModel.Name), "A contractor name cannot contain only white space characters");
+
+				return View(contractorModel);
 			}
-			else if (await _suggestService.DoesContractorNameExistAsync(contractorModel.Name) == true)
+
+			contractorModel.Name = contractorModel.Name.Trim();
+
+			Regex contractorNameRegex = new Regex(DataConstants.Contractor.NameMatchRegex);
+
+			if (!contractorNameRegex.IsMatch(contractorModel.Name))
+			{
+				ModelState.AddModelError(nameof(contractorModel.Name), "The contractor name suggestion is not valid");
+
+				return View(contractorModel);
+			}
+
+			if (await _suggestService.DoesContractorNameExistAsync(contractorModel.Name) == true)
 			{
 				ModelState.AddModelError(nameof(contractorModel.Name), "A contractor with the given name already exists");
 			}
