@@ -111,7 +111,7 @@ namespace ConstructionSiteReportingSystem.Core.Services
 		}
 
 		public async Task<bool> DoesTaskExistAsync(int taskId) => await _repository.AllReadOnly<Task>()
-				.AnyAsync(w => w.Id == taskId);
+				.AnyAsync(t => t.Id == taskId);
 
 		public async Task<TaskEditFormModel?> GetTaskEditFormModelByIdAsync(int taskId)
 		{
@@ -136,15 +136,15 @@ namespace ConstructionSiteReportingSystem.Core.Services
 
 		public async Task<TaskViewModel?> GetTaskViewModelByIdAsync(int taskId) =>
 			await _repository.AllReadOnly<Task>()
-			.Where(w => w.Id == taskId)
-			.Select(w => new TaskViewModel()
+			.Where(t => t.Id == taskId)
+			.Select(t => new TaskViewModel()
 			{
-				Id = w.Id,
-				Title = w.Title,
-				Description = w.Description,
-				CreatedOn = w.CreatedOn,
-				Status = w.Status,
-				Creator = w.CreatorId
+				Id = t.Id,
+				Title = t.Title,
+				Description = t.Description,
+				CreatedOn = t.CreatedOn,
+				Status = t.Status,
+				Creator = t.CreatorId
 			})
 			.FirstOrDefaultAsync();
 
