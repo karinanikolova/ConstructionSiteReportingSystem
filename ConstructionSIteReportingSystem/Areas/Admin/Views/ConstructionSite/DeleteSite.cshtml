@@ -1,0 +1,14 @@
+﻿@model SiteViewModel
+
+@{
+	ViewData["Title"] = "Site to Delete";
+}
+
+<h2 class="text-center">@ViewData["Title"]</h2>
+<hr />
+
+<partial name="_SiteViewPartial" model="@Model" />
+
+@section Scripts {
+	<partial name="_ValidationScriptsPartial" />
+}
