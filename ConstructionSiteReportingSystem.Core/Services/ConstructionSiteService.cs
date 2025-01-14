@@ -1,5 +1,6 @@
 ﻿using ConstructionSiteReportingSystem.Core.Common;
 using ConstructionSiteReportingSystem.Core.Extensions;
+using ConstructionSiteReportingSystem.Core.Models.Admin.Site;
 using ConstructionSiteReportingSystem.Core.Models.Site;
 using ConstructionSiteReportingSystem.Core.Services.Contracts;
 using ConstructionSiteReportingSystem.Infrastructure.Data.Models;
@@ -9,6 +10,7 @@ using Microsoft.EntityFrameworkCore;
 using System.Globalization;
 using static ConstructionSiteReportingSystem.Core.Constants.ValidationConstants;
 using Stage = ConstructionSiteReportingSystem.Infrastructure.Data.Models.Stage;
+using Task = System.Threading.Tasks.Task;
 
 namespace ConstructionSiteReportingSystem.Core.Services
 {
@@ -48,7 +50,7 @@ namespace ConstructionSiteReportingSystem.Core.Services
 			if (site != null)
 			{
 				var works = _repository.AllReadOnly<Work>()
-				.Where(ss => ss.SiteId == siteId);
+				.Where(w => w.SiteId == siteId);
 
 				var allStages = await GetAllStagesNamesAsync();
 
@@ -127,6 +129,64 @@ namespace ConstructionSiteReportingSystem.Core.Services
 				.FirstAsync();
 
 			return site.GetInformation();
+		}
+
+		public async Task CreateSiteAsync(SiteAddFormModel siteModel, DateTime finishDate)
+		{
+			var site = new Site()
+			{
+				Name = siteModel.Name,
+				FinishDate = finishDate,
+				ImageUrl = siteModel.ImageUrl
+			};
+
+			await _repository.AddAsync<Site>(site);
+			await _repository.SaveChangesAsync();
+		}
+
+		public async Task DeleteSiteAsync(int siteId)
+		{
+			var siteToDelete = await _repository.GetByIdAsync<Site>(siteId);
+
+			if (siteToDelete != null)
+			{
+				_repository.Delete<Site>(siteToDelete);
+				await _repository.SaveChangesAsync();
+			}
+		}
+
+		public async Task<bool> DoesSiteExistAsync(int siteId) => await _repository.AllReadOnly<Site>()
+				.AnyAsync(s => s.Id == siteId);
+
+		public async Task<bool> DoesSiteNameExistAsync(string siteName) => await _repository.AllReadOnly<Site>()
+				.AnyAsync(s => s.Name == siteName);
+
+		public async Task<SiteViewModel?> GetSiteViewModelByIdAsync(int siteId) => await _repository.AllReadOnly<Site>()
+			.Where(s => s.Id == siteId)
+			.Select(s => new SiteViewModel()
+			{
+				Id = s.Id,
+				Name = s.Name,
+				FinishDate = s.FinishDate,
+				WorksCount = s.Works.Select(w => w.Id).Count(),
+				WorkIds = s.Works.Select(w => w.Id),
+				UsersPostedCount = s.Works.Select(c => c.CreatorId).Distinct().Count()
+			})
+			.FirstOrDefaultAsync();
+
+		public async Task<IEnumerable<int>?> GetSiteWorkIdsAsync(int siteId)
+		{
+			var siteWorks = _repository.AllReadOnly<Work>()
+				.Where(w => w.SiteId == siteId);
+
+			if (!siteWorks.Any())
+			{
+				return null;
+			}
+
+			return await siteWorks
+				.Select(w => w.Id)
+				.ToArrayAsync();
 		}
 	}
 }
