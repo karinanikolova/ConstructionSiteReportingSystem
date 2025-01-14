@@ -12,13 +12,13 @@ namespace ConstructionSiteReportingSystem.Controllers
 	{
 		private readonly ILogger<WorkController> _logger;
 		private readonly IWorkService _workService;
-		private readonly IConstructionSiteService _siteService;
+		private readonly IConstructionSiteService _constructionSiteService;
 
-		public WorkController(ILogger<WorkController> logger, IWorkService workService, IConstructionSiteService siteService)
+		public WorkController(ILogger<WorkController> logger, IWorkService workService, IConstructionSiteService constructionSiteService)
 		{
 			_logger = logger;
 			_workService = workService;
-			_siteService = siteService;
+			_constructionSiteService = constructionSiteService;
 		}
 
 		[HttpGet]
@@ -45,7 +45,7 @@ namespace ConstructionSiteReportingSystem.Controllers
 		[HttpPost]
 		public async Task<IActionResult> AddWork(WorkAddFormModel workModel)
 		{
-			if (await _workService.DoesSiteExistAsync(workModel.SiteId) == false)
+			if (await _constructionSiteService.DoesSiteExistAsync(workModel.SiteId) == false)
 			{
 				ModelState.AddModelError(nameof(workModel.SiteId), "Construction site does not exist");
 			}
@@ -93,7 +93,7 @@ namespace ConstructionSiteReportingSystem.Controllers
 
 			var siteId = await _workService.CreateWorkAsync(workModel, date, userId);
 
-			var siteInformation = await _siteService.GetSiteInformationAsync(siteId);
+			var siteInformation = await _constructionSiteService.GetSiteInformationAsync(siteId);
 
 			return RedirectToAction("Site", "ConstructionSite", new {id = siteId, information = siteInformation, model = new SiteQueryModel()});
 		}
@@ -129,7 +129,7 @@ namespace ConstructionSiteReportingSystem.Controllers
 				return Unauthorized();
 			}
 
-			if (await _workService.DoesSiteExistAsync(workModel.SiteId) == false)
+			if (await _constructionSiteService.DoesSiteExistAsync(workModel.SiteId) == false)
 			{
 				ModelState.AddModelError(nameof(workModel.SiteId), "Construction site does not exist");
 			}
@@ -177,7 +177,7 @@ namespace ConstructionSiteReportingSystem.Controllers
 
 			var siteId = workModel.SiteId;
 
-			var siteInformation = await _siteService.GetSiteInformationAsync(siteId);
+			var siteInformation = await _constructionSiteService.GetSiteInformationAsync(siteId);
 			
 			return RedirectToAction("Site", "ConstructionSite", new { id = siteId, information = siteInformation, model = new SiteQueryModel() });
 		}
@@ -217,7 +217,7 @@ namespace ConstructionSiteReportingSystem.Controllers
 
 			var siteId = workModel.SiteId;
 
-			var siteInformation = await _siteService.GetSiteInformationAsync(siteId);
+			var siteInformation = await _constructionSiteService.GetSiteInformationAsync(siteId);
 
 			return RedirectToAction("Site", "ConstructionSite", new { id = siteId, information = siteInformation, model = new SiteQueryModel() });
 		}
