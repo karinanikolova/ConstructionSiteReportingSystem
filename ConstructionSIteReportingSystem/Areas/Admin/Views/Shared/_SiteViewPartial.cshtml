@@ -1,0 +1,71 @@
+﻿@model SiteViewModel
+
+@{
+	string workIdsString = string.Empty;
+
+	if (Model.WorkIds.Count() > 0)
+	{
+		workIdsString = string.Join(", ", Model.WorkIds);
+	}
+	else
+	{
+		workIdsString = "0";
+	}
+}
+
+<form method="post">
+	<div class="mb-3 row">
+		<label asp-for="@Model.Name" class="col-sm-2 col-form-label"><strong>Name:</strong></label>
+		<div class="col-sm-10">
+			<input asp-for="@Model.Name" type="text" readonly class="form-control-plaintext" value="@Model.Name">
+		</div>
+	</div>
+	<div class="mb-3 row">
+		<label asp-for="@Model.FinishDate" class="col-sm-2 col-form-label"><strong>Finish date:</strong></label>
+		<div class="col-sm-10">
+			<input asp-for="@Model.FinishDate" type="text" readonly class="form-control-plaintext" value="@DateTimeConverter.ConvertDateToString(Model.FinishDate)">
+		</div>
+	</div>
+	<div class="mb-3 row">
+		<label asp-for="@Model.WorksCount" class="col-sm-2 col-form-label"><strong>Construction works added:</strong></label>
+		<div class="col-sm-10">
+			<input asp-for="@Model.WorksCount" type="text" readonly class="form-control-plaintext" value="@Model.WorksCount">
+		</div>
+	</div>
+	<div class="mb-3 row">
+		<label asp-for="@Model.UsersPostedCount" class="col-sm-2 col-form-label"><strong>Number of users who posted:</strong></label>
+		<div class="col-sm-10">
+			<input asp-for="@Model.UsersPostedCount" type="text" readonly class="form-control-plaintext" value="@Model.UsersPostedCount">
+		</div>
+	</div>
+
+	<div class="text-center">
+		<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+			Delete
+		</button>
+
+		<div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h1 class="modal-title fs-5" id="staticBackdropLabel">Attention</h1>
+						<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+					</div>
+					<div class="modal-body">
+						<div class="mb-5">
+							You are about to delete the following construction site: <strong>@Model.Name</strong>. Be aware that this action will result in the loss of all data related to the construction site. This action can only be reversed by the database administrator.
+						</div>
+						<p>Do you wish to proceed?</p>
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+						<form asp-area="Admin" asp-controller="ConstructionSite" asp-action="DeleteSite">
+							<input type="hidden" name="workIds" value="@workIdsString" />
+							<input type="submit" value="Proceed" class="btn btn-outline-danger" />
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</form>
