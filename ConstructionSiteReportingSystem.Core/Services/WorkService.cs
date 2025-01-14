@@ -76,12 +76,6 @@ namespace ConstructionSiteReportingSystem.Core.Services
 				.ToListAsync();
 		}
 
-		public async Task<bool> DoesSiteExistAsync(int siteId)
-		{
-			return await _repository.AllReadOnly<Site>()
-				.AnyAsync(s => s.Id == siteId);
-		}
-
 		public async Task<bool> DoesWorkTypeExistAsync(int workTypeId)
 		{
 			return await _repository.AllReadOnly<WorkType>()
