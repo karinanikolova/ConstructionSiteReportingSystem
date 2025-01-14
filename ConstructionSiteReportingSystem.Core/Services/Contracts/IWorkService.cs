@@ -19,8 +19,6 @@ namespace ConstructionSiteReportingSystem.Core.Services.Contracts
 
         Task<WorkServiceModel?> GetWorkServiceModelByIdAsync(int workId);
 
-        Task<bool> DoesSiteExistAsync(int siteId);
-
         Task<bool> DoesWorkTypeExistAsync(int workTypeId);
 
         Task<bool> DoesStageExistAsync(int stageId);
