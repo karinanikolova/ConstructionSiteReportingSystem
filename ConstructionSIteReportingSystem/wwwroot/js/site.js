@@ -3,7 +3,7 @@
 
 // Write your JavaScript code.
 
-var message = function () {
+let message = function () {
     toastr.options = {
         "closeButton": true,
         "debug": false,
@@ -22,7 +22,7 @@ var message = function () {
         "hideMethod": "fadeOut"
     }
 
-    var showInfo = function (message) {
+    let showInfo = function (message) {
         toastr["info"](message);
     }
 
