@@ -105,7 +105,7 @@ namespace ConstructionSiteReportingSystem.Areas.Admin.Controllers
 
 			var siteWorkIds = await _constructionSiteService.GetSiteWorkIdsAsync(siteModel.Id);
 
-			await _constructionSiteService.DeleteSiteAsync(siteModel.Id); //
+			await _constructionSiteService.DeleteSiteAsync(siteModel.Id);
 
 			if (workIds != "0" && siteWorkIds != null)
 			{
