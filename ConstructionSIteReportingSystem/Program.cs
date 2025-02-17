@@ -1,5 +1,7 @@
+using ConstructionSiteReportingSystem.Infrastructure.Data;
 using ConstructionSiteReportingSystem.ModelBinders;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace ConstructionSiteReportingSystem
 {
@@ -60,9 +62,31 @@ namespace ConstructionSiteReportingSystem
                 endpoints.MapRazorPages();
             });
 
-            await app.CreateAdminRoleAsync();
+			// Applying database migrations before starting the application
+			using (var scope = app.Services.CreateScope())
+			{
+				var services = scope.ServiceProvider;
 
-            await app.RunAsync();
+				try
+				{
+					var dbContext = services.GetRequiredService<ConstructionSiteDbContext>();
+
+					if (dbContext.Database.IsRelational())
+					{
+						await dbContext.Database.MigrateAsync();
+					}
+				}
+				catch (Exception ex)
+				{
+					var logger = services.GetRequiredService<ILogger<Program>>();
+					logger.LogError(ex, "An error occurred while applying database migrations.");
+				}
+			}
+			// Creating admin role after migrations are applied
+			await app.CreateAdminRoleAsync();
+
+			//Starting the application
+			await app.RunAsync();
         }
     }
 }
