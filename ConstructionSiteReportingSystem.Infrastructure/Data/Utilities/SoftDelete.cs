@@ -1,18 +1,11 @@
 ﻿using ConstructionSiteReportingSystem.Infrastructure.Data.Utilities.Contracts;
-using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace ConstructionSiteReportingSystem.Infrastructure.Data.Utilities
 {
-    /// <summary>
-    /// Abstract class which implements the ISoftDelete interface.It provides a common definition of a base class that multiple derived Entity classes can share in order to be marked as soft-deleted.
-    /// </summary>
-    public abstract class SoftDelete : ISoftDelete
+	/// <summary>
+	/// Abstract class which implements the ISoftDelete interface.It provides a common definition of a base class that multiple derived Entity classes can share in order to be marked as soft-deleted.
+	/// </summary>
+	public abstract class SoftDelete : ISoftDelete
     {
         /// <summary>
         /// Implementation of the ISoftDelete IsDeleted property.
