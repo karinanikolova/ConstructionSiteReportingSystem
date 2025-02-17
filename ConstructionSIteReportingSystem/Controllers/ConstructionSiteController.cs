@@ -20,7 +20,7 @@ namespace ConstructionSiteReportingSystem.Controllers
 		[HttpGet]
 		public async Task<IActionResult> All()
 		{
-			var models = await _constructionSiteService.GetAllSitesAsync();
+			var models = await _constructionSiteService.GetAllSiteInfoViewModelsAsync();
 
 			return View(models);
 		}
