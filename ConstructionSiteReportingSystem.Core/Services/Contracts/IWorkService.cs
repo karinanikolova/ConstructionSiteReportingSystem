@@ -5,7 +5,7 @@ namespace ConstructionSiteReportingSystem.Core.Services.Contracts
 {
     public interface IWorkService
     {
-        Task<IEnumerable<SiteServiceModel>> GetAllSitesAsync();
+        Task<IEnumerable<SiteServiceModel>> GetAllSiteServiceModelsAsync();
 
         Task<IEnumerable<WorkTypeServiceModel>> GetAllWorkTypesAsync();
 
