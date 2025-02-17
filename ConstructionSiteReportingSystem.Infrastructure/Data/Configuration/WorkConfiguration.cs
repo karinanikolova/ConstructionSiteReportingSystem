@@ -39,9 +39,6 @@ namespace ConstructionSiteReportingSystem.Infrastructure.Data.Configuration
                 .HasForeignKey(w => w.UnitId)
                 .OnDelete(DeleteBehavior.Restrict);
 
-            // Applying query filer to the entity in order for Entity Framework Core to ignore soft-deleted records when executing queries. The query filer will only show entities with the IsDeleted property set to 'false'.
-            builder.HasQueryFilter(c => c.IsDeleted == false);
-
             // Seeding data for Works
             var data = new DataSeed();
 
