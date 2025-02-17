@@ -14,6 +14,18 @@ namespace ConstructionSiteReportingSystem.Infrastructure.Data.Configuration
 {
 	internal class DataSeed
     {
+        public DataSeed()
+        {
+            SeedUsers();
+            SeedContractors();
+            SeedSites();
+            SeedStages();
+            SeedUnits();
+            SeedWorkTypes();
+            SeedWorks();
+            SeedTasks();
+        }
+
         public List<ApplicationUser> Users { get; set; }
 
         public List<IdentityUserClaim<string>> UserClaims { get; set; }
@@ -31,18 +43,6 @@ namespace ConstructionSiteReportingSystem.Infrastructure.Data.Configuration
         public IEnumerable<Work> Works { get; set; }
 
         public IEnumerable<Task> Tasks { get; set; }
-
-        public DataSeed()
-        {
-            SeedUsers();
-            SeedContractors();
-            SeedSites();
-            SeedStages();
-            SeedUnits();
-            SeedWorkTypes();
-            SeedWorks();
-            SeedTasks();
-        }
 
         private void SeedUsers()
         {
