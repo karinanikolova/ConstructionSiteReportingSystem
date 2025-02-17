@@ -24,7 +24,7 @@ namespace ConstructionSiteReportingSystem.Controllers
 		[HttpGet]
 		public async Task<IActionResult> AddWork()
 		{
-			var sites = await _workService.GetAllSitesAsync();
+			var sites = await _workService.GetAllSiteServiceModelsAsync();
 			var workTypes = await _workService.GetAllWorkTypesAsync();
 			var stages = await _workService.GetAllStagesAsync();
 			var contractors = await _workService.GetAllContractorsAsync();
@@ -80,7 +80,7 @@ namespace ConstructionSiteReportingSystem.Controllers
 
 			if (!ModelState.IsValid)
 			{
-				workModel.Sites = await _workService.GetAllSitesAsync();
+				workModel.Sites = await _workService.GetAllSiteServiceModelsAsync();
 				workModel.WorkTypes = await _workService.GetAllWorkTypesAsync();
 				workModel.Stages = await _workService.GetAllStagesAsync();
 				workModel.Contractors = await _workService.GetAllContractorsAsync();
@@ -164,7 +164,7 @@ namespace ConstructionSiteReportingSystem.Controllers
 
 			if (!ModelState.IsValid)
 			{
-				workModel.Sites = await _workService.GetAllSitesAsync();
+				workModel.Sites = await _workService.GetAllSiteServiceModelsAsync();
 				workModel.WorkTypes = await _workService.GetAllWorkTypesAsync();
 				workModel.Stages = await _workService.GetAllStagesAsync();
 				workModel.Contractors = await _workService.GetAllContractorsAsync();
