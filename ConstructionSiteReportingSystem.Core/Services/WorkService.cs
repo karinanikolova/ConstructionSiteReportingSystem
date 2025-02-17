@@ -17,7 +17,7 @@ namespace ConstructionSiteReportingSystem.Core.Services
 			_repository = repository;
 		}
 
-		public async Task<IEnumerable<SiteServiceModel>> GetAllSitesAsync()
+		public async Task<IEnumerable<SiteServiceModel>> GetAllSiteServiceModelsAsync()
 		{
 			return await _repository.AllReadOnly<Site>()
 				.Select(s => new SiteServiceModel()
@@ -132,7 +132,7 @@ namespace ConstructionSiteReportingSystem.Core.Services
 
 			if (work != null)
 			{
-				work.Sites = await GetAllSitesAsync();
+				work.Sites = await GetAllSiteServiceModelsAsync();
 				work.WorkTypes = await GetAllWorkTypesAsync();
 				work.Stages = await GetAllStagesAsync();
 				work.Contractors = await GetAllContractorsAsync();
