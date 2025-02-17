@@ -7,7 +7,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ConstructionSiteReportingSy
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ConstructionSiteReportingSystem.Infrastructure", "ConstructionSiteReportingSystem.Infrastructure\ConstructionSiteReportingSystem.Infrastructure.csproj", "{921EC0FB-182B-49C0-B135-9F52CB15D40A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConstructionSiteReportingSystem.Core", "ConstructionSiteReportingSystem.Core\ConstructionSiteReportingSystem.Core.csproj", "{C96FA05F-C8B2-4D77-A6D3-B74A281A1F4B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ConstructionSiteReportingSystem.Core", "ConstructionSiteReportingSystem.Core\ConstructionSiteReportingSystem.Core.csproj", "{C96FA05F-C8B2-4D77-A6D3-B74A281A1F4B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConstructionSiteReportingSystem.Tests", "ConstructionSiteReportingSystem.Tests\ConstructionSiteReportingSystem.Tests.csproj", "{E5233A00-6459-4284-AF33-B5E8CE7AB483}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -27,6 +29,10 @@ Global
 		{C96FA05F-C8B2-4D77-A6D3-B74A281A1F4B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C96FA05F-C8B2-4D77-A6D3-B74A281A1F4B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C96FA05F-C8B2-4D77-A6D3-B74A281A1F4B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E5233A00-6459-4284-AF33-B5E8CE7AB483}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E5233A00-6459-4284-AF33-B5E8CE7AB483}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E5233A00-6459-4284-AF33-B5E8CE7AB483}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E5233A00-6459-4284-AF33-B5E8CE7AB483}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
