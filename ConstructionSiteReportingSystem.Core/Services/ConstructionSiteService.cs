@@ -23,7 +23,7 @@ namespace ConstructionSiteReportingSystem.Core.Services
 			_repository = repository;
 		}
 
-		public async Task<IEnumerable<SiteInfoViewModel>> GetAllSitesAsync()
+		public async Task<IEnumerable<SiteInfoViewModel>> GetAllSiteInfoViewModelsAsync()
 		{
 			return await _repository
 				.AllReadOnly<Site>()
