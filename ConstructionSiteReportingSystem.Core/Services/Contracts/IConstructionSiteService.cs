@@ -4,15 +4,15 @@ using ConstructionSiteReportingSystem.Infrastructure.Enums;
 
 namespace ConstructionSiteReportingSystem.Core.Services.Contracts
 {
-    public interface IConstructionSiteService
+	public interface IConstructionSiteService
     {
-        Task<SiteQueryServiceModel?> GetSiteAsync(int projectSiteNameId, string? stage = null, string? searchDate = null, DateSorting dateSorting = DateSorting.Newest, int currentPage = 1, int worksPerPage = 1);
+        Task<SiteQueryServiceModel?> GetSiteAsync(int siteId, string? stage = null, string? searchDate = null, DateSorting dateSorting = DateSorting.Newest, int currentPage = 1, int worksPerPage = 1);
+
+        Task<IEnumerable<SiteInfoViewModel>> GetAllSiteInfoViewModelsAsync();
 
         Task<IEnumerable<string>> GetAllStagesNamesAsync();
 
-        Task<IEnumerable<SiteInfoViewModel>> GetAllSitesAsync();
-
-        Task<string> GetSiteInformationAsync(int siteId);
+		Task<string> GetSiteInformationAsync(int siteId);
 
 		Task<bool> DoesSiteNameExistAsync(string siteName);
 
