@@ -110,6 +110,18 @@ namespace ConstructionSiteReportingSystem.Tests.UnitTests
 					Id = 3,
 					Name = "Third Contractor",
 					IsApproved = true
+				},
+				new Contractor()
+				{
+					Id = 4,
+					Name = "Fourth Contractor",
+					IsApproved = false
+				},
+				new Contractor()
+				{
+					Id = 5,
+					Name = "Fifth Contractor",
+					IsApproved = false
 				}
 			};
 
@@ -169,6 +181,18 @@ namespace ConstructionSiteReportingSystem.Tests.UnitTests
 					Id = 3,
 					Name = "Third Stage",
 					IsApproved = true
+				},
+				new Stage()
+				{
+					Id = 4,
+					Name = "Fourth Stage",
+					IsApproved = false
+				},
+				new Stage()
+				{
+					Id = 5,
+					Name = "Fifth Stage",
+					IsApproved = false
 				}
 			};
 
@@ -197,6 +221,18 @@ namespace ConstructionSiteReportingSystem.Tests.UnitTests
 					Id = 3,
 					Type = "m",
 					IsApproved = true
+				},
+				new Unit()
+				{
+					Id = 4,
+					Type = "sq.m",
+					IsApproved = false
+				},
+				new Unit()
+				{
+					Id = 5,
+					Type = "t",
+					IsApproved = false
 				}
 			};
 
@@ -225,6 +261,18 @@ namespace ConstructionSiteReportingSystem.Tests.UnitTests
 					Id = 3,
 					Name = "Third Work Type Name",
 					IsApproved = true
+				},
+				new WorkType()
+				{
+					Id = 4,
+					Name = "Fourth Work Type Name",
+					IsApproved = false
+				},
+				new WorkType()
+				{
+					Id = 5,
+					Name = "Fifth Work Type Name",
+					IsApproved = false
 				}
 			};
 
