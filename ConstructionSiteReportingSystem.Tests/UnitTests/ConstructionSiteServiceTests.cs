@@ -72,24 +72,32 @@ namespace ConstructionSiteReportingSystem.Tests.UnitTests
 			var siteViewResult = await _constructionSiteService.GetSiteViewModelByIdAsync(site.Id);
 
 			Assert.That(siteViewResult, Is.Not.Null, "The tested service returned a null result.");
-			Assert.That(siteViewResult.Id, Is.EqualTo(site.Id), "The evaluated site ids are not equal.");
-			Assert.That(siteViewResult.Name, Is.EqualTo(site.Name), "The evaluated site names are not the same.");
-			Assert.That(siteViewResult.FinishDate, Is.EqualTo(site.FinishDate), "The evaluated site finish dates are not equal.");
-			Assert.That(siteViewResult.WorksCount, Is.EqualTo(siteWorksCount), "The evaluated site works count are not equal.");
-			Assert.That(siteViewResult.WorkIds, Is.EqualTo(siteWorkIds), "The evaluated site works ids are not equal.");
-			Assert.That(siteViewResult.UsersPostedCount, Is.EqualTo(siteUsersPostedCount), "The evaluated users count that posted to the site are not equal.");
+
+			Assert.Multiple(() =>
+			{
+				Assert.That(siteViewResult.Id, Is.EqualTo(site.Id), "The evaluated site ids are not equal.");
+				Assert.That(siteViewResult.Name, Is.EqualTo(site.Name), "The evaluated site names are not the same.");
+				Assert.That(siteViewResult.FinishDate, Is.EqualTo(site.FinishDate), "The evaluated site finish dates are not equal.");
+				Assert.That(siteViewResult.WorksCount, Is.EqualTo(siteWorksCount), "The evaluated site works count are not equal.");
+				Assert.That(siteViewResult.WorkIds, Is.EqualTo(siteWorkIds), "The evaluated site works ids are not equal.");
+				Assert.That(siteViewResult.UsersPostedCount, Is.EqualTo(siteUsersPostedCount), "The evaluated users count that posted to the site are not equal.");
+			});
 		}
 
+		[Test, Order(1)]
 		public async Task GetAllSitesAsync_ShouldReturnAllSites()
 		{
 			var sitesViewResult = await _constructionSiteService.GetAllSiteInfoViewModelsAsync();
 			sitesViewResult = sitesViewResult.OrderBy(s => s.Id);
 
 			Assert.That(sitesViewResult, Is.Not.Null, "The tested service returned a null result.");
-			Assert.That(sitesViewResult.Select(s => s.Id), Is.EqualTo(TestSites.Select(s => s.Id)), "The evaluated sites ids are not equal.");
-			Assert.That(sitesViewResult.Select(s => s.Name), Is.EqualTo(TestSites.Select(s => s.Name)), "The evaluated sites names are not the same.");
-			Assert.That(sitesViewResult.Select(s => s.FinishDate), Is.EqualTo(TestSites.Select(s => DateTimeConverter.ConvertDateToString(s.FinishDate))), "The evaluated sites finish dates are not equal.");
-			Assert.That(sitesViewResult.Count(), Is.EqualTo(TestSites.Count()), "The evaluated sites count are not equal.");
+			Assert.Multiple(() =>
+			{
+				Assert.That(sitesViewResult.Select(s => s.Id), Is.EqualTo(TestSites.Select(s => s.Id)), "The evaluated sites ids are not equal.");
+				Assert.That(sitesViewResult.Select(s => s.Name), Is.EqualTo(TestSites.Select(s => s.Name)), "The evaluated sites names are not the same.");
+				Assert.That(sitesViewResult.Select(s => s.FinishDate), Is.EqualTo(TestSites.Select(s => DateTimeConverter.ConvertDateToString(s.FinishDate))), "The evaluated sites finish dates are not equal.");
+				Assert.That(sitesViewResult.Count(), Is.EqualTo(TestSites.Count()), "The evaluated sites count are not equal.");
+			});
 		}
 
 		[Test]
@@ -137,9 +145,12 @@ namespace ConstructionSiteReportingSystem.Tests.UnitTests
 			Assert.That(allSitesInDbAfterCreating, Is.EqualTo(allSitesInDbBeforeCreating + 1), "No new site has been added to the database.");
 
 			var newlyCreatedSite = allSites.FirstOrDefault(s => s.Name == newSite.Name);
-			Assert.IsNotNull(newlyCreatedSite, "The task of creating a new site was not successful and the returned value is null.");
-			Assert.That(newSite.FinishDate, Is.EqualTo(newlyCreatedSite.FinishDate), "The evaluated site finish dates are not equal.");
-			Assert.NotZero(newlyCreatedSite.Id, "The evaluated site id is equal to zero.");
+			Assert.Multiple(() =>
+			{
+				Assert.That(newlyCreatedSite, Is.Not.Null, "The task of creating a new site was not successful and the returned value is null.");
+				Assert.That(newSite.FinishDate, Is.EqualTo(newlyCreatedSite.FinishDate), "The evaluated site finish dates are not equal.");
+			});
+			Assert.That(newlyCreatedSite!.Id, Is.Not.Zero, "The evaluated site id is equal to zero.");
 		}
 
 		[Test]
@@ -154,8 +165,11 @@ namespace ConstructionSiteReportingSystem.Tests.UnitTests
 			var sitesAfter = await _constructionSiteService.GetAllSiteInfoViewModelsAsync();
 			var allSitesInDbAfterDeleting = sitesAfter.Count();
 
-			Assert.That(allSitesInDbAfterDeleting, Is.EqualTo(allSitesInDbBeforeDeleting - 1), "The site has not been removed from the database.");
-			Assert.IsNull(sitesAfter.FirstOrDefault(s => s.Id == siteToDelete.Id));
+			Assert.Multiple(() =>
+			{
+				Assert.That(allSitesInDbAfterDeleting, Is.EqualTo(allSitesInDbBeforeDeleting - 1), "The site has not been removed from the database.");
+				Assert.That(sitesAfter.FirstOrDefault(s => s.Id == siteToDelete.Id), Is.Null);
+			});
 		}
 
 		[Test]
@@ -170,9 +184,12 @@ namespace ConstructionSiteReportingSystem.Tests.UnitTests
 			var siteQueryServiceResult = await _constructionSiteService.GetSiteAsync(site.Id, "Second Stage", "05/01/2025", Oldest);
 
 			Assert.That(siteQueryServiceResult, Is.Not.Null, "The tested service returned a null result.");
-			Assert.That(siteQueryServiceResult.SiteName, Is.EqualTo(site.Name), "The evaluated site names are not equal.");
-			Assert.That(siteQueryServiceResult.ConstructionFinishDate, Is.EqualTo(site.FinishDate), "The evaluated site finish dates are not equal.");
-			Assert.That(siteQueryServiceResult.TotalWorksCount, Is.EqualTo(siteWorksCount), "The evaluated site works count are not equal.");
+			Assert.Multiple(() =>
+			{
+				Assert.That(siteQueryServiceResult.SiteName, Is.EqualTo(site.Name), "The evaluated site names are not the same.");
+				Assert.That(siteQueryServiceResult.ConstructionFinishDate, Is.EqualTo(site.FinishDate), "The evaluated site finish dates are not equal.");
+				Assert.That(siteQueryServiceResult.TotalWorksCount, Is.EqualTo(siteWorksCount), "The evaluated site works count are not equal.");
+			});
 		}
 
 		[Test]
@@ -186,9 +203,12 @@ namespace ConstructionSiteReportingSystem.Tests.UnitTests
 			var siteQueryServiceResult = await _constructionSiteService.GetSiteAsync(site.Id, null, null, Newest);
 
 			Assert.That(siteQueryServiceResult, Is.Not.Null, "The tested service returned a null result.");
-			Assert.That(siteQueryServiceResult.SiteName, Is.EqualTo(site.Name), "The evaluated site names are not the same.");
-			Assert.That(siteQueryServiceResult.ConstructionFinishDate, Is.EqualTo(site.FinishDate), "The evaluated site finish dates are not equal.");
-			Assert.That(siteQueryServiceResult.TotalWorksCount, Is.EqualTo(siteWorksCount), "The evaluated site works count are not equal.");
+			Assert.Multiple(() =>
+			{
+				Assert.That(siteQueryServiceResult.SiteName, Is.EqualTo(site.Name), "The evaluated site names are not the same.");
+				Assert.That(siteQueryServiceResult.ConstructionFinishDate, Is.EqualTo(site.FinishDate), "The evaluated site finish dates are not equal.");
+				Assert.That(siteQueryServiceResult.TotalWorksCount, Is.EqualTo(siteWorksCount), "The evaluated site works count are not equal.");
+			});
 		}
 
 		[Test]
