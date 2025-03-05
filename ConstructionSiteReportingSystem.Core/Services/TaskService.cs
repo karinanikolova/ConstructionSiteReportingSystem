@@ -29,8 +29,7 @@ namespace ConstructionSiteReportingSystem.Core.Services
 
 			if (!string.IsNullOrWhiteSpace(searchStatus) && statuses.Any(s => s == searchStatus))
 			{
-				Status status;
-				bool isStatusValid = Enum.TryParse(searchStatus, true, out status);
+				bool isStatusValid = Enum.TryParse(searchStatus, true, out Status status);
 
 				if (isStatusValid)
 				{
@@ -42,7 +41,7 @@ namespace ConstructionSiteReportingSystem.Core.Services
 			{
 				string searchTermInLowercase = searchTerm.ToLower();
 
-				tasks = tasks.Where(t => t.Title.ToLower().Contains(searchTermInLowercase) || t.Description.ToLower().Contains(searchTermInLowercase));
+				tasks = tasks.Where(t => t.Title.ToLower().Contains(searchTermInLowercase) || t.Description.ToLower().Contains(searchTermInLowercase) || (t.Creator.FirstName + " " + t.Creator.LastName).ToLower().Contains(searchTermInLowercase));
 			}
 
 			tasks = dateSorting switch
@@ -61,7 +60,8 @@ namespace ConstructionSiteReportingSystem.Core.Services
 					Description = t.Description,
 					CreatedOn = t.CreatedOn,
 					Status = t.Status,
-					Creator = t.CreatorId
+					CreatorId = t.CreatorId,
+					CreatorName = t.Creator.FirstName + " " + t.Creator.LastName
 				})
 				.ToListAsync();
 
@@ -144,7 +144,8 @@ namespace ConstructionSiteReportingSystem.Core.Services
 				Description = t.Description,
 				CreatedOn = t.CreatedOn,
 				Status = t.Status,
-				Creator = t.CreatorId
+				CreatorId = t.CreatorId,
+				CreatorName = t.Creator.FirstName + " " + t.Creator.LastName
 			})
 			.FirstOrDefaultAsync();
 
