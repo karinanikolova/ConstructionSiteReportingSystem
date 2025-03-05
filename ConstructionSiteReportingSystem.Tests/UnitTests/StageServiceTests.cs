@@ -29,18 +29,15 @@ namespace ConstructionSiteReportingSystem.Tests.UnitTests
 			Assert.That(stagesResult, Is.Not.Null, "The tested service returned a null result.");
 			Assert.That(stagesResult.Count(), Is.EqualTo(stages.Length), "The evaluated stage counts are not equal.");
 
-			if (stagesResult.Count() == stages.Length)
-			{
-				int i = default;
+			int i = default;
 
-				foreach (var stageResult in stagesResult.OrderBy(s => s.Id))
+			foreach (var stageResult in stagesResult.OrderBy(s => s.Id))
+			{
+				Assert.Multiple(() =>
 				{
-					Assert.Multiple(() =>
-					{
-						Assert.That(stageResult.Id, Is.EqualTo(stages[i].Id), "The evaluated stage ids are not equal.");
-						Assert.That(stageResult.Name, Is.EqualTo(stages[i++].Name), "The evaluated stage names are not the same.");
-					});
-				}
+					Assert.That(stageResult.Id, Is.EqualTo(stages[i].Id), "The evaluated stage ids are not equal.");
+					Assert.That(stageResult.Name, Is.EqualTo(stages[i++].Name), "The evaluated stage names are not the same.");
+				});
 			}
 		}
 
