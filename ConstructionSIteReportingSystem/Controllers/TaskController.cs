@@ -131,7 +131,7 @@ namespace ConstructionSiteReportingSystem.Controllers
 
 			var task = await _taskService.GetTaskViewModelByIdAsync(id);
 
-			if (User.Id() != task!.Creator && User.IsAdmin() == false)
+			if (User.Id() != task!.CreatorId && User.IsAdmin() == false)
 			{
 				return Unauthorized();
 			}
@@ -147,7 +147,7 @@ namespace ConstructionSiteReportingSystem.Controllers
 				return BadRequest();
 			}
 
-			if (User.Id() != taskModel.Creator && User.IsAdmin() == false)
+			if (User.Id() != taskModel.CreatorId && User.IsAdmin() == false)
 			{
 				return Unauthorized();
 			}
