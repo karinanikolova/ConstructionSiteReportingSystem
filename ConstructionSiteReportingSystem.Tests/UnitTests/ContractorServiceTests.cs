@@ -56,11 +56,9 @@ namespace ConstructionSiteReportingSystem.Tests.UnitTests
 		[Test]
 		public async Task AreThereContractorsToApproveAsync_ShouldReturnTrue()
 		{
-			var areThereContractorsToBeApproved = TestContractors.Any(c => !c.IsApproved);
+			var areThereContractorsToApprove = await _contractorService.AreThereContractorsToApproveAsync();
 
-			var areThereContractorsToBeApprovedResult = await _contractorService.AreThereContractorsToApproveAsync();
-
-			Assert.That(areThereContractorsToBeApprovedResult, Is.EqualTo(areThereContractorsToBeApproved));
+			Assert.That(areThereContractorsToApprove, Is.True);
 		}
 
 		[Test]
@@ -76,7 +74,7 @@ namespace ConstructionSiteReportingSystem.Tests.UnitTests
 			Assert.Multiple(() =>
 			{
 				Assert.That(contractorsAfterRemoving.Count(), Is.EqualTo(contractorsCountBeforeRemoving - 1), "The contractor has not been removed from the database.");
-				Assert.That(contractorsAfterRemoving.FirstOrDefault(c => c.Id == contractorIdToRemove), Is.Null);
+				Assert.That(contractorsAfterRemoving.FirstOrDefault(c => c.Id == contractorIdToRemove), Is.Null, "There is a contractor found with the removed id.");
 			});
 		}
 
