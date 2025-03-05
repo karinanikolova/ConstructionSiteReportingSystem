@@ -44,8 +44,7 @@ namespace ConstructionSiteReportingSystem.Core.Services
 		public async Task<bool> AreThereContractorsToApproveAsync()
 		{
 			return await _repository.AllReadOnly<Contractor>()
-				.Where(c => c.IsApproved == false)
-				.AnyAsync();
+				.AnyAsync(c => !c.IsApproved);
 		}
 
 		public async Task RemoveContractorAsync(int contractorId)
@@ -85,8 +84,7 @@ namespace ConstructionSiteReportingSystem.Core.Services
 		public async Task<bool> DoesUnapprovedContractorExistAsync(int contractorId)
 		{
 			return await _repository.AllReadOnly<Contractor>()
-				.Where(c => c.IsApproved == false)
-				.AnyAsync(c => c.Id == contractorId);
+				.AnyAsync(c => c.Id == contractorId && !c.IsApproved);
 		}
 	}
 }
