@@ -110,7 +110,7 @@
 			<th scope="col">Unit</th>
 			<th scope="col">Cost per unit</th>
 			<th scope="col">Total cost</th>
-			@if (siteWorks.Any(w => w.Creator == User?.Identity?.Name))
+			@if (siteWorks.Any(w => w.Creator == User?.Identity?.Name || User.IsAdmin()))
 			{
 				<th scope="col"></th>
 			}
