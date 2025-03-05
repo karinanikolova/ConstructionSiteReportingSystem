@@ -44,15 +44,13 @@ namespace ConstructionSiteReportingSystem.Core.Services
 		public async Task<bool> AreThereWorkTypesToApproveAsync()
 		{
 			return await _repository.AllReadOnly<WorkType>()
-				.Where(wt => wt.IsApproved == false)
-				.AnyAsync();
+				.AnyAsync(wt => !wt.IsApproved);
 		}
 
 		public async Task<bool> DoesUnapprovedWorkTypeExistAsync(int workTypeId)
 		{
 			return await _repository.AllReadOnly<WorkType>()
-				.Where(wt => wt.IsApproved == false)
-				.AnyAsync(wt => wt.Id == workTypeId);
+				.AnyAsync(wt => wt.Id == workTypeId && !wt.IsApproved);
 		}
 
 		public async Task EditWorkTypeAsync(int workTypeId, WorkTypeAddFormModel workTypeModel)
