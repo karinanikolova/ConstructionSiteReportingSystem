@@ -28,19 +28,16 @@ namespace ConstructionSiteReportingSystem.Tests.UnitTests
 			Assert.That(sitesResult, Is.Not.Null, "The tested service returned a null result.");
 			Assert.That(sitesResult.Count(), Is.EqualTo(sites.Length), "The evaluated site counts are not equal.");
 
-			if (sitesResult.Count() == sites.Length)
-			{
-				int i = default;
+			int i = default;
 
-				foreach (var siteResult in sitesResult.OrderBy(s => s.Id))
+			foreach (var siteResult in sitesResult.OrderBy(s => s.Id))
+			{
+				Assert.Multiple(() =>
 				{
-					Assert.Multiple(() =>
-					{
-						Assert.That(siteResult.Id, Is.EqualTo(sites[i].Id), "The evaluated site ids are not equal.");
-						Assert.That(siteResult.Name, Is.EqualTo(sites[i].Name), "The evaluated site names are not the same.");
-						Assert.That(siteResult.ImageUrl, Is.EqualTo(sites[i++].ImageUrl), "The evaluated site image URLs are not the same.");
-					});
-				}
+					Assert.That(siteResult.Id, Is.EqualTo(sites[i].Id), "The evaluated site ids are not equal.");
+					Assert.That(siteResult.Name, Is.EqualTo(sites[i].Name), "The evaluated site names are not the same.");
+					Assert.That(siteResult.ImageUrl, Is.EqualTo(sites[i++].ImageUrl), "The evaluated site image URLs are not the same.");
+				});
 			}
 		}
 
