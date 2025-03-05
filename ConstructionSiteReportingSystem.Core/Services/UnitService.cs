@@ -55,15 +55,13 @@ namespace ConstructionSiteReportingSystem.Core.Services
 		public async Task<bool> AreThereUnitsToApproveAsync()
 		{
 			return await _repository.AllReadOnly<Unit>()
-				.Where(u => u.IsApproved == false)
-				.AnyAsync();
+				.AnyAsync(u => !u.IsApproved);
 		}
 
 		public async Task<bool> DoesUnapprovedUnitExistAsync(int unitId)
 		{
 			return await _repository.AllReadOnly<Unit>()
-				.Where(u => u.IsApproved == false)
-				.AnyAsync(u => u.Id == unitId);
+				.AnyAsync(u => u.Id == unitId && !u.IsApproved);
 		}
 
 		public async Task EditUnitAsync(int unitId, UnitAddFormModel unitModel)
