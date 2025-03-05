@@ -103,7 +103,7 @@ namespace ConstructionSiteReportingSystem.Tests.UnitTests
 		[Test]
 		public async Task GetAllStagesNamesAsync_ShouldReturnCorrectNames()
 		{
-			var stagesNames = TestStages.Select(s => s.Name);
+			var stagesNames = TestStages.Where(s => s.IsApproved).Select(s => s.Name);
 
 			var stagesNamesResult = await _constructionSiteService.GetAllStagesNamesAsync();
 			stagesNamesResult = stagesNamesResult.Reverse();
@@ -148,9 +148,9 @@ namespace ConstructionSiteReportingSystem.Tests.UnitTests
 			Assert.Multiple(() =>
 			{
 				Assert.That(newlyCreatedSite, Is.Not.Null, "The task of creating a new site was not successful and the returned value is null.");
-				Assert.That(newSite.FinishDate, Is.EqualTo(newlyCreatedSite.FinishDate), "The evaluated site finish dates are not equal.");
+				Assert.That(newlyCreatedSite.FinishDate, Is.EqualTo(newSite.FinishDate), "The evaluated site finish dates are not equal.");
 			});
-			Assert.That(newlyCreatedSite!.Id, Is.Not.Zero, "The evaluated site id is equal to zero.");
+			Assert.That(newlyCreatedSite.Id, Is.Not.Zero, "The evaluated site id is equal to zero.");
 		}
 
 		[Test]
@@ -181,7 +181,7 @@ namespace ConstructionSiteReportingSystem.Tests.UnitTests
 				.Where(w => w.SiteId == site.Id && w.CarryOutDate == date)
 				.Count();
 
-			var siteQueryServiceResult = await _constructionSiteService.GetSiteAsync(site.Id, "Second Stage", "05/01/2025", Oldest);
+			var siteQueryServiceResult = await _constructionSiteService.GetSiteAsync(site.Id, "Second Stage", "05/01/2025", Oldest, 1, TestWorks.Count());
 
 			Assert.That(siteQueryServiceResult, Is.Not.Null, "The tested service returned a null result.");
 			Assert.Multiple(() =>
@@ -200,7 +200,7 @@ namespace ConstructionSiteReportingSystem.Tests.UnitTests
 				.Where(w => w.SiteId == site.Id);
 			var siteWorksCount = siteWorks.Count();
 
-			var siteQueryServiceResult = await _constructionSiteService.GetSiteAsync(site.Id, null, null, Newest);
+			var siteQueryServiceResult = await _constructionSiteService.GetSiteAsync(site.Id, null, null, Newest, 1, TestWorks.Count());
 
 			Assert.That(siteQueryServiceResult, Is.Not.Null, "The tested service returned a null result.");
 			Assert.Multiple(() =>
@@ -232,29 +232,26 @@ namespace ConstructionSiteReportingSystem.Tests.UnitTests
 					Creator = w.Creator.UserName
 				});
 
-			var siteQueryServiceResult = await _constructionSiteService.GetSiteAsync(site.Id, "Second Stage", "05/01/2025", Oldest);
+			var siteQueryServiceResult = await _constructionSiteService.GetSiteAsync(site.Id, null, null, Oldest, 1, TestWorks.Count());
 
-			if (siteQueryServiceResult.TotalWorksCount == works.Count())
+			foreach (var work in works)
 			{
-				foreach (var work in works)
-				{
-					var workResult = siteQueryServiceResult.Works.First(w => w.Id == work.Id);
+				var workResult = siteQueryServiceResult.Works.First(w => w.Id == work.Id);
 
-					Assert.Multiple(() =>
-					{
-						Assert.That(workResult.Id, Is.EqualTo(work.Id), "The evaluated work ids are not equal.");
-						Assert.That(workResult.WorkName, Is.EqualTo(work.WorkName), "The evaluated work names are not the same.");
-						Assert.That(workResult.Description, Is.EqualTo(work.Description), "The evaluated work descriptions are not the same.");
-						Assert.That(workResult.CarryOutDate, Is.EqualTo(work.CarryOutDate), "The evaluated work carry out dates are not equal.");
-						Assert.That(workResult.Stage, Is.EqualTo(work.Stage), "The evaluated work stages names are not the same.");
-						Assert.That(workResult.Contractor, Is.EqualTo(work.Contractor), "The evaluated work contractors are not the same.");
-						Assert.That(workResult.Quantity, Is.EqualTo(work.Quantity), "The evaluated work quantities are not equal.");
-						Assert.That(workResult.Unit, Is.EqualTo(work.Unit), "The evaluated work units are not the same.");
-						Assert.That(workResult.CostPerUnit, Is.EqualTo(work.CostPerUnit), "The evaluated work cost per units are not equal.");
-						Assert.That(workResult.TotalCost, Is.EqualTo(work.TotalCost), "The evaluated work total costs are not equal.");
-						Assert.That(workResult.Creator, Is.EqualTo(work.Creator), "The evaluated work creators are not the same.");
-					});
-				}
+				Assert.Multiple(() =>
+				{
+					Assert.That(workResult.Id, Is.EqualTo(work.Id), "The evaluated work ids are not equal.");
+					Assert.That(workResult.WorkName, Is.EqualTo(work.WorkName), "The evaluated work names are not the same.");
+					Assert.That(workResult.Description, Is.EqualTo(work.Description), "The evaluated work descriptions are not the same.");
+					Assert.That(workResult.CarryOutDate, Is.EqualTo(work.CarryOutDate), "The evaluated work carry out dates are not equal.");
+					Assert.That(workResult.Stage, Is.EqualTo(work.Stage), "The evaluated work stages names are not the same.");
+					Assert.That(workResult.Contractor, Is.EqualTo(work.Contractor), "The evaluated work contractors are not the same.");
+					Assert.That(workResult.Quantity, Is.EqualTo(work.Quantity), "The evaluated work quantities are not equal.");
+					Assert.That(workResult.Unit, Is.EqualTo(work.Unit), "The evaluated work units are not the same.");
+					Assert.That(workResult.CostPerUnit, Is.EqualTo(work.CostPerUnit), "The evaluated work cost per units are not equal.");
+					Assert.That(workResult.TotalCost, Is.EqualTo(work.TotalCost), "The evaluated work total costs are not equal.");
+					Assert.That(workResult.Creator, Is.EqualTo(work.Creator), "The evaluated work creators are not the same.");
+				});
 			}
 		}
 	}
