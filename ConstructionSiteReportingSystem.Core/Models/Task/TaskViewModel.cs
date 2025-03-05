@@ -14,6 +14,8 @@ namespace ConstructionSiteReportingSystem.Core.Models.Task
 
 		public Status Status { get; set; }
 
-		public string Creator { get; set; } = string.Empty;
+		public string CreatorId { get; set; } = string.Empty;
+
+		public string CreatorName { get; set;} = string.Empty;
 	}
 }
