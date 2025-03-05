@@ -34,20 +34,16 @@ namespace ConstructionSiteReportingSystem.Core.Services
 			var forReviewViewModel = new ForReviewViewModel();
 
 			forReviewViewModel.AreThereContractorsForReview = await _repository.AllReadOnly<Contractor>()
-				.Where(c => c.IsApproved == false)
-				.AnyAsync();
+				.AnyAsync(c => !c.IsApproved);
 
 			forReviewViewModel.AreThereStagesForReview = await _repository.AllReadOnly<Stage>()
-				.Where(s => s.IsApproved == false)
-				.AnyAsync();
+				.AnyAsync(s => !s.IsApproved);
 
 			forReviewViewModel.AreThereUnitsForReview = await _repository.AllReadOnly<Unit>()
-				.Where(u => u.IsApproved == false)
-				.AnyAsync();
+				.AnyAsync(u => !u.IsApproved);
 
 			forReviewViewModel.AreThereWorkTypesForReview = await _repository.AllReadOnly<WorkType>()
-				.Where(wt => wt.IsApproved == false)
-				.AnyAsync();
+				.AnyAsync(wt => !wt.IsApproved);
 
 			return forReviewViewModel;
 		}
