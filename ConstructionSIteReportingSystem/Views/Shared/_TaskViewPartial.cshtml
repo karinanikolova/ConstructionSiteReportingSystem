@@ -29,24 +29,24 @@
 			<input asp-for="@Model.Status" type="text" readonly class="form-control-plaintext" id="@Model.Status" value="@status">
 		</div>
 	</div>
-	<input type="hidden" asp-for="Creator" />
+	<input type="hidden" asp-for="CreatorId" />
+</form>
 
-	<div class="text-center">
-		<button class="btn btn-outline-primary" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight">Delete</button>
-		<div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasRight" aria-labelledby="offcanvasRightLabel">
-			<div class="offcanvas-header">
-				<h5 class="offcanvas-title" id="offcanvasRightLabel">Attention</h5>
-				<button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+<div class="text-center">
+	<button class="btn btn-outline-primary" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight">Delete</button>
+	<div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasRight" aria-labelledby="offcanvasRightLabel">
+		<div class="offcanvas-header">
+			<h5 class="offcanvas-title" id="offcanvasRightLabel">Attention</h5>
+			<button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+		</div>
+		<div class="offcanvas-body">
+			<div class="mb-5">
+				<p>You are about to delete the selected task from <strong>@DateTimeConverter.ConvertDateToString(Model.CreatedOn)</strong>.</p>
 			</div>
-			<div class="offcanvas-body">
-				<div class="mb-5">
-					<p>You are about to delete the selected task from <strong>@DateTimeConverter.ConvertDateToString(Model.CreatedOn)</strong>.</p>
-				</div>
-				<p>Do you wish to proceed?</p>
-				<form asp-controller="Task" asp-action="DeleteTask" asp-route-id="@Model.Id">
-					<input type="submit" value="Proceed" class="btn btn-primary" />
-				</form>
-			</div>
+			<p>Do you wish to proceed?</p>
+			<form asp-controller="Task" asp-action="DeleteTask" asp-route-id="@Model.Id">
+				<input type="submit" value="Proceed" class="btn btn-primary" />
+			</form>
 		</div>
 	</div>
-</form>
+</div>
