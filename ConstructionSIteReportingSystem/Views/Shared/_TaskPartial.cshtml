@@ -1,4 +1,8 @@
-﻿@model TaskViewModel
+﻿@{
+	string status = Model.Status.ToString() == "NotStarted" ? "Not started" : Model.Status.ToString() == "InProgress" ? "In progress" : Model.Status.ToString();;
+}
+
+@model TaskViewModel
 
 <div class="col">
 	<div class="card h-100 border-info mb-3 text-center">
@@ -8,23 +12,11 @@
 		<ul class="list-group list-group-flush">
 			<li class="list-group-item"><strong>Description: </strong>@Model.Description</li>
 			<li class="list-group-item"><strong>Created on: </strong>@DateTimeConverter.ConvertDateToString(Model.CreatedOn)</li>
-			<li class="list-group-item">
-				<strong>Status: </strong>
-				@{
-					if (Model.Status.ToString() == "NotStarted")
-					{
-						<option value="@Model.Status">Not started</option>
-					}
-					else if (Model.Status.ToString() == "InProgress")
-					{
-						<option value="@Model.Status">In progress</option>
-					}
-					else
-					{
-						<option value="@Model.Status">@Model.Status</option>
-					}
-				}
-			</li>
+			<li class="list-group-item"><strong>Status: </strong>@status</li>
+			@if (User.IsAdmin())
+			{
+				<li class="list-group-item"><strong>Creator: </strong>@Model.CreatorName</li>
+			}
 		</ul>
 		<div class="card-body">
 			<div class="btn-group" role="group" aria-label="Basic outlined example">
