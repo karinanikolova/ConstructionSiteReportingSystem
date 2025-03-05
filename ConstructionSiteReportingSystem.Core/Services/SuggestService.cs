@@ -21,7 +21,7 @@ namespace ConstructionSiteReportingSystem.Core.Services
 			var contractor = new Contractor()
 			{
 				Name = contractorModel.Name,
-				IsApproved = isUserAdmin ? true : false
+				IsApproved = isUserAdmin
 			};
 
 			await _repository.AddAsync<Contractor>(contractor);
@@ -33,7 +33,7 @@ namespace ConstructionSiteReportingSystem.Core.Services
 			var stage = new Stage()
 			{
 				Name = stageModel.Name,
-				IsApproved = isUserAdmin ? true : false
+				IsApproved = isUserAdmin
 			};
 
 			await _repository.AddAsync<Stage>(stage);
@@ -45,7 +45,7 @@ namespace ConstructionSiteReportingSystem.Core.Services
 			var unit = new Unit()
 			{
 				Type = unitModel.Type,
-				IsApproved = isUserAdmin ? true : false
+				IsApproved = isUserAdmin
 			};
 
 			await _repository.AddAsync<Unit>(unit);
@@ -57,7 +57,7 @@ namespace ConstructionSiteReportingSystem.Core.Services
 			var workType = new WorkType()
 			{
 				Name = workTypeModel.Name,
-				IsApproved = isUserAdmin ? true : false
+				IsApproved = isUserAdmin
 			};
 
 			await _repository.AddAsync<WorkType>(workType);
