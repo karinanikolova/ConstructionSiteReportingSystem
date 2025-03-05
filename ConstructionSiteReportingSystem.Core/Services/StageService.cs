@@ -44,15 +44,13 @@ namespace ConstructionSiteReportingSystem.Core.Services
 		public async Task<bool> AreThereStagesToApproveAsync()
 		{
 			return await _repository.AllReadOnly<Stage>()
-				.Where(s => s.IsApproved == false)
-				.AnyAsync();
+				.AnyAsync(s => !s.IsApproved);
 		}
 
 		public async Task<bool> DoesUnapprovedStageExistAsync(int stageId)
 		{
 			return await _repository.AllReadOnly<Stage>()
-				.Where(s => s.IsApproved == false)
-				.AnyAsync(s => s.Id == stageId);
+				.AnyAsync(s => s.Id == stageId && !s.IsApproved);
 		}
 
 		public async Task EditStageAsync(int stageId, StageAddFormModel stageModel)
