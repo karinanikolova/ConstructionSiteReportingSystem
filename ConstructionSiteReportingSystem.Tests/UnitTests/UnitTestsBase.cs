@@ -27,7 +27,7 @@ namespace ConstructionSiteReportingSystem.Tests.UnitTests
 
 		public IEnumerable<Unit> TestUnits { get; private set; }
 
-		public IEnumerable<WorkType> TestWorksTypes { get; private set; }
+		public IEnumerable<WorkType> TestWorkTypes { get; private set; }
 
 		public IEnumerable<Work> TestWorks { get; private set; }
 
@@ -231,7 +231,7 @@ namespace ConstructionSiteReportingSystem.Tests.UnitTests
 				new Unit()
 				{
 					Id = 5,
-					Type = "t",
+					Type = "ton",
 					IsApproved = false
 				}
 			};
@@ -242,7 +242,7 @@ namespace ConstructionSiteReportingSystem.Tests.UnitTests
 
 		private void SeedWorkTypes()
 		{
-			TestWorksTypes = new List<WorkType>()
+			TestWorkTypes = new List<WorkType>()
 			{
 				new WorkType()
 				{
@@ -276,7 +276,7 @@ namespace ConstructionSiteReportingSystem.Tests.UnitTests
 				}
 			};
 
-			_dbContext.WorksTypes.AddRange(TestWorksTypes);
+			_dbContext.WorksTypes.AddRange(TestWorkTypes);
 			_dbContext.SaveChanges();
 		}
 
@@ -389,7 +389,7 @@ namespace ConstructionSiteReportingSystem.Tests.UnitTests
 					Title = "Third Task Title",
 					Description = "Third Task Description",
 					CreatedOn = DateTime.Now.AddDays(-5),
-					CreatorId = "AdminUserId",
+					CreatorId = "TestAdminId",
 					Status = (Status)2
 				}
 			};
