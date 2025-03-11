@@ -4,6 +4,8 @@ using ConstructionSiteReportingSystem.Core.Services.Contracts;
 using ConstructionSiteReportingSystem.Infrastructure.Data.Utilities;
 using ConstructionSiteReportingSystem.Infrastructure.Data.Utilities.Contracts;
 using ConstructionSiteReportingSystem.Infrastructure.Enums;
+using NUnit.Framework;
+using System;
 
 namespace ConstructionSiteReportingSystem.Tests.UnitTests
 {
@@ -260,9 +262,9 @@ namespace ConstructionSiteReportingSystem.Tests.UnitTests
 
 			Assert.Multiple(() =>
 			{
-				Assert.That(taskAfterEdit!.Title, Is.EqualTo(taskAfterEdit.Title), "The evaluated task titles are not the same.");
-				Assert.That(taskAfterEdit!.Description, Is.EqualTo(taskAfterEdit.Description), "The evaluated task descriptions are not the same.");
-				Assert.That(taskAfterEdit!.StatusId, Is.EqualTo(taskAfterEdit.StatusId), "The evaluated task status ids are not equal.");
+				Assert.That(taskAfterEdit!.Title, Is.EqualTo(taskEditFormModel.Title), "The evaluated task titles are not the same.");
+				Assert.That(taskAfterEdit!.Description, Is.EqualTo(taskEditFormModel.Description), "The evaluated task descriptions are not the same.");
+				Assert.That(taskAfterEdit!.StatusId, Is.EqualTo(taskEditFormModel.StatusId), "The evaluated task status ids are not equal.");
 			});
 		}
 
@@ -280,7 +282,8 @@ namespace ConstructionSiteReportingSystem.Tests.UnitTests
 			Assert.Multiple(() =>
 			{
 				Assert.That(allTasksInDbAfterDeleting, Is.EqualTo(allTasksInDbBeforeDeleting - 1), "The task has not been removed from the database.");
-				Assert.That(tasksAfter.Tasks.FirstOrDefault(s => s.Id == taskToDelete.Id), Is.Null);
+				Assert.That(tasksAfter.Tasks.FirstOrDefault(s => s.Id == taskToDelete.Id), Is.Null,
+					"Task with a supposedly deleted id has been found.");
 			});
 		}
 	}
