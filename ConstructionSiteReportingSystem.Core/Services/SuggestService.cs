@@ -79,7 +79,7 @@ namespace ConstructionSiteReportingSystem.Core.Services
 		public async Task<bool> DoesUnitTypeExistAsync(string unitType)
 		{
 			return await _repository.AllReadOnly<Unit>()
-				.AnyAsync(s => s.Type == unitType);
+				.AnyAsync(u => u.Type == unitType);
 		}
 
 		public async Task<bool> DoesWorkTypeNameExistAsync(string workTypeName)
