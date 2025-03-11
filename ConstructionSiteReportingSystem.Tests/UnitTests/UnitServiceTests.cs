@@ -31,12 +31,12 @@ namespace ConstructionSiteReportingSystem.Tests.UnitTests
 
 			int i = default;
 
-			foreach (var stageResult in unitsResult.OrderBy(s => s.Id))
+			foreach (var unitResult in unitsResult.OrderBy(s => s.Id))
 			{
 				Assert.Multiple(() =>
 				{
-					Assert.That(stageResult.Id, Is.EqualTo(units[i].Id), "The evaluated unit ids are not equal.");
-					Assert.That(stageResult.Type, Is.EqualTo(units[i++].Type), "The evaluated unit types are not the same.");
+					Assert.That(unitResult.Id, Is.EqualTo(units[i].Id), "The evaluated unit ids are not equal.");
+					Assert.That(unitResult.Type, Is.EqualTo(units[i++].Type), "The evaluated unit types are not the same.");
 				});
 			}
 		}
@@ -76,7 +76,7 @@ namespace ConstructionSiteReportingSystem.Tests.UnitTests
 		[Test]
 		public async Task DoesUnapprovedUnitExistAsync_ShouldReturnTrue_WithValidUnitId()
 		{
-			var unapprovedUnitId = TestUnits.First(s => !s.IsApproved).Id;
+			var unapprovedUnitId = TestUnits.First(u => !u.IsApproved).Id;
 
 			var doesUnapprovedUnitExist = await _unitService.DoesUnapprovedUnitExistAsync(unapprovedUnitId);
 
