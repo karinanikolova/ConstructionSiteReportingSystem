@@ -45,9 +45,9 @@ namespace ConstructionSiteReportingSystem.Tests.UnitTests
 		public async Task GetForReviewViewModelAsync_ShouldReturnViewModelForPreview()
 		{
 			var areThereContractorsForReview = TestContractors.Any(c => !c.IsApproved);
-			var areThereStagesForReview = TestStages.Any(c => !c.IsApproved);
-			var areThereUnitsForReview = TestUnits.Any(c => !c.IsApproved);
-			var areThereWorkTypesForReview = TestWorkTypes.Any(c => !c.IsApproved);
+			var areThereStagesForReview = TestStages.Any(s => !s.IsApproved);
+			var areThereUnitsForReview = TestUnits.Any(u => !u.IsApproved);
+			var areThereWorkTypesForReview = TestWorkTypes.Any(wt => !wt.IsApproved);
 
 			var forReviewViewModel = await _homeService.GetForReviewViewModelAsync();
 
