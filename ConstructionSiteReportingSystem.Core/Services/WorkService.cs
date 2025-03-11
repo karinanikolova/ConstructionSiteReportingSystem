@@ -79,29 +79,25 @@ namespace ConstructionSiteReportingSystem.Core.Services
 		public async Task<bool> DoesWorkTypeExistAsync(int workTypeId)
 		{
 			return await _repository.AllReadOnly<WorkType>()
-				.Where(c => c.IsApproved == true)
-				.AnyAsync(wt => wt.Id == workTypeId);
+				.AnyAsync(wt => wt.Id == workTypeId && wt.IsApproved);
 		}
 
 		public async Task<bool> DoesStageExistAsync(int stageId)
 		{
 			return await _repository.AllReadOnly<Stage>()
-				.Where(c => c.IsApproved == true)
-				.AnyAsync(s => s.Id == stageId);
+				.AnyAsync(s => s.Id == stageId && s.IsApproved);
 		}
 
 		public async Task<bool> DoesContractorExistAsync(int contractorId)
 		{
 			return await _repository.AllReadOnly<Contractor>()
-				.Where(c => c.IsApproved == true)
-				.AnyAsync(c => c.Id == contractorId);
+				.AnyAsync(c => c.Id == contractorId && c.IsApproved);
 		}
 
 		public async Task<bool> DoesUnitExistAsync(int unitId)
 		{
 			return await _repository.AllReadOnly<Unit>()
-				.Where(c => c.IsApproved == true)
-				.AnyAsync(u => u.Id == unitId);
+				.AnyAsync(u => u.Id == unitId && u.IsApproved);
 		}
 
 		public async Task<bool> DoesWorkExistAsync(int workId)
