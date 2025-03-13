@@ -27,10 +27,17 @@
 					<div class="mb-3">
 						Finish date: @sites[i].FinishDate
 					</div>
-					<a asp-area="" asp-controller="ConstructionSite" asp-action="Site" asp-route-id="@sites[i].Id" asp-route-information="@sites[i].GetInformation()" class="btn btn-outline-primary" type="button">View Report</a>
 					@if (User.IsAdmin())
 					{
-						<a asp-area="Admin" asp-controller="ConstructionSite" asp-action="DeleteSite" asp-route-id="@sites[i].Id" class="btn btn-outline-danger" type="button">Delete Site</a>
+						<div class="btn-group" role="group" aria-label="Basic outlined example">
+							<a asp-area="" asp-controller="ConstructionSite" asp-action="Site" asp-route-id="@sites[i].Id" asp-route-information="@sites[i].GetInformation()" class="btn btn-outline-primary" type="button">View Report</a>
+							<a asp-area="Admin" asp-controller="ConstructionSite" asp-action="EditSite" asp-route-id="@sites[i].Id" class="btn btn-outline-primary" type="button">Edit Site</a>
+							<a asp-area="Admin" asp-controller="ConstructionSite" asp-action="DeleteSite" asp-route-id="@sites[i].Id" class="btn btn-outline-primary" type="button">Delete Site</a>
+						</div>
+					}
+					else
+					{
+						<a asp-area="" asp-controller="ConstructionSite" asp-action="Site" asp-route-id="@sites[i].Id" asp-route-information="@sites[i].GetInformation()" class="btn btn-outline-primary" type="button">View Report</a>
 					}
 				</div>
 			</div>
