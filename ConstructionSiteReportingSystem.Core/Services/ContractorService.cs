@@ -76,9 +76,8 @@ namespace ConstructionSiteReportingSystem.Core.Services
 			if (contractor != null)
 			{
 				contractor.Name = contractorModel.Name;
+				await _repository.SaveChangesAsync();
 			}
-
-			await _repository.SaveChangesAsync();
 		}
 
 		public async Task<bool> DoesUnapprovedContractorExistAsync(int contractorId)
