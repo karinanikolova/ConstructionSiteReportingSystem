@@ -3,6 +3,7 @@ using ConstructionSiteReportingSystem.Core.Models.Work;
 using ConstructionSiteReportingSystem.Core.Services.Contracts;
 using ConstructionSiteReportingSystem.Infrastructure.Data.Models;
 using ConstructionSiteReportingSystem.Infrastructure.Data.Utilities.Contracts;
+using Microsoft.AspNetCore.Routing;
 using Microsoft.EntityFrameworkCore;
 using Task = System.Threading.Tasks.Task;
 
@@ -60,9 +61,8 @@ namespace ConstructionSiteReportingSystem.Core.Services
 			if (workType != null)
 			{
 				workType.Name = workTypeModel.Name;
+				await _repository.SaveChangesAsync();
 			}
-
-			await _repository.SaveChangesAsync();
 		}
 
 		public async Task<WorkTypeAddFormModel?> GetWorkTypeAddFormModelByIdAsync(int workTypeId)
