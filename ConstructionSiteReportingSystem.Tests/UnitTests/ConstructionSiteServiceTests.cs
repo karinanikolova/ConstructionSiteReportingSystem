@@ -129,7 +129,7 @@ namespace ConstructionSiteReportingSystem.Tests.UnitTests
 		{
 			var allSitesInDbBeforeCreating = TestSites.Count();
 
-			var newSite = new SiteAddFormModel()
+			var newSite = new SiteFormModel()
 			{
 				Name = "New Site Name",
 				FinishDate = "05/07/2025",
@@ -253,6 +253,29 @@ namespace ConstructionSiteReportingSystem.Tests.UnitTests
 					Assert.That(workResult.Creator, Is.EqualTo(work.Creator), "The evaluated work creators are not the same.");
 				});
 			}
+		}
+
+		[Test]
+		public async Task EditSiteAsync_ShouldEditSuccessfully_WithValidMethodArguments()
+		{
+			var siteId = TestWorks.Skip(1).Take(1).First().Id;
+
+			var siteFormModel = new SiteFormModel()
+			{
+				Name = "Edited Construction Site Name",
+				FinishDate = "05/04/2025",
+				ImageUrl = "https://images.pexels.com/photos/1078884/pexels-photo-1078884.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
+			};
+
+			await _constructionSiteService.EditSiteAsync(siteId, siteFormModel, DateTime.ParseExact(siteFormModel.FinishDate, DateTimePreferredFormat, CultureInfo.InvariantCulture, DateTimeStyles.None));
+			var siteAfterEdit = await _constructionSiteService.GetSiteFormModelByIdAsync(siteId);
+
+			Assert.Multiple(() =>
+			{
+				Assert.That(siteAfterEdit!.Name, Is.EqualTo(siteFormModel.Name), "The evaluated site names are not the same.");
+				Assert.That(siteAfterEdit!.FinishDate, Is.EqualTo(siteFormModel.FinishDate), "The evaluated site finish dates are not equal.");
+				Assert.That(siteAfterEdit!.ImageUrl, Is.EqualTo(siteFormModel.ImageUrl), "The evaluated site image URLs are not the same.");
+			});
 		}
 	}
 }
