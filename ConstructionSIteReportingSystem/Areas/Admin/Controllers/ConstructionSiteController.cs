@@ -25,12 +25,22 @@ namespace ConstructionSiteReportingSystem.Areas.Admin.Controllers
 		[HttpGet]
 		public async Task<IActionResult> AddSite()
 		{
-			return View(new SiteAddFormModel());
+			if (User.IsAdmin() == false)
+			{
+				return Unauthorized();
+			}
+
+			return View(new SiteFormModel());
 		}
 
 		[HttpPost]
-		public async Task<IActionResult> AddSite(SiteAddFormModel siteModel)
+		public async Task<IActionResult> AddSite(SiteFormModel siteModel)
 		{
+			if (User.IsAdmin() == false)
+			{
+				return Unauthorized();
+			}
+
 			if (string.IsNullOrWhiteSpace(siteModel.Name))
 			{
 				ModelState.AddModelError(nameof(siteModel.Name), "A construction site name cannot contain only white space characters");
@@ -121,6 +131,78 @@ namespace ConstructionSiteReportingSystem.Areas.Admin.Controllers
 					}
 				}
 			}
+
+			return RedirectToAction("All", "ConstructionSite", new { area = "" });
+		}
+
+		[HttpGet]
+		public async Task<IActionResult> EditSite(int id)
+		{
+			if (User.IsAdmin() == false)
+			{
+				return Unauthorized();
+			}
+
+			var site = await _constructionSiteService.GetSiteFormModelByIdAsync(id);
+
+			if (site == null)
+			{
+				return BadRequest();
+			}
+
+			return View(site);
+		}
+
+		[HttpPost]
+		public async Task<IActionResult> EditSite(int id, SiteFormModel siteModel)
+		{
+			if (await _constructionSiteService.DoesSiteExistAsync(id) == false)
+			{
+				return BadRequest();
+			}
+
+			if (User.IsAdmin() == false)
+			{
+				return Unauthorized();
+			}
+
+			if (string.IsNullOrWhiteSpace(siteModel.Name))
+			{
+				ModelState.AddModelError(nameof(siteModel.Name), "A construction site name cannot contain only white space characters");
+
+				return View(siteModel);
+			}
+
+			siteModel.Name = siteModel.Name.Trim();
+
+			Regex siteNameRegex = new Regex(DataConstants.Site.NameMatchRegex);
+
+			if (!siteNameRegex.IsMatch(siteModel.Name))
+			{
+				ModelState.AddModelError(nameof(siteModel.Name), "The construction site name suggestion is not valid");
+
+				return View(siteModel);
+			}
+
+			if (await _constructionSiteService.DoesSiteNameExistAsync(siteModel.Name) == true)
+			{
+				ModelState.AddModelError(nameof(siteModel.Name), "A construction site with the given name already exists");
+			}
+
+			DateTime date;
+			bool isDateValid = DateTime.TryParseExact(siteModel.FinishDate, DateTimePreferredFormat, CultureInfo.InvariantCulture, DateTimeStyles.None, out date);
+
+			if (!isDateValid || date.Year < DateTime.UtcNow.Year)
+			{
+				ModelState.AddModelError(nameof(siteModel.FinishDate), "The specified date is not valid");
+			}
+
+			if (!ModelState.IsValid)
+			{
+				return View(siteModel);
+			}
+
+			await _constructionSiteService.EditSiteAsync(id, siteModel, date);
 
 			return RedirectToAction("All", "ConstructionSite", new { area = "" });
 		}
