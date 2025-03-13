@@ -60,9 +60,8 @@ namespace ConstructionSiteReportingSystem.Tests.UnitTests
 			var unit = TestUnits.First(s => !s.IsApproved);
 
 			await _unitService.ApproveUnitAsync(unit.Id);
-			var isApprovedAfterChange = unit.IsApproved;
 
-			Assert.That(isApprovedAfterChange, Is.True);
+			Assert.That(unit.IsApproved, Is.True);
 		}
 
 		[Test]
@@ -101,8 +100,8 @@ namespace ConstructionSiteReportingSystem.Tests.UnitTests
 		[Test]
 		public async Task RemoveUnitAsync_ShouldRemoveSuccessfully_WithValidUnitId()
 		{
-			var unitIdToRemove = TestUnits.First(c => !c.IsApproved).Id;
-			var unitsCountBeforeRemoving = TestUnits.Where(c => !c.IsApproved).Count();
+			var unitIdToRemove = TestUnits.First(u => !u.IsApproved).Id;
+			var unitsCountBeforeRemoving = TestUnits.Where(u => !u.IsApproved).Count();
 
 			await _unitService.RemoveUnitAsync(unitIdToRemove);
 
@@ -111,7 +110,7 @@ namespace ConstructionSiteReportingSystem.Tests.UnitTests
 			Assert.Multiple(() =>
 			{
 				Assert.That(unitsAfterRemoving.Count(), Is.EqualTo(unitsCountBeforeRemoving - 1), "The unit has not been removed from the database.");
-				Assert.That(unitsAfterRemoving.FirstOrDefault(c => c.Id == unitIdToRemove), Is.Null, "There is a unit found with the removed id.");
+				Assert.That(unitsAfterRemoving.FirstOrDefault(u => u.Id == unitIdToRemove), Is.Null, "There is a unit found with the removed id.");
 			});
 		}
 	}
