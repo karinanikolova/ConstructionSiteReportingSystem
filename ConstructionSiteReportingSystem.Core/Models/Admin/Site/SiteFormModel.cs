@@ -4,7 +4,7 @@ using static ConstructionSiteReportingSystem.Core.Constants.MessageConstants;
 
 namespace ConstructionSiteReportingSystem.Core.Models.Admin.Site
 {
-    public class SiteAddFormModel
+    public class SiteFormModel
     {
         [Required(ErrorMessage = RequiredFieldMessage)]
         [StringLength(NameMaxLength, MinimumLength = NameMinLength, ErrorMessage = FieldLengthMessage)]
