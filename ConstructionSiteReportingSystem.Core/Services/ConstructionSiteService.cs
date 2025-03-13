@@ -131,7 +131,7 @@ namespace ConstructionSiteReportingSystem.Core.Services
 			return site.GetInformation();
 		}
 
-		public async Task CreateSiteAsync(SiteAddFormModel siteModel, DateTime finishDate)
+		public async Task CreateSiteAsync(SiteFormModel siteModel, DateTime finishDate)
 		{
 			var site = new Site()
 			{
@@ -141,6 +141,20 @@ namespace ConstructionSiteReportingSystem.Core.Services
 			};
 
 			await _repository.AddAsync<Site>(site);
+			await _repository.SaveChangesAsync();
+		}
+
+		public async Task EditSiteAsync(int siteId, SiteFormModel siteModel, DateTime finishDate)
+		{
+			var site = await _repository.GetByIdAsync<Site>(siteId);
+
+			if (site != null)
+			{
+				site.Name = siteModel.Name;
+				site.FinishDate = finishDate;
+				site.ImageUrl = siteModel.ImageUrl;
+			}
+
 			await _repository.SaveChangesAsync();
 		}
 
@@ -171,6 +185,16 @@ namespace ConstructionSiteReportingSystem.Core.Services
 				WorksCount = s.Works.Select(w => w.Id).Count(),
 				WorkIds = s.Works.Select(w => w.Id),
 				UsersPostedCount = s.Works.Select(c => c.CreatorId).Distinct().Count()
+			})
+			.FirstOrDefaultAsync();
+
+		public async Task<SiteFormModel?> GetSiteFormModelByIdAsync(int siteId) => await _repository.AllReadOnly<Site>()
+			.Where(s => s.Id == siteId)
+			.Select(s => new SiteFormModel()
+			{
+				Name = s.Name,
+				FinishDate = DateTimeConverter.ConvertDateToString(s.FinishDate),
+				ImageUrl = s.ImageUrl
 			})
 			.FirstOrDefaultAsync();
 
