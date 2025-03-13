@@ -71,9 +71,8 @@ namespace ConstructionSiteReportingSystem.Core.Services
 			if (unit != null)
 			{
 				unit.Type = unitModel.Type;
+				await _repository.SaveChangesAsync();
 			}
-
-			await _repository.SaveChangesAsync();
 		}
 
 		public async Task RemoveUnitAsync(int unitId)
