@@ -47,9 +47,8 @@ namespace ConstructionSiteReportingSystem.Tests.UnitTests
 			var stage = TestStages.First(s => !s.IsApproved);
 
 			await _stageService.ApproveStageAsync(stage.Id);
-			var isApprovedAfterChange = stage.IsApproved;
 
-			Assert.That(isApprovedAfterChange, Is.True);
+			Assert.That(stage.IsApproved, Is.True);
 		}
 
 		[Test]
@@ -101,8 +100,8 @@ namespace ConstructionSiteReportingSystem.Tests.UnitTests
 		[Test]
 		public async Task RemoveStageAsync_ShouldRemoveSuccessfully_WithValidStageId()
 		{
-			var stageIdToRemove = TestStages.First(c => !c.IsApproved).Id;
-			var stagesCountBeforeRemoving = TestStages.Where(c => !c.IsApproved).Count();
+			var stageIdToRemove = TestStages.First(s => !s.IsApproved).Id;
+			var stagesCountBeforeRemoving = TestStages.Where(s => !s.IsApproved).Count();
 
 			await _stageService.RemoveStageAsync(stageIdToRemove);
 
@@ -111,7 +110,7 @@ namespace ConstructionSiteReportingSystem.Tests.UnitTests
 			Assert.Multiple(() =>
 			{
 				Assert.That(stagesAfterRemoving.Count(), Is.EqualTo(stagesCountBeforeRemoving - 1), "The stage has not been removed from the database.");
-				Assert.That(stagesAfterRemoving.FirstOrDefault(c => c.Id == stageIdToRemove), Is.Null, "There is a stage found with the removed id.");
+				Assert.That(stagesAfterRemoving.FirstOrDefault(s => s.Id == stageIdToRemove), Is.Null, "There is a stage found with the removed id.");
 			});
 		}
 	}
