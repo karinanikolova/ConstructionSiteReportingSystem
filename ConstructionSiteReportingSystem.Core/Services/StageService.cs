@@ -60,9 +60,8 @@ namespace ConstructionSiteReportingSystem.Core.Services
 			if (stage != null)
 			{
 				stage.Name = stageModel.Name;
+				await _repository.SaveChangesAsync();
 			}
-
-			await _repository.SaveChangesAsync();
 		}
 
 		public async Task<StageAddFormModel?> GetStageAddFormModelByIdAsync(int stageId)
