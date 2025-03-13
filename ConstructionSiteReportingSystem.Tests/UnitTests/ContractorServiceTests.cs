@@ -22,24 +22,27 @@ namespace ConstructionSiteReportingSystem.Tests.UnitTests
 		[Test]
 		public async Task GetContractorsForReviewAsync_ShouldReturnAllContractorsForReview()
 		{
-			var contractors = TestContractors.Where(c => !c.IsApproved).OrderBy(c => c.Id).ToArray();
+			var contractors = TestContractors.Where(c => !c.IsApproved).ToArray();
 			var contractorsResult = await _contractorService.GetContractorsForReviewAsync();
 
 			var contractorsCount = contractors.Count();
 			var contractorsResultCount = contractorsResult.Count();
 
-			Assert.That(contractorsResult, Is.Not.Null, "The tested service returned a null result for contractors for review.");
-			Assert.That(contractorsCount, Is.EqualTo(contractorsResultCount), "The evaluated collections count are not equal.");
-
-			if (contractorsCount == contractorsResultCount)
+			Assert.Multiple(() =>
 			{
-				int i = default;
+				Assert.That(contractorsResult, Is.Not.Null, "The tested service returned a null result for contractors for review.");
+				Assert.That(contractorsCount, Is.EqualTo(contractorsResultCount), "The evaluated collections count are not equal.");
+			});
 
-				foreach (var contractorResult in contractorsResult)
+			int i = default;
+
+			foreach (var contractorResult in contractorsResult.OrderBy(c => c.Id))
+			{
+				Assert.Multiple(() =>
 				{
 					Assert.That(contractorResult.Id, Is.EqualTo(contractors[i].Id), "The evaluated contractor ids are not equal.");
 					Assert.That(contractorResult.Name, Is.EqualTo(contractors[i++].Name), "The evaluated contractor names are not the same.");
-				}
+				});
 			}
 		}
 
