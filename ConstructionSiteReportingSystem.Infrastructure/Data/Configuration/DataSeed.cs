@@ -67,7 +67,7 @@ namespace ConstructionSiteReportingSystem.Infrastructure.Data.Configuration
                 Id = 1,
                 UserId = "32f9a0f0-4d62-4573-96e3-fbb7ad7f321f",
                 ClaimType = UserFirstLastNameClaim,
-                ClaimValue = "Konstantin Kirilov",
+                ClaimValue = "Konstantin Georgiev",
             };
 
             testUser.PasswordHash = hasher.HashPassword(testUser, "Test123!");
@@ -91,7 +91,7 @@ namespace ConstructionSiteReportingSystem.Infrastructure.Data.Configuration
                 Id = 2,
                 UserId = "a615552b-5981-4730-be32-12c087492aef",
                 ClaimType = UserFirstLastNameClaim,
-                ClaimValue = "Ivan Metodiev",
+                ClaimValue = "Ivan Petrov",
             };
 
             guestUser.PasswordHash = hasher.HashPassword(guestUser, "Guest123!");
@@ -696,7 +696,7 @@ namespace ConstructionSiteReportingSystem.Infrastructure.Data.Configuration
                     Id = 2,
                     Title = "New project documentation",
                     Description = "Should start looking through documentation and drawings of upcoming project",
-                    CreatedOn = DateTime.Now.AddDays(30),
+                    CreatedOn = DateTime.Now.AddDays(-30),
                     CreatorId = "32f9a0f0-4d62-4573-96e3-fbb7ad7f321f",
                     Status = (Status)0
                 },
@@ -732,7 +732,7 @@ namespace ConstructionSiteReportingSystem.Infrastructure.Data.Configuration
                     Id = 6,
                     Title = "Formwork",
                     Description = "Call Doka representative and order more formwork for site",
-                    CreatedOn = DateTime.Now.AddDays(5),
+                    CreatedOn = DateTime.Now.AddDays(-5),
                     CreatorId = "a615552b-5981-4730-be32-12c087492aef",
                     Status = (Status)0
                 },
