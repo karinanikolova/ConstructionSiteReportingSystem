@@ -24,7 +24,7 @@ namespace ConstructionSiteReportingSystem.Infrastructure.Data
 		public DbSet<Task> Tasks { get; set; }
 		public DbSet<Unit> Units { get; set; }
 		public DbSet<Work> Works { get; set; }
-		public DbSet<WorkType> WorksTypes { get; set; }
+		public DbSet<WorkType> WorkTypes { get; set; }
 
 		// Overriding the SaveChanges method in order to achieve soft delete.
 		public override int SaveChanges(bool acceptAllChangesOnSuccess)
