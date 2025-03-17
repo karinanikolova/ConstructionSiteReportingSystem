@@ -276,7 +276,7 @@ namespace ConstructionSiteReportingSystem.Tests.UnitTests
 				}
 			};
 
-			_dbContext.WorksTypes.AddRange(TestWorkTypes);
+			_dbContext.WorkTypes.AddRange(TestWorkTypes);
 			_dbContext.SaveChanges();
 		}
 
