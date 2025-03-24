@@ -11,7 +11,7 @@
 </div>
 
 <form method="get">
-	<div class="row">
+	<div class="row mb-3 d-flex text-center">
 		<div class="form-group col-md-3 d-flex justify-content-between">
 			<div class="form-group">
 				<label asp-for="Status"></label>
@@ -51,8 +51,8 @@
 			</div>
 		</div>
 
-		<div class="col-md-3">
-			<div class="form-group mt-4 p-2">
+		<div class="col-md-3 d-flex justify-content-end">
+			<div class="form-group align-self-end">
 				<input type="submit" value="Filter" class="btn btn-outline-primary" />
 			</div>
 		</div>
@@ -70,7 +70,7 @@
 		AllTasksQueryModel.TasksPerPage);
 }
 
-<div class="row mb-5">
+<div class="row mb-3">
 	<div class="col-md-6 d-grid gap-2 d-md-flex justify-content-md-start">
 		<a class="btn btn-primary @(Model.CurrentPage == 1 ? "disabled" : string.Empty)"
 		   asp-controller="Task"
@@ -103,6 +103,10 @@
 		   asp-route-searchTerm="@Model.SearchTerm"
 		   asp-route-sorting="@((int)Model.Sorting)">>></a>
 	</div>
+</div>
+
+<div class="pb-3 d-flex justify-content-end">
+	<a asp-area="" asp-controller="Task" asp-action="AddTask" tabindex="0" class="btn btn-outline-primary" role="button" data-bs-toggle="popover" data-bs-placement="left" data-bs-trigger="hover focus" data-bs-content="Add new Task">🞥</a>
 </div>
 
 @if (!Model.Tasks.Any())
