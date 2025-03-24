@@ -4,9 +4,6 @@
 		<li class="nav-item">
 			<a class="nav-link text-dark" asp-area="" asp-controller="ConstructionSite" asp-action="All">Construction Sites</a>
 		</li>
-		<li class="nav-item">
-			<a class="nav-link text-dark" asp-area="" asp-controller="Work" asp-action="AddWork">Add Work</a>
-		</li>
 		<li class="nav-item dropdown">
 			<a class="nav-link text-dark dropdown-toggle" role="button" data-bs-toggle="dropdown" aria-expanded="false">
 				Suggest
@@ -20,9 +17,6 @@
 		</li>
 		<li class="nav-item">
 			<a class="nav-link text-dark" asp-area="" asp-controller="Task" asp-action="All">Tasks</a>
-		</li>
-		<li class="nav-item">
-			<a class="nav-link text-dark" asp-area="" asp-controller="Task" asp-action="AddTask">Add Task</a>
 		</li>
 
 		@if (User.IsInRole(AdminRole))
