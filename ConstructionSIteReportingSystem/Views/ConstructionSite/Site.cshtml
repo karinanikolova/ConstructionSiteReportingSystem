@@ -11,7 +11,7 @@
 </div>
 
 <form method="get">
-	<div class="row">
+	<div class="row mb-3 d-flex text-center">
 		<div class="form-group col-md-3 d-flex justify-content-between">
 			<div class="form-group">
 				<label asp-for="Stage"></label>
@@ -43,8 +43,8 @@
 			</div>
 		</div>
 
-		<div class="col-md-3">
-			<div class="form-group mt-4 p-2">
+		<div class="col-md-3 d-flex justify-content-end">
+			<div class="form-group align-self-center">
 				<input type="submit" value="Filter" class="btn btn-outline-primary" />
 			</div>
 		</div>
@@ -97,6 +97,10 @@
 		   asp-route-searchDate="@Model.SearchDate"
 		   asp-route-sorting="@((int)Model.Sorting)">>></a>
 	</div>
+</div>
+
+<div class="d-flex mt-5 justify-content-end">
+	<a asp-area="" asp-controller="Work" asp-action="AddWork" tabindex="0" class="btn btn-outline-primary" role="button" data-bs-toggle="popover" data-bs-placement="left" data-bs-trigger="hover focus" data-bs-content="Add new Work">🞥</a>
 </div>
 
 <table class="table table-hover">
