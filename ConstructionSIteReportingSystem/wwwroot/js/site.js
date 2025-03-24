@@ -1,9 +1,41 @@
-﻿// Please see documentation at https://docs.microsoft.com/aspnet/core/client-side/bundling-and-minification
-// for details on configuring this project to bundle and minify static web assets.
+﻿document.addEventListener("DOMContentLoaded", function () {
+    const popoverTriggerList = document.querySelectorAll('[data-bs-toggle="popover"]');
+    const popoverList = [...popoverTriggerList].map(popoverTriggerEl => new bootstrap.Popover(popoverTriggerEl));
 
-// Write your JavaScript code.
+    const plusBtnList = document.querySelectorAll('button[data-btn-for]');
 
-let message = function () {
+    for (const btn of plusBtnList) {
+        btn.addEventListener('click', btnEventHandler);
+    }
+
+    function btnEventHandler(e) {
+        const proceedBtn = e.target.closest('#workForm').querySelector('#addEditWork a');
+        const proceedMsgPar = e.target.closest('#workForm').querySelector('#addEditWork p');
+
+        if (e.target.dataset.btnFor === 'workType') {
+            proceedBtn.href = '/Suggest/WorkType';
+            proceedMsgPar.textContent = 'You are about to be redirected to another page. All filled-in data will be lost. Do you wish to proceed and suggest a new construction and assembly work type?';
+
+        } else if (e.target.dataset.btnFor === 'stage') {
+            proceedBtn.href = '/Suggest/Stage';
+            proceedMsgPar.textContent = 'You are about to be redirected to another page. All filled-in data will be lost. Do you wish to proceed and suggest a new construction stage?';
+
+        } else if (e.target.dataset.btnFor === 'contractor') {
+            proceedBtn.href = '/Suggest/Contractor';
+            proceedMsgPar.textContent = 'You are about to be redirected to another page. All filled-in data will be lost. Do you wish to proceed and suggest a new contractor?';
+
+        } else if (e.target.dataset.btnFor === 'unit') {
+            proceedBtn.href = '/Suggest/Unit';
+            proceedMsgPar.textContent = 'You are about to be redirected to another page. All filled-in data will be lost. Do you wish to proceed and suggest a new measurement unit?';
+        }
+    }
+});
+
+let message = (function () {
+    if (typeof toastr === "undefined") {
+        return;
+    }
+
     toastr.options = {
         "closeButton": true,
         "debug": false,
@@ -20,13 +52,11 @@ let message = function () {
         "hideEasing": "linear",
         "showMethod": "fadeIn",
         "hideMethod": "fadeOut"
-    }
+    };
 
     let showInfo = function (message) {
         toastr["info"](message);
-    }
+    };
 
-    return {
-        showInfo
-    }
-}();
+    return { showInfo };
+})();
