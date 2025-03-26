@@ -6,7 +6,7 @@ using ConstructionSiteReportingSystem.Core.Common;
 
 namespace ConstructionSiteReportingSystem.Controllers
 {
-    public class ConstructionSiteController : BaseController
+	public class ConstructionSiteController : BaseController
 	{
 		private readonly ILogger<ConstructionSiteController> _logger;
 		private readonly IConstructionSiteService _constructionSiteService;
@@ -26,7 +26,7 @@ namespace ConstructionSiteReportingSystem.Controllers
 		}
 
 		[HttpGet]
-		public async Task<IActionResult> Site(int id, string information, [FromQuery]SiteQueryModel model)
+		public async Task<IActionResult> Site(int id, string information, [FromQuery] SiteQueryModel model)
 		{
 			var site = await _constructionSiteService.GetSiteAsync(
 				id,
@@ -43,6 +43,7 @@ namespace ConstructionSiteReportingSystem.Controllers
 
 			model.TotalWorksCount = site.TotalWorksCount;
 			model.Works = site.Works;
+			model.Id = id;
 			model.Name = site.SiteName;
 			model.ConstructionFinishDate = site.ConstructionFinishDate;
 			model.Stages = await _constructionSiteService.GetAllStagesNamesAsync();
