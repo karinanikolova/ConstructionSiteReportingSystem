@@ -8,7 +8,7 @@ using static ConstructionSiteReportingSystem.Core.Constants.ValidationConstants;
 
 namespace ConstructionSiteReportingSystem.Controllers
 {
-    public class WorkController : BaseController
+	public class WorkController : BaseController
 	{
 		private readonly ILogger<WorkController> _logger;
 		private readonly IWorkService _workService;
@@ -22,9 +22,15 @@ namespace ConstructionSiteReportingSystem.Controllers
 		}
 
 		[HttpGet]
-		public async Task<IActionResult> AddWork()
+		public async Task<IActionResult> AddWork(int id)
 		{
-			var sites = await _workService.GetAllSiteServiceModelsAsync();
+			var site = await _workService.GetSiteServiceModelByIdAsync(id);
+
+			if (site == null)
+			{
+				return BadRequest();
+			}
+
 			var workTypes = await _workService.GetAllWorkTypesAsync();
 			var stages = await _workService.GetAllStagesAsync();
 			var contractors = await _workService.GetAllContractorsAsync();
@@ -32,12 +38,14 @@ namespace ConstructionSiteReportingSystem.Controllers
 
 			var workModel = new WorkAddFormModel()
 			{
-				Sites = sites,
+				SiteId = site.Id,
 				WorkTypes = workTypes,
 				Stages = stages,
 				Contractors = contractors,
 				Units = units
 			};
+
+			workModel.Sites.Add(site);
 
 			return View(workModel);
 		}
@@ -80,7 +88,9 @@ namespace ConstructionSiteReportingSystem.Controllers
 
 			if (!ModelState.IsValid)
 			{
-				workModel.Sites = await _workService.GetAllSiteServiceModelsAsync();
+				var sites = await _workService.GetAllSiteServiceModelsAsync();
+
+				workModel.Sites.Add(sites.First());
 				workModel.WorkTypes = await _workService.GetAllWorkTypesAsync();
 				workModel.Stages = await _workService.GetAllStagesAsync();
 				workModel.Contractors = await _workService.GetAllContractorsAsync();
@@ -91,11 +101,11 @@ namespace ConstructionSiteReportingSystem.Controllers
 
 			var userId = User.Id();
 
-			var siteId = await _workService.CreateWorkAsync(workModel, date, userId);
+			await _workService.CreateWorkAsync(workModel, date, userId);
 
-			var siteInformation = await _constructionSiteService.GetSiteInformationAsync(siteId);
+			var siteInformation = await _constructionSiteService.GetSiteInformationAsync(workModel.SiteId);
 
-			return RedirectToAction("Site", "ConstructionSite", new {id = siteId, information = siteInformation, model = new SiteQueryModel()});
+			return RedirectToAction("Site", "ConstructionSite", new { id = workModel.SiteId, information = siteInformation, model = new SiteQueryModel() });
 		}
 
 		[HttpGet]
@@ -178,7 +188,7 @@ namespace ConstructionSiteReportingSystem.Controllers
 			var siteId = workModel.SiteId;
 
 			var siteInformation = await _constructionSiteService.GetSiteInformationAsync(siteId);
-			
+
 			return RedirectToAction("Site", "ConstructionSite", new { id = siteId, information = siteInformation, model = new SiteQueryModel() });
 		}
 
