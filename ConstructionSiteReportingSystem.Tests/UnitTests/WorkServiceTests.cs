@@ -27,6 +27,22 @@ namespace ConstructionSiteReportingSystem.Tests.UnitTests
 		}
 
 		[Test]
+		public async Task GetSiteServiceModelByIdAsync_ShouldReturnCorrectServiceModel_WithValidSiteId()
+		{
+			var site = TestSites.First();
+
+			var siteServiceResult = await _workService.GetSiteServiceModelByIdAsync(site.Id);
+
+			Assert.That(siteServiceResult, Is.Not.Null, "The tested service returned a null result.");
+
+			Assert.Multiple(() =>
+			{
+				Assert.That(siteServiceResult.Id, Is.EqualTo(site.Id), "The evaluated site ids are not equal.");
+				Assert.That(siteServiceResult.Name, Is.EqualTo(site.Name), "The evaluated site names are not the same.");
+			});
+		}
+
+		[Test]
 		public async Task GetAllSiteServiceModelsAsync_ShouldReturnAllServiceModels()
 		{
 			var sites = TestSites;
@@ -230,7 +246,7 @@ namespace ConstructionSiteReportingSystem.Tests.UnitTests
 				Quantity = 100,
 				UnitId = 4,
 				CostPerUnit = 15.35M,
-				TotalCost = (decimal)100 * 15.35M
+				TotalCost = 100M * 15.35M
 			};
 
 			var date = DateTime.ParseExact(newWork.CarryOutDate, DateTimePreferredFormat, CultureInfo.InvariantCulture);
