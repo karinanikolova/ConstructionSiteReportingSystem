@@ -5,13 +5,8 @@
 		<form method="post">
 			<div class="form-group">
 				<label asp-for="SiteId"></label>
-				<select asp-for="SiteId" class="form-control">
-					@foreach (var site in Model.Sites)
-					{
-						<option value="@site.Id">@site.Name</option>
-					}
-				</select>
-				<span asp-validation-for="SiteId" class="small text-danger"></span>
+				<input asp-for="SiteId" class="form-control" type="text" value="@Model.Sites.First().Name" disabled />
+				<input asp-for="SiteId" type="hidden" />
 			</div>
 			<div class="form-group">
 				<div class="d-flex">
