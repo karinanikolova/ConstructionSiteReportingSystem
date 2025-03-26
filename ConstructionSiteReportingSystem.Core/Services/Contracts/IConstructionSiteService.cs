@@ -16,7 +16,7 @@ namespace ConstructionSiteReportingSystem.Core.Services.Contracts
 
 		Task<bool> DoesSiteNameExistAsync(string siteName);
 
-		Task<bool> DoesSiteExistAsync(int siteId);
+		Task<bool> DoesSiteExistAsync(int? siteId);
 
 		Task CreateSiteAsync(SiteFormModel siteModel, DateTime finishDate);
 
