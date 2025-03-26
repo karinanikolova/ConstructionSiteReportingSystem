@@ -5,7 +5,9 @@ namespace ConstructionSiteReportingSystem.Core.Services.Contracts
 {
     public interface IWorkService
     {
-        Task<IEnumerable<SiteServiceModel>> GetAllSiteServiceModelsAsync();
+		Task<SiteServiceModel?> GetSiteServiceModelByIdAsync(int siteId);
+
+		Task<List<SiteServiceModel>> GetAllSiteServiceModelsAsync();
 
         Task<IEnumerable<WorkTypeServiceModel>> GetAllWorkTypesAsync();
 
@@ -29,7 +31,7 @@ namespace ConstructionSiteReportingSystem.Core.Services.Contracts
 
         Task<bool> DoesWorkExistAsync(int workId);
 
-        Task<int> CreateWorkAsync(WorkAddFormModel workModel, DateTime carryOutDate, string userId);
+        Task CreateWorkAsync(WorkAddFormModel workModel, DateTime carryOutDate, string userId);
 
         Task EditWorkAsync(int workId, WorkEditFormModel workModel, DateTime carryOutDate);
 
