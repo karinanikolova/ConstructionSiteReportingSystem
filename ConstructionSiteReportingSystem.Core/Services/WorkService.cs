@@ -17,7 +17,19 @@ namespace ConstructionSiteReportingSystem.Core.Services
 			_repository = repository;
 		}
 
-		public async Task<IEnumerable<SiteServiceModel>> GetAllSiteServiceModelsAsync()
+		public async Task<SiteServiceModel?> GetSiteServiceModelByIdAsync(int siteId)
+		{
+			return await _repository.AllReadOnly<Site>()
+				.Where(s => s.Id == siteId)
+				.Select(s => new SiteServiceModel()
+				{
+					Id = s.Id,
+					Name = s.Name
+				})
+				.FirstOrDefaultAsync();
+		}
+
+		public async Task<List<SiteServiceModel>> GetAllSiteServiceModelsAsync()
 		{
 			return await _repository.AllReadOnly<Site>()
 				.Select(s => new SiteServiceModel()
@@ -25,6 +37,7 @@ namespace ConstructionSiteReportingSystem.Core.Services
 					Id = s.Id,
 					Name = s.Name
 				})
+				.OrderBy(s => s.Name)
 				.ToListAsync();
 		}
 
@@ -37,42 +50,46 @@ namespace ConstructionSiteReportingSystem.Core.Services
 					Id = c.Id,
 					Name = c.Name 
 				})
+				.OrderBy(c => c.Name)
 				.ToListAsync();
 		}
 
 		public async Task<IEnumerable<StageServiceModel>> GetAllStagesAsync()
 		{
 			return await _repository.AllReadOnly<Stage>()
-				.Where(c => c.IsApproved == true)
+				.Where(s => s.IsApproved == true)
 				.Select(s => new StageServiceModel()
 				{
 					Id = s.Id,
 					Name = s.Name
 				})
+				.OrderBy(s => s.Name)
 				.ToListAsync();
 		}
 
 		public async Task<IEnumerable<UnitServiceModel>> GetAllUnitsAsync()
 		{
 			return await _repository.AllReadOnly<Unit>()
-				.Where(c => c.IsApproved == true)
+				.Where(u => u.IsApproved == true)
 				.Select(u => new UnitServiceModel()
 				{
 					Id = u.Id,
 					Type = u.Type
 				})
+				.OrderBy(u => u.Type)
 				.ToListAsync();
 		}
 
 		public async Task<IEnumerable<WorkTypeServiceModel>> GetAllWorkTypesAsync()
 		{
 			return await _repository.AllReadOnly<WorkType>()
-				.Where(c => c.IsApproved == true)
+				.Where(wt => wt.IsApproved == true)
 				.Select(wt => new WorkTypeServiceModel()
 				{
 					Id = wt.Id,
 					Name = wt.Name
 				})
+				.OrderBy(wt => wt.Name)
 				.ToListAsync();
 		}
 
@@ -158,7 +175,7 @@ namespace ConstructionSiteReportingSystem.Core.Services
 			})
 			.FirstOrDefaultAsync();
 
-		public async Task<int> CreateWorkAsync(WorkAddFormModel workModel, DateTime carryOutDate, string userId)
+		public async Task CreateWorkAsync(WorkAddFormModel workModel, DateTime carryOutDate, string userId)
 		{
 			var work = new Work()
 			{
@@ -177,8 +194,6 @@ namespace ConstructionSiteReportingSystem.Core.Services
 
 			await _repository.AddAsync<Work>(work);
 			await _repository.SaveChangesAsync();
-
-			return workModel.SiteId;
 		}
 
 		public async Task EditWorkAsync(int workId, WorkEditFormModel workModel,  DateTime carryOutDate)
