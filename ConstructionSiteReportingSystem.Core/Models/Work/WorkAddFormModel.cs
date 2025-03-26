@@ -51,6 +51,6 @@ namespace ConstructionSiteReportingSystem.Core.Models.Work
 
 		public IEnumerable<UnitServiceModel> Units { get; set; } = new List<UnitServiceModel>();
 
-		public IEnumerable<SiteServiceModel> Sites { get; set; } = new List<SiteServiceModel>();
+		public List<SiteServiceModel> Sites { get; set; } = new List<SiteServiceModel>();
 	}
 }
