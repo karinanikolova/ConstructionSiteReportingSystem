@@ -8,6 +8,10 @@ namespace ConstructionSiteReportingSystem.Core.Models.Site
     {
         public const int WorksPerPage = 5;
 
+        public int Id { get; set; }
+
+        public string Name { get; set; } = string.Empty;
+
         public string Stage { get; init; } = null!;
 
         [Display(Name = "Search by date")]
@@ -18,8 +22,6 @@ namespace ConstructionSiteReportingSystem.Core.Models.Site
         public int CurrentPage { get; init; } = 1;
 
         public int TotalWorksCount { get; set; }
-
-        public string Name { get; set; } = string.Empty;
 
         public DateTime ConstructionFinishDate { get; set; }
 
