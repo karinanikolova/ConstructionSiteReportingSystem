@@ -169,8 +169,18 @@ namespace ConstructionSiteReportingSystem.Core.Services
 			}
 		}
 
-		public async Task<bool> DoesSiteExistAsync(int siteId) => await _repository.AllReadOnly<Site>()
+		public async Task<bool> DoesSiteExistAsync(int? siteId)
+		{
+			if (siteId == null)
+			{
+				return false;
+			}
+			else
+			{
+				return await _repository.AllReadOnly<Site>()
 				.AnyAsync(s => s.Id == siteId);
+			}
+		}
 
 		public async Task<bool> DoesSiteNameExistAsync(string siteName) => await _repository.AllReadOnly<Site>()
 				.AnyAsync(s => s.Name == siteName);
